@@ -1,0 +1,24 @@
+{
+	"welcome_message": "This is just an example crew! Do not use!",
+
+	"update_frequency": 5,
+
+	"T2_heartbeat_sizes": [12, 18],
+
+	"T2_packet_throttling": {
+		"max_packets": 10,
+		"per_seconds": 30
+	},
+
+	"allow_list": {
+		"IPs": {
+			"127.0.0.2": "Yohan Blair",
+			"127.0.0.3": "Lester Crest",
+			"127.0.0.4": "Paige Harris",
+			"127.0.0.5": "Rickie Lukens",
+			"127.0.0.6": "Christian Feltz",
+			"127.0.0.7": "Avi Schwartzman"
+		}
+	}
+}
+
