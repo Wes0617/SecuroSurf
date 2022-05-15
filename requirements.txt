@@ -1,0 +1,4 @@
+pydivert~=2.1.0
+jsonschema~=4.4.0
+PySimpleGUI~=4.59.0
+requests~=2.27.1

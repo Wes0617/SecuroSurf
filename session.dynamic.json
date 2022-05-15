@@ -1,0 +1,16 @@
+{
+	"welcome_message": "The fellas came in and installed that session locker. Anything to keep you productive, Boss!",
+
+	"update_frequency": 5,
+
+	"T2_heartbeat_sizes": [12, 18],
+
+	"T2_packet_throttling": {
+		"max_packets": 10,
+		"per_seconds": 30
+	},
+
+	"session_lock": {
+		"default_enabled": true
+	}
+}
