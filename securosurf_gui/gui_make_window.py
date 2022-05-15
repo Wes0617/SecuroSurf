@@ -11,7 +11,7 @@ from securosurf_gui_toolkit.toolkit import TextAppearance
 
 ########################################################################################################################
 
-def FUNC(window_title: str, icon_path: p.Path, log_size: int) -> tk.Window:
+def FUNC(application_root: p.Path, telemetry_length: int) -> tk.Window:
     layout = [
         [tk.EmptyRectangle(background_color=tk.accent_BG_lighter, area=(3, 3), expand_x=True)],
         [tk.EmptyRectangle(background_color="white", area=(2, 2), expand_x=True)],
@@ -22,7 +22,7 @@ def FUNC(window_title: str, icon_path: p.Path, log_size: int) -> tk.Window:
             [gui_make_welcome_message_frame.FUNC()],
             [
                 gui_make_sidebar.FUNC(),
-                gui_make_telemetry_frame.FUNC(log_size)
+                gui_make_telemetry_frame.FUNC(telemetry_length)
             ],
         ], expand_x=True, expand_y=True)],
 
@@ -46,4 +46,6 @@ def FUNC(window_title: str, icon_path: p.Path, log_size: int) -> tk.Window:
         ], expand_x=True)],
     ]
 
+    window_title = information.VAR.application_name
+    icon_path = application_root / "images" / "icon.ico"
     return tk.Window(title=window_title, layout=layout, icon=icon_path)

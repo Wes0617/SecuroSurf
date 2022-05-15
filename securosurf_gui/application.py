@@ -35,9 +35,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     window_refresh_rate_max_ms          = 5000
     window_refresh_rate_used_ms         = window_refresh_rate_user_ms
     _telemetry_length                   = 40
-    _window_title                       = information.VAR.application_name
-    _icon_path                          = root / "images" / "icon.ico"
-    window                              = gui_make_window.FUNC(_window_title, _icon_path, _telemetry_length)
+    window                              = gui_make_window.FUNC(root, _telemetry_length)
     window_event_target                 = EventTarget(window)
     session_configuration_manager       = SessionConfigurationManager.CLASS(root)
     current_crew_names                  = []
@@ -52,7 +50,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     firewall                            = FirewallClass.CLASS(_messaging.invert(), _telemetry_manager, session_configuration)
     firewall.start()
 
-    ####################################################################################################################
+    # ------------------------------------------------------------------------------------------------------------------
 
     def _handle_IPC():
         nonlocal firewall_telemetry
@@ -68,7 +66,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
             time.sleep(window_refresh_rate_used_ms / 1000)
     t.Thread(target=_handle_IPC, args=(), daemon=True).start()
 
-    ####################################################################################################################
+    # ------------------------------------------------------------------------------------------------------------------
 
     widget_message: sg.Text = window["welcome_message"]
 
@@ -89,7 +87,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         window_event_target.add_event_listener(_element_key, "<Enter>", lambda elk, evk: _show_help_message(elk))
         window_event_target.add_event_listener(_element_key, "<Leave>", lambda elk, evk: show_welcome_message())
 
-    ####################################################################################################################
+    # ------------------------------------------------------------------------------------------------------------------
 
     while True:
         event_name, _values = window.read(window_refresh_rate_used_ms)
@@ -97,11 +95,11 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         if event_name == sg.WIN_CLOSED: break
         window_event_target.run_event_listeners(event_name)
 
-        ################################################################################################################
+        # --------------------------------------------------------------------------------------------------------------
 
         window.TKroot.config(cursor='')
 
-        ################################################################################################################
+        # --------------------------------------------------------------------------------------------------------------
 
         _is_minimized = window.tk_get_metrics().state == "iconic"
         window_refresh_rate_used_ms = window_refresh_rate_max_ms if _is_minimized else window_refresh_rate_user_ms
@@ -111,7 +109,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
             _last_known_metrics = _new_metrics
             print(_new_metrics)
 
-        ################################################################################################################
+        # --------------------------------------------------------------------------------------------------------------
 
         current_crew_names, session_configuration_name = gui_refresh_and_get_session_configuration_names.FUNC(
             window, session_configuration_manager, current_crew_names, event_name == "crew_name"
