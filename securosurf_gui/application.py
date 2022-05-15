@@ -29,27 +29,26 @@ from securosurf import information
 
 def FUNC(root: p.Path, simulation: bool = False) -> None:
 
-    FirewallClass                       = FirewallFake if simulation else Firewall
     active_max_age_minutes              = 3
     host_max_age_minutes                = 4
     window_refresh_rate_user_ms         = 100
     window_refresh_rate_max_ms          = 5000
     window_refresh_rate_used_ms         = window_refresh_rate_user_ms
-    window_telemetry_length             = 40
+    _telemetry_length                   = 40
+    _window_title                       = information.VAR.application_name
     _icon_path                          = root / "images" / "icon.ico"
-    window                              = gui_make_window.FUNC(information.VAR.application_name, _icon_path, window_telemetry_length)
+    window                              = gui_make_window.FUNC(_window_title, _icon_path, _telemetry_length)
     window_event_target                 = EventTarget(window)
-
-    _messaging                          = ProcessMessaging.CLASS(m.Queue(), m.Queue())
-    _telemetry_manager                  = TelemetryManager.CLASS(window_telemetry_length)
     session_configuration_manager       = SessionConfigurationManager.CLASS(root)
     session_configuration_name          = "Normal"
     live_session_configuration          = session_configuration_manager.get_by_name(session_configuration_name)
     session_configuration               = live_session_configuration.get()
     session_configuration_changed       = False
+    _telemetry_manager                  = TelemetryManager.CLASS(_telemetry_length)
     firewall_telemetry                  = _telemetry_manager.get_telemetry()
+    _messaging                          = ProcessMessaging.CLASS(m.Queue(), m.Queue())
+    FirewallClass                       = FirewallFake if simulation else Firewall
     firewall                            = FirewallClass.CLASS(_messaging.invert(), _telemetry_manager, session_configuration)
-
     firewall.start()
 
     ####################################################################################################################
@@ -148,11 +147,11 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         if not window_showing_help:
             show_welcome_message()
 
-        gui_refresh_allow_list_frame                    .FUNC(window, session_configuration)
-        gui_refresh_status_frame                        .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
-        gui_refresh_T2_packet_throttling_frame          .FUNC(window, session_configuration)
-        gui_refresh_update_frame                        .FUNC(window, live_session_configuration)
-        gui_refresh_telemetry_frame                     .FUNC(window, firewall_telemetry)
+        gui_refresh_allow_list_frame          .FUNC(window, session_configuration)
+        gui_refresh_status_frame              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
+        gui_refresh_T2_packet_throttling_frame.FUNC(window, session_configuration)
+        gui_refresh_update_frame              .FUNC(window, live_session_configuration)
+        gui_refresh_telemetry_frame           .FUNC(window, firewall_telemetry)
 
         window.refresh()
 
