@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import typing as t
-import jsonschema.exceptions as jsse
+import json
+import jsonschema.exceptions as jse
 from securosurf.session_configuration import SessionConfiguration
 from securosurf.session_configuration import SessionConfigurationAllowList
 from securosurf.session_configuration import SessionConfigurationSessionLock
@@ -11,11 +11,14 @@ from securosurf.session_configuration_manager.json_tools import session_configur
 
 ########################################################################################################################
 
-def FUNC(JSON_object: t.Any) -> SessionConfiguration.CLASS | jsse.ValidationError:
+ErrorString = str
+
+def FUNC(JSON: str) -> tuple[SessionConfiguration.CLASS | None, ErrorString | None]:
     try:
+        JSON_object = json.loads(JSON)
         session_configuration_validate_normalize_JSON.FUNC(JSON_object)
-    except jsse.ValidationError as exception:
-        return exception
+    except (json.JSONDecodeError, jse.ValidationError) as exception:
+        return None, str(exception)
 
     v = JSON_object.get("T2_heartbeat_sizes", None)
     T2_HB = None if v is None else set(v)
@@ -40,4 +43,4 @@ def FUNC(JSON_object: t.Any) -> SessionConfiguration.CLASS | jsse.ValidationErro
         T2_mandatory_packet_detection=T2_MP,
         allow_list=AL,
         session_lock=SL
-    )
+    ), None

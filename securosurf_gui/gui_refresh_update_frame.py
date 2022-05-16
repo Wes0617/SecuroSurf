@@ -19,10 +19,10 @@ def FUNC(
 
     widget_update_frequency.tk_update(text=f"{session_configuration.update_frequency} seconds")
 
-    if live_session_configuration.latest_update_attempt is None:
+    if live_session_configuration.last_update_attempt is None:
         last_attempt_age_text = "Never"
     else:
-        last_attempt_age = round(time.time() - live_session_configuration.latest_update_attempt)
+        last_attempt_age = round(time.time() - live_session_configuration.last_update_attempt)
         last_attempt_age_text = "Over an hour ago" if last_attempt_age > 3600 else f"{last_attempt_age} seconds ago"
     widget_update_last_attempted.tk_update(text=last_attempt_age_text)
 

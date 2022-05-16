@@ -11,12 +11,12 @@ from securosurf.session_configuration_manager import LiveSessionConfigurationFro
 ########################################################################################################################
 
 class CLASS:
-    def __init__(self, root: pathlib.Path):
+    def __init__(self, app_root: pathlib.Path):
         self.__last_checked: float = 0.0
 
-        self.__root: pathlib.Path = root
+        self.__app_root: pathlib.Path = app_root
 
-        self.__crew_file_pattern: re.Pattern[t.AnyStr] = re.compile(r'^session\.crew\.([a-z0-9-]{3,})\.json$')
+        self.__crew_file_pattern: re.Pattern[t.AnyStr] = re.compile(r'^session\.crew\.([a-zA-Z0-9 ]{3,})\.json$')
         self.__crews: dict[str, LiveSessionConfiguration.CLASS] = {}
         self.__crew_names: list[str] = []
 
@@ -29,7 +29,7 @@ class CLASS:
 
     def __make_builtin(self, name: str) -> None:
         self.__builtins[name] = LiveSessionConfigurationFromLocalFile.CLASS(
-            self.__root, f"session.{name.lower()}.json", name
+            self.__app_root, name, f"session.{name.lower()}.json"
         )
 
     def get_by_name(self, name: str) -> LiveSessionConfiguration.CLASS | None:
@@ -49,17 +49,15 @@ class CLASS:
         changed = False
 
         new_crews: dict[str, LiveSessionConfiguration.CLASS] = {}
-        for local_crew_file in glob.glob('session.crew.*.json', root_dir=self.__root):
-            crew_file_match = self.__crew_file_pattern.match(local_crew_file)
+        for local_crew_filename in glob.glob('session.crew.*.json', root_dir=self.__app_root):
+            crew_file_match = self.__crew_file_pattern.match(local_crew_filename)
             if crew_file_match is None: continue
-
-            # Fetch the local crews
-            crew_name = "[L] " + crew_file_match[1].replace("-", " ").title()
+            crew_name = "[L] " + crew_file_match[1]
             if crew_name in self.__crews:
                 new_crews[crew_name] = self.__crews[crew_name]
             else:
                 changed = True
-                new_crews[crew_name] = LiveSessionConfigurationFromLocalFile.CLASS(self.__root, local_crew_file, crew_name)
+                new_crews[crew_name] = LiveSessionConfigurationFromLocalFile.CLASS(self.__app_root, crew_name, local_crew_filename)
 
             # TODO fetch the name of the remote crews
 
