@@ -29,8 +29,8 @@ from securosurf import information
 
 def FUNC(root: p.Path, simulation: bool = False) -> None:
 
-    active_max_age_minutes              = 3
-    host_max_age_minutes                = 4
+    active_max_age_minutes              = 1
+    host_max_age_minutes                = 2
     window_refresh_rate_user_ms         = 100
     window_refresh_rate_max_ms          = 5000
     window_refresh_rate_used_ms         = window_refresh_rate_user_ms

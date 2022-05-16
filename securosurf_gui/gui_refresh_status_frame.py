@@ -17,7 +17,7 @@ def FUNC(
         text = "Never"
         appearance = tk.TextAppearance.WARNING
     elif telemetry.last_activity_age > (active_max_age_minutes * 60):
-        text = f"More than {active_max_age_minutes} minutes ago"
+        text = f"The game appears closed."
         appearance = tk.TextAppearance.WARNING
     else:
         text = f"{round(telemetry.last_activity_age)} seconds ago"
@@ -33,11 +33,11 @@ def FUNC(
         text = "Never"
         appearance = tk.TextAppearance.NORMAL
     elif telemetry.last_T2_host_packet_age > (host_max_age_minutes * 60):
-        text = f"More than {host_max_age_minutes} minutes ago"
+        text = f"You appear not to be hosting."
         appearance = tk.TextAppearance.NORMAL
     else:
 
-        text = f"{round(telemetry.last_T2_host_packet_age)} seconds ago - Hosting"
+        text = f"{round(telemetry.last_T2_host_packet_age)} seconds ago - Hosting(?)"
         appearance = tk.TextAppearance.SUCCESS
 
     widget_traffic_host_last_activity.tk_update(text=text, appearance=appearance)
