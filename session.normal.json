@@ -1,7 +1,5 @@
 {
 	"welcome_message": "They got clearance, I guess. Just gimme the word and I'll make it happen.",
 
-	"update_frequency": 5,
-
-	"T2_heartbeat_sizes": [12, 18]
+	"update_frequency": 5
 }

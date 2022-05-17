@@ -21,7 +21,7 @@
 			"default": 30
 		},
 		"T2_heartbeat_sizes": {
-			"description": "T2 packets that should be allowed as they simply check whether the user is still online.",
+			"description": "T2 packets that should be always allowed as they simply check whether the user is still online. These should be provided automatically by the program. Only define this property if there is an actual reason to do it.",
 			"type": "array",
 			"items": {
 				"type": "integer",
@@ -29,7 +29,10 @@
 				"maximum": 2000,
 				"maxLength": 20
 			},
-			"default": []
+			"default": [
+				12,
+				18
+			]
 		},
 		"T2_packet_throttling": {
 			"description": "Throttle the T2 packets in order to prevent full-blown gameplay connections, while still making matchmaking possible. Omit this property to disable this feature.",

@@ -3,8 +3,6 @@
 
 	"update_frequency": 5,
 
-	"T2_heartbeat_sizes": [12, 18],
-
 	"T2_packet_throttling": {
 		"max_packets": 20,
 		"per_seconds": 60

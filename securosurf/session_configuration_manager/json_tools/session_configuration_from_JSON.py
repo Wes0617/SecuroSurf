@@ -20,8 +20,7 @@ def FUNC(JSON: str) -> tuple[SessionConfiguration.CLASS | None, ErrorString | No
     except (json.JSONDecodeError, jse.ValidationError) as exception:
         return None, str(exception)
 
-    v = JSON_object.get("T2_heartbeat_sizes", None)
-    T2_HB = None if v is None else set(v)
+    T2_HB = set(JSON_object.get("T2_heartbeat_sizes"))
 
     v = JSON_object.get("T2_packet_throttling", None)
     T2_PT = None if v is None else SessionConfigurationT2PacketThrottling.CLASS(v["max_packets"], v["per_seconds"])

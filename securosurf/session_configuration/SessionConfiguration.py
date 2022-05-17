@@ -11,13 +11,21 @@ from securosurf.session_configuration import SessionConfigurationT2MandatoryPack
 
 @dc.dataclass(frozen=True)
 class CLASS:
+
     welcome_message: str
+
     update_frequency: int
-    T2_heartbeat_sizes: set[int] | None = None
+
+    T2_heartbeat_sizes: set[int] = dc.field(default_factory=set, init=True)
+
     T2_packet_throttling: SessionConfigurationT2PacketThrottling.CLASS | None = None
+
     T2_mandatory_packet_detection: SessionConfigurationT2MandatoryPacketDetection.CLASS | None = None
+
     allow_list: SessionConfigurationAllowList.CLASS | None = None
+
     session_lock: SessionConfigurationSessionLock.CLASS | None = None
+
     fetch_time: float = dc.field(default_factory=time.time, init=False)
 
     def __eq__(self, other) -> bool:
