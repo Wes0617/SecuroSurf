@@ -16,7 +16,7 @@ def FUNC(
     if telemetry.last_activity is None or telemetry.last_activity_age > (active_max_age_minutes * 60):
         text = "The game appears closed."
         appearance = tk.TextAppearance.WARNING
-    elif telemetry.last_activity_age <= 1:
+    elif telemetry.last_activity_age <= 2:
         text = "Just now."
         appearance = tk.TextAppearance.SUCCESS
     else:
