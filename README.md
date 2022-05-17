@@ -88,25 +88,23 @@ TODO
 
 ## 🔹 SecuroSurf 2.0
 
-- Implement remote crews.
-- Figure out how to compile the program to a Windows executable.
 - Set up GitHub actions to build releases automatically.
+- The remote crews should stop updating themselves if the game is turned off.
 - Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
+- Implement session lock and Dynamic mode.
+- Complete README.
 
 ## 🔹 SecuroSurf 2.+
 
-- Interface:
-  - User setting for custom refresh rate (to apply when maximized -- minimized should reduce refresh rate already).
-  - Custom enable-telemetry setting (always enabled, disabled if minimized, always disabled).
-  - Notifications, e.g. play bell sound when people join or leave.
-  - Save settings to local files automatically, such as refresh rate, or window position.
-  - Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
-  - Add "please wait N seconds before joining the crew" message.
-- Firewall:
-  - Implement session lock and Dynamic mode.
-  - Determine whether it is necessary to implement the "mandatory packet detection" heuristics.
-  - Consider whether to introduce the "Firewall Cooldown" option.
-  - Implement manual kick of non-firewalled users. 
+- User setting for custom refresh rate (to apply when maximized -- minimized should reduce refresh rate already).
+- Custom enable-telemetry setting (always enabled, disabled if minimized, always disabled).
+- Notifications, e.g. play bell sound when people join or leave.
+- Save settings to local files automatically, such as refresh rate, or window position.
+- Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
+- Add "please wait N seconds before joining the crew" message.
+- Determine whether it is necessary to implement the "mandatory packet detection" heuristics.
+- Consider whether to introduce the "Firewall Cooldown" option.
+- Implement manual kick of non-firewalled users. 
 
 ## 🔹 SecuroSurf >2
 
