@@ -34,7 +34,7 @@ print("Is dark-mode:", is_darkmode())
 
 ########################################################################################################################
 
-padding_width                       = 3
+padding_width                       = 4
 border_width                        = 1 # combos' border is always 1, so this should be always be 1 for consistency
 
 accent_BG                           = "#0C529A"
