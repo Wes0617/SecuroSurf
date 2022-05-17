@@ -1,4 +1,6 @@
 pydivert~=2.1.0
 jsonschema~=4.4.0
 PySimpleGUI~=4.59.0
+pycryptodome~=3.14.1
 requests~=2.27.1
+cx-freeze~=6.10
