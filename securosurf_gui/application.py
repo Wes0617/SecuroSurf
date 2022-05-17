@@ -126,7 +126,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         gui_refresh_allow_list_frame          .FUNC(window, session_configuration)
         gui_refresh_status_frame              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
         gui_refresh_T2_packet_throttling_frame.FUNC(window, session_configuration)
-        gui_refresh_update_frame              .FUNC(window, session_configuration_manager)
+        gui_refresh_update_frame              .FUNC(window, session_configuration, session_configuration_manager.last_update_attempt)
         gui_refresh_telemetry_frame           .FUNC(window, firewall_telemetry)
 
         window.refresh()

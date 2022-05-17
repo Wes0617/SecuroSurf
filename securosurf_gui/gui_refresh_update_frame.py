@@ -3,27 +3,23 @@ from __future__ import annotations
 import time
 import securosurf_gui_toolkit.toolkit as tk
 from securosurf.session_configuration import SessionConfiguration
-from securosurf.session_configuration_manager import SessionConfigurationManager
 
 ########################################################################################################################
 
 def FUNC(
     window: tk.Window,
-    live_session_configuration: LiveSessionConfiguration.CLASS,
+    session_configuration: SessionConfiguration.CLASS,
+    session_configuration_last_update_attempt: float | None
 ):
-    session_configuration = live_session_configuration.get()
-
-    # ------------------------------------------------------------------------------------------------------------------
-
     widget_update_frequency: tk.Text = window["update_frequency"]
     widget_update_frequency.tk_update(text=f"Every {session_configuration.update_frequency} seconds.")
 
     # ------------------------------------------------------------------------------------------------------------------
 
-    if live_session_configuration.last_update_attempt is None:
+    if session_configuration_last_update_attempt is None:
         _text = "Never."
     else:
-        last_attempt_age = round(time.time() - live_session_configuration.last_update_attempt)
+        last_attempt_age = round(time.time() - session_configuration_last_update_attempt)
         _text = "Over an hour ago." if last_attempt_age > 3600 else f"{last_attempt_age} seconds ago."
     widget_update_last_attempted: tk.Text = window["update_last_attempted"]
     widget_update_last_attempted.tk_update(text=_text)
