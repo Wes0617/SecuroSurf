@@ -66,6 +66,19 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
     # ------------------------------------------------------------------------------------------------------------------
 
+    def _fetch_configuration_thread():
+        nonlocal SC_manager, SC, SC_changed
+        while True:
+            time.sleep(SC.update_frequency)
+            SC_manager = SC_set_manager.get_by_name(SC_name)
+            _new_session_configuration = SC_manager.get()
+            if _new_session_configuration != SC:
+                SC_changed = True
+            SC = _new_session_configuration
+    t.Thread(target=_fetch_configuration_thread, args=(), daemon=True).start()
+
+    # ------------------------------------------------------------------------------------------------------------------
+
     widget_message: sg.Text = window["welcome_message"]
 
     from securosurf_gui.application_help import VAR as _help_messages
@@ -112,12 +125,6 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         current_crew_names, SC_name = gui_refresh_and_get_session_configuration_names.FUNC(
             window, SC_set_manager, current_crew_names, event_name == "crew_name"
         )
-
-        SC_manager = SC_set_manager.get_by_name(SC_name)
-        _new_session_configuration = SC_manager.get()
-        if _new_session_configuration != SC:
-            SC_changed = True
-        SC = _new_session_configuration
 
         if not window_showing_help:
             show_welcome_message()
