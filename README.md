@@ -7,7 +7,6 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
 [User Manual](README.md#user-manual) 🔹
 [FAQs](README.md#faqs) 🔹
 [TODO](README.md#todo) 🔹
@@ -31,12 +30,12 @@ the peace of mind of running safe code.
 
 ### 🔹 Is this effective?
 
-Only if used correctly! That is, **the firewall must be used by all the players in the lobby**. Otherwise, hackers can
-still connect through the people that aren't running the firewall. How this works is illustrated by diagram below; if
-the Assistant and Lester are running the firewall, but Rickie is not, hackers can connect to Rickie, Lester and the
-Assistant _through_ Rickie:  
+Only if used correctly! That is, **all the players you are playing with must use it**. Otherwise, hackers can still
+connect through the people that aren't running the firewall. How this works is illustrated by diagram below; if the
+_Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to _Rickie_, _Lester_ and
+the _Assistant_ _**through**_ _Rickie_:  
 
-<p align="center"><img src="md_images/tunneling_diagram.png" alt="Tunneling Diagram"></p>
+<p align="center"><img src="md_images/tunneling_diagram.png"></p>
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -84,14 +83,22 @@ updated, rather than blindly copying them from one directory to another. Importa
 that ship with the firewall (_Normal, Solo, Lan, Dynamic_) are not meant to be user-configurable, so you should always
 replace them with the respective newer versions.
 
-### 🔹 Why can't I connect sometimes? 
+### 🔹 Why can't I connect sometimes (1)? 
 
-It is completely normal to get "Unable to connect to game session" or "The player is no longer in session" sometimes.
-These errors happen when you could not connect within the allowed traffic limits, probably because other people or
-strangers were trying to connect at the same time. Should this happen, don't press _Continue_; instead, open your
-friends list, and try again by clicking _JOIN GAME_:
+It is completely normal to get "**Unable to connect to game session**" or "**Player is no longer in session**"
+sometimes, even if everything looks fine. These errors happen when you could not complete the connection within the
+allowed traffic limits, probably because other people or strangers were trying to connect at the same time. **Should
+this happen, don't press _Continue_; open your friends list, and try again by clicking _Join Game_**:
 
-<p align="center"><img src="md_images/player_no_longer_in_session_fix.gif" alt="Tunneling Diagram"></p>
+<p align="center"><img src="md_images/player_no_longer_in_session_fix.gif"></p>
+
+### 🔹 Why can't I connect sometimes (2)? 
+
+Instead, if you see a lot of traffic being blocked by the firewall, it means that **you tried to connect to your
+friends before the firewall could be updated on their end** to allow you inside. Unfortunately your connection will be
+permanently glitched when this happens, and the only way to fix it is to **switch to single player** before trying
+again. This problem will be solved in a future version, where the app will tell you explicitly when it's ok to join your
+friends.
 
 ------------------------------------------------------------------------------------------------------------------------
 
