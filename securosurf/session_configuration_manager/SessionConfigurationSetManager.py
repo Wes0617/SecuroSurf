@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import glob
 import time
@@ -9,6 +10,7 @@ from securosurf.session_configuration_manager import SessionConfigurationManager
 from securosurf.session_configuration_manager import SessionConfigurationManagerLocal
 
 ########################################################################################################################
+from securosurf.session_configuration_manager import SessionConfigurationManagerRemote
 
 class CLASS:
     def __init__(self, app_root: pathlib.Path):
@@ -46,8 +48,6 @@ class CLASS:
         elapsed = time.time() - self.__last_checked
         if elapsed < 10: return self.__crew_names
 
-        changed = False
-
         new_crews: dict[str, SessionConfigurationManager.CLASS] = {}
         for local_crew_filename in glob.glob('session.crew.*.json', root_dir=self.__app_root):
             crew_file_match = self.__crew_file_pattern.match(local_crew_filename)
@@ -56,13 +56,20 @@ class CLASS:
             if crew_name in self.__crews:
                 new_crews[crew_name] = self.__crews[crew_name]
             else:
-                changed = True
                 new_crews[crew_name] = SessionConfigurationManagerLocal.CLASS(self.__app_root, crew_name, local_crew_filename)
 
-            # TODO fetch the name of the remote crews
-
-        if changed or (len(self.__crews) != len(new_crews)):
-            print("Updated the local and remote crew lists.")
+        remote_crews_file = self.__app_root / "session.crews-remote.json"
+        if remote_crews_file.exists():
+            try:
+                with open(remote_crews_file, "r") as fp:
+                    remote_crews_JSON = fp.read()
+                    JSON_object = json.loads(remote_crews_JSON)
+                    for crew_name_no_prefix in JSON_object:
+                        crew_name = "[R] " + crew_name_no_prefix
+                        URL = JSON_object[crew_name_no_prefix]
+                        new_crews[crew_name] = SessionConfigurationManagerRemote.CLASS(self.__app_root, crew_name, URL)
+            except Exception as exception:
+                print(exception)
 
         self.__last_checked = time.time()
         self.__crews = new_crews
