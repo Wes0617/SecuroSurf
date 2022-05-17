@@ -34,6 +34,7 @@ class CLASS(abc.ABC):
         self.__last_update_attempt = time.time()
 
         JSON, error = self._get_JSON()
+
         if JSON is not None:
             new_session_configuration, error = session_configuration_from_JSON.FUNC(JSON)
             if new_session_configuration is not None:

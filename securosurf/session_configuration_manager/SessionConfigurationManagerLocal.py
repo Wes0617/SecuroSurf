@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import pathlib as p
-from securosurf.session_configuration_manager import LiveSessionConfiguration
+from securosurf.session_configuration_manager import SessionConfigurationManager
 
 ########################################################################################################################
 
 JSONString = str
 ErrorString = str
 
-class CLASS(LiveSessionConfiguration.CLASS):
+class CLASS(SessionConfigurationManager.CLASS):
     def __init__(self, app_root: p.Path, session_configuration_name: str, filename: str):
         super().__init__(app_root, session_configuration_name, 5)
         self.__filename: str = filename

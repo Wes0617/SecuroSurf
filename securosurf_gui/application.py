@@ -23,7 +23,6 @@ from securosurf_gui import gui_refresh_status_frame
 from securosurf_gui import gui_refresh_welcome_message_frame
 from securosurf_gui import gui_refresh_T2_packet_throttling_frame
 from securosurf_gui_toolkit.toolkit_tools import EventTarget
-from securosurf import information
 
 ########################################################################################################################
 
@@ -40,8 +39,8 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     session_configuration_set_manager   = SessionConfigurationSetManager.CLASS(root)
     current_crew_names                  = []
     session_configuration_name          = "Normal"
-    live_session_configuration          = session_configuration_set_manager.get_by_name(session_configuration_name)
-    session_configuration               = live_session_configuration.get()
+    session_configuration_manager       = session_configuration_set_manager.get_by_name(session_configuration_name)
+    session_configuration               = session_configuration_manager.get()
     session_configuration_changed       = False
     _telemetry_manager                  = TelemetryManager.CLASS(_telemetry_length)
     firewall_telemetry                  = _telemetry_manager.get_telemetry()
@@ -115,8 +114,8 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
             window, session_configuration_set_manager, current_crew_names, event_name == "crew_name"
         )
 
-        live_session_configuration = session_configuration_set_manager.get_by_name(session_configuration_name)
-        _new_session_configuration = live_session_configuration.get()
+        session_configuration_manager = session_configuration_set_manager.get_by_name(session_configuration_name)
+        _new_session_configuration = session_configuration_manager.get()
         if _new_session_configuration != session_configuration:
             session_configuration_changed = True
             session_configuration = _new_session_configuration
@@ -127,7 +126,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         gui_refresh_allow_list_frame          .FUNC(window, session_configuration)
         gui_refresh_status_frame              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
         gui_refresh_T2_packet_throttling_frame.FUNC(window, session_configuration)
-        gui_refresh_update_frame              .FUNC(window, live_session_configuration)
+        gui_refresh_update_frame              .FUNC(window, session_configuration_manager)
         gui_refresh_telemetry_frame           .FUNC(window, firewall_telemetry)
 
         window.refresh()

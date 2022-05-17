@@ -5,8 +5,8 @@ import glob
 import time
 import pathlib
 import typing as t
-from securosurf.session_configuration_manager import LiveSessionConfiguration
-from securosurf.session_configuration_manager import LiveSessionConfigurationFromLocalFile
+from securosurf.session_configuration_manager import SessionConfigurationManager
+from securosurf.session_configuration_manager import SessionConfigurationManagerLocal
 
 ########################################################################################################################
 
@@ -17,10 +17,10 @@ class CLASS:
         self.__app_root: pathlib.Path = app_root
 
         self.__crew_file_pattern: re.Pattern[t.AnyStr] = re.compile(r'^session\.crew\.([a-zA-Z0-9 ]{3,})\.json$')
-        self.__crews: dict[str, LiveSessionConfiguration.CLASS] = {}
+        self.__crews: dict[str, SessionConfigurationManager.CLASS] = {}
         self.__crew_names: list[str] = []
 
-        self.__builtins: dict[str, LiveSessionConfiguration.CLASS] = {}
+        self.__builtins: dict[str, SessionConfigurationManager.CLASS] = {}
         self.__make_builtin("Normal")
         self.__make_builtin("Solo")
         self.__make_builtin("LAN")
@@ -28,11 +28,11 @@ class CLASS:
         self.__builtin_names: list[str] = list(set(self.__builtins.keys()))
 
     def __make_builtin(self, name: str) -> None:
-        self.__builtins[name] = LiveSessionConfigurationFromLocalFile.CLASS(
+        self.__builtins[name] = SessionConfigurationManagerLocal.CLASS(
             self.__app_root, name, f"session.{name.lower()}.json"
         )
 
-    def get_by_name(self, name: str) -> LiveSessionConfiguration.CLASS | None:
+    def get_by_name(self, name: str) -> SessionConfigurationManager.CLASS | None:
         builtin = self.__builtins.get(name, None)
         return self.__crews.get(name, None) if builtin is None else builtin
 
@@ -48,7 +48,7 @@ class CLASS:
 
         changed = False
 
-        new_crews: dict[str, LiveSessionConfiguration.CLASS] = {}
+        new_crews: dict[str, SessionConfigurationManager.CLASS] = {}
         for local_crew_filename in glob.glob('session.crew.*.json', root_dir=self.__app_root):
             crew_file_match = self.__crew_file_pattern.match(local_crew_filename)
             if crew_file_match is None: continue
@@ -57,7 +57,7 @@ class CLASS:
                 new_crews[crew_name] = self.__crews[crew_name]
             else:
                 changed = True
-                new_crews[crew_name] = LiveSessionConfigurationFromLocalFile.CLASS(self.__app_root, crew_name, local_crew_filename)
+                new_crews[crew_name] = SessionConfigurationManagerLocal.CLASS(self.__app_root, crew_name, local_crew_filename)
 
             # TODO fetch the name of the remote crews
 

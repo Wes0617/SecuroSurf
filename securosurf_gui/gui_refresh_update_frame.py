@@ -3,7 +3,7 @@ from __future__ import annotations
 import time
 import securosurf_gui_toolkit.toolkit as tk
 from securosurf.session_configuration import SessionConfiguration
-from securosurf.session_configuration_manager import LiveSessionConfiguration
+from securosurf.session_configuration_manager import SessionConfigurationManager
 
 ########################################################################################################################
 
