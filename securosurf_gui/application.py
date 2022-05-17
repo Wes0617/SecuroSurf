@@ -28,40 +28,40 @@ from securosurf_gui_toolkit.toolkit_tools import EventTarget
 
 def FUNC(root: p.Path, simulation: bool = False) -> None:
 
-    active_max_age_minutes              = 1
-    host_max_age_minutes                = 2
-    window_refresh_rate_user_ms         = 100
-    window_refresh_rate_max_ms          = 5000
-    window_refresh_rate_used_ms         = window_refresh_rate_user_ms
-    _telemetry_length                   = 40
-    window                              = gui_make_window.FUNC(root, _telemetry_length)
-    window_event_target                 = EventTarget(window)
-    session_configuration_set_manager   = SessionConfigurationSetManager.CLASS(root)
-    current_crew_names                  = []
-    session_configuration_name          = "Normal"
-    session_configuration_manager       = session_configuration_set_manager.get_by_name(session_configuration_name)
-    session_configuration               = session_configuration_manager.get()
-    session_configuration_changed       = False
-    _telemetry_manager                  = TelemetryManager.CLASS(_telemetry_length)
-    firewall_telemetry                  = _telemetry_manager.get_telemetry()
-    _messaging                          = ProcessMessaging.CLASS(m.Queue(), m.Queue())
-    FirewallClass                       = FirewallFake if simulation else Firewall
-    firewall                            = FirewallClass.CLASS(_messaging.invert(), _telemetry_manager, session_configuration)
+    active_max_age_minutes      = 1
+    host_max_age_minutes        = 2
+    window_refresh_rate_user_ms = 100
+    window_refresh_rate_max_ms  = 5000
+    window_refresh_rate_used_ms = window_refresh_rate_user_ms
+    _telemetry_length           = 40
+    window                      = gui_make_window.FUNC(root, _telemetry_length)
+    window_event_target         = EventTarget(window)
+    SC_set_manager              = SessionConfigurationSetManager.CLASS(root)
+    current_crew_names          = []
+    SC_name                     = "Normal"
+    SC_manager                  = SC_set_manager.get_by_name(SC_name)
+    SC                          = SC_manager.get()
+    SC_changed                  = False
+    _telemetry_manager          = TelemetryManager.CLASS(_telemetry_length)
+    firewall_telemetry          = _telemetry_manager.get_telemetry()
+    _messaging                  = ProcessMessaging.CLASS(m.Queue(), m.Queue())
+    FirewallClass               = FirewallFake if simulation else Firewall
+    firewall                    = FirewallClass.CLASS(_messaging.invert(), _telemetry_manager, SC)
     firewall.start()
 
     # ------------------------------------------------------------------------------------------------------------------
 
     def _handle_IPC():
         nonlocal firewall_telemetry
-        nonlocal session_configuration_changed
+        nonlocal SC_changed
         while True:
             _messaging.send_message("get_telemetry")
             returned_message, returned_contents = _messaging.receive_message()
             if returned_message == "return_telemetry":
                 firewall_telemetry = returned_contents
-            if session_configuration_changed:
-                session_configuration_changed = False
-                _messaging.send_message("set_session_configuration", session_configuration)
+            if SC_changed:
+                SC_changed = False
+                _messaging.send_message("set_session_configuration", SC)
             time.sleep(window_refresh_rate_used_ms / 1000)
     t.Thread(target=_handle_IPC, args=(), daemon=True).start()
 
@@ -79,7 +79,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
     def show_welcome_message():
         nonlocal window_showing_help
-        gui_refresh_welcome_message_frame.FUNC(widget_message, False, session_configuration.welcome_message)
+        gui_refresh_welcome_message_frame.FUNC(widget_message, False, SC.welcome_message)
         window_showing_help = False
 
     for _element_key in _help_messages:
@@ -110,23 +110,23 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
-        current_crew_names, session_configuration_name = gui_refresh_and_get_session_configuration_names.FUNC(
-            window, session_configuration_set_manager, current_crew_names, event_name == "crew_name"
+        current_crew_names, SC_name = gui_refresh_and_get_session_configuration_names.FUNC(
+            window, SC_set_manager, current_crew_names, event_name == "crew_name"
         )
 
-        session_configuration_manager = session_configuration_set_manager.get_by_name(session_configuration_name)
-        _new_session_configuration = session_configuration_manager.get()
-        if _new_session_configuration != session_configuration:
-            session_configuration_changed = True
-        session_configuration = _new_session_configuration
+        SC_manager = SC_set_manager.get_by_name(SC_name)
+        _new_session_configuration = SC_manager.get()
+        if _new_session_configuration != SC:
+            SC_changed = True
+        SC = _new_session_configuration
 
         if not window_showing_help:
             show_welcome_message()
 
-        gui_refresh_allow_list_frame          .FUNC(window, session_configuration)
+        gui_refresh_allow_list_frame          .FUNC(window, SC)
         gui_refresh_status_frame              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
-        gui_refresh_T2_packet_throttling_frame.FUNC(window, session_configuration)
-        gui_refresh_update_frame              .FUNC(window, session_configuration, session_configuration_manager.last_update_attempt)
+        gui_refresh_T2_packet_throttling_frame.FUNC(window, SC)
+        gui_refresh_update_frame              .FUNC(window, SC, SC_manager.last_update_attempt)
         gui_refresh_telemetry_frame           .FUNC(window, firewall_telemetry)
 
         window.refresh()
