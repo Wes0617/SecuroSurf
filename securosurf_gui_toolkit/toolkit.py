@@ -162,7 +162,7 @@ class Window(sg.Window):
             finalize=True,
             margins=(0, 0),
             font=window_font,
-            alpha_channel=0.91,
+            alpha_channel=0.925,
             element_padding=padding_width,
             grab_anywhere_using_control=False,
 
