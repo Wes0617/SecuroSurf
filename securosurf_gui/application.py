@@ -51,7 +51,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
     # ------------------------------------------------------------------------------------------------------------------
 
-    def _handle_IPC():
+    def _handle_IPC_thread():
         nonlocal firewall_telemetry, SC_changed
         while True:
             _messaging.send_message("get_telemetry")
@@ -62,7 +62,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
                 SC_changed = False
                 _messaging.send_message("set_session_configuration", SC)
             time.sleep(window_refresh_rate_used_ms / 1000)
-    t.Thread(target=_handle_IPC, args=(), daemon=True).start()
+    t.Thread(target=_handle_IPC_thread, args=(), daemon=True).start()
 
     # ------------------------------------------------------------------------------------------------------------------
 
