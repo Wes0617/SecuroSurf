@@ -28,8 +28,14 @@ shutil.copytree(cwd / "images", build_path / "images")
 
 shutil.copytree(cwd / "errors", build_path / "errors")
 
-_session_configuration_builtin_names = ["normal", "solo", "lan", "dynamic", "crew.Example Crew"]
-for _name in _session_configuration_builtin_names:
-    _source = cwd / f"session.{_name}.json"
-    _destination = build_path / f"session.{_name}.json"
+_configs = [
+    "session.normal.json",
+    "session.solo.json",
+    "session.lan.json",
+    "session.dynamic.json"
+]
+
+for _config in _configs:
+    _source = cwd / _config
+    _destination = build_path / _config
     shutil.copyfile(_source, _destination)
