@@ -8,22 +8,20 @@
 ------------------------------------------------------------------------------------------------------------------------
 
 
-[FAQs](README.md#faqs) 🔹
 [User Manual](README.md#user-manual) 🔹
+[FAQs](README.md#faqs) 🔹
 [TODO](README.md#todo) 🔹
 [Credits & Thanks](README.md#todo)
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## FAQs
-
-#### 🔹 Is this a mod-menu?
+### 🔹 Is this a mod menu?
 
 No it's not! _SecuroSurf_ simply blocks traffic from IPs you don't know, which is well within your rights, especially
 considering how vulnerable and poorly maintained this (P2P!) game is. _SecuroSurf_ does not decrypt the game's traffic,
 and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor any code that
 would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was even necessary to create the
-program. The traffic is very trivially blocked by just IP and simple heuristics. 
+program. The traffic is very trivially blocked by just IP and simple heuristics.
 
 ### 🔹 Should I trust this?
 
@@ -39,14 +37,6 @@ the Assistant and Lester are running the firewall, but Rickie is not, hackers ca
 Assistant _through_ Rickie:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png" alt="Tunneling Diagram"></p>
-
-### 🔹 How to update?
-
-This project follows _SemVer_ versioning. Meaning that, **for example, if you own the firewall version 2.x you can
-use your configuration files on any other 2.x, but not 3.x.**. However, you should try to keep your configuration files
-updated, rather than blindly copying them from one directory to another. Important to know also, is that the presets
-that ship with the firewall (_Normal, Solo, Lan, Dynamic_) are not meant to be user-configurable, so you should always
-replace them with the respective newer versions.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -81,6 +71,27 @@ TODO
 ### 🔹 Remote crews
 
 TODO
+
+------------------------------------------------------------------------------------------------------------------------
+
+## FAQs
+
+### 🔹 How to update?
+
+This project follows _SemVer_ versioning. Meaning that, **for example, if you own the firewall version 2.x you can
+use your configuration files on any other 2.x, but not 3.x.**. However, you should try to keep your configuration files
+updated, rather than blindly copying them from one directory to another. Important to know also, is that the presets
+that ship with the firewall (_Normal, Solo, Lan, Dynamic_) are not meant to be user-configurable, so you should always
+replace them with the respective newer versions.
+
+### 🔹 Why can't I connect sometimes? 
+
+It is completely normal to get "Unable to connect to game session" or "The player is no longer in session" sometimes.
+These errors happen when you could not connect within the allowed traffic limits, probably because other people or
+strangers were trying to connect at the same time. Should this happen, don't press _Continue_; instead, open your
+friends list, and try again by clicking _JOIN GAME_:
+
+<p align="center"><img src="md_images/player_no_longer_in_session_fix.gif" alt="Tunneling Diagram"></p>
 
 ------------------------------------------------------------------------------------------------------------------------
 
