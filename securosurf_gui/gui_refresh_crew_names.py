@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import PySimpleGUI as sg
 import securosurf_gui_toolkit.toolkit as tk
-from securosurf.session_configuration_manager import SessionConfigurationManager
+from securosurf.session_configuration_manager import SessionConfigurationSetManager
 
 ########################################################################################################################
 
 def FUNC(
-    session_configuration_manager: SessionConfigurationManager.CLASS,
+    session_configuration_manager: SessionConfigurationSetManager.CLASS,
     current_crew_names: list[str],
     widget_crew_name: tk.Combo,
     widget_to_crew: sg.Radio,

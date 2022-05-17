@@ -12,7 +12,7 @@ from securosurf.firewall import Firewall
 from securosurf.firewall import FirewallFake
 from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
-from securosurf.session_configuration_manager import SessionConfigurationManager
+from securosurf.session_configuration_manager import SessionConfigurationSetManager
 
 from securosurf_gui import gui_make_window
 from securosurf_gui import gui_refresh_and_get_session_configuration_names
@@ -37,10 +37,10 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     _telemetry_length                   = 40
     window                              = gui_make_window.FUNC(root, _telemetry_length)
     window_event_target                 = EventTarget(window)
-    session_configuration_manager       = SessionConfigurationManager.CLASS(root)
+    session_configuration_set_manager   = SessionConfigurationSetManager.CLASS(root)
     current_crew_names                  = []
     session_configuration_name          = "Normal"
-    live_session_configuration          = session_configuration_manager.get_by_name(session_configuration_name)
+    live_session_configuration          = session_configuration_set_manager.get_by_name(session_configuration_name)
     session_configuration               = live_session_configuration.get()
     session_configuration_changed       = False
     _telemetry_manager                  = TelemetryManager.CLASS(_telemetry_length)
@@ -112,10 +112,10 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         # --------------------------------------------------------------------------------------------------------------
 
         current_crew_names, session_configuration_name = gui_refresh_and_get_session_configuration_names.FUNC(
-            window, session_configuration_manager, current_crew_names, event_name == "crew_name"
+            window, session_configuration_set_manager, current_crew_names, event_name == "crew_name"
         )
 
-        live_session_configuration = session_configuration_manager.get_by_name(session_configuration_name)
+        live_session_configuration = session_configuration_set_manager.get_by_name(session_configuration_name)
         _new_session_configuration = live_session_configuration.get()
         if _new_session_configuration != session_configuration:
             session_configuration_changed = True
