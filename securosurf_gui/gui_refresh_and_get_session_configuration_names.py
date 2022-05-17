@@ -16,7 +16,6 @@ def FUNC(
     triggered_by_crew_name_change: bool
 ) -> tuple[NewCrewNames, CurrentSessionConfigurationName]:
 
-
     widget_to_normal: sg.Radio = window["to_normal"]
     widget_to_solo: sg.Radio = window["to_solo"]
     widget_to_LAN: sg.Radio = window["to_LAN"]
@@ -36,11 +35,17 @@ def FUNC(
     if triggered_by_crew_name_change:
         widget_to_crew.update(value=True)
 
-    if widget_to_normal.get(): session_configuration_name = "Normal"
-    elif widget_to_solo.get(): session_configuration_name = "Solo"
-    elif widget_to_LAN.get():  session_configuration_name = "LAN"
-    elif widget_to_dyn.get():  session_configuration_name = "Dynamic"
-    elif widget_to_crew.get(): session_configuration_name = widget_crew_name.get()
-    else: raise Exception()
+    if widget_to_normal.get():
+        session_configuration_name = "Normal"
+    elif widget_to_solo.get():
+        session_configuration_name = "Solo"
+    elif widget_to_LAN.get():
+        session_configuration_name = "LAN"
+    elif widget_to_dyn.get():
+        session_configuration_name = "Dynamic"
+    elif widget_to_crew.get():
+        session_configuration_name = widget_crew_name.get()
+    else:
+        raise Exception()
 
     return new_crew_names, session_configuration_name

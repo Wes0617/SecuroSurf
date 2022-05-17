@@ -12,17 +12,17 @@ from securosurf.firewall import Firewall
 from securosurf.firewall import FirewallFake
 from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
+from securosurf_gui_toolkit.toolkit_tools import EventTarget
 from securosurf.session_configuration_manager import SessionConfigurationSetManager
 
 from securosurf_gui import gui_make_window
+from securosurf_gui import gui_refresh_update
+from securosurf_gui import gui_refresh_status
+from securosurf_gui import gui_refresh_telemetry
+from securosurf_gui import gui_refresh_allow_list
+from securosurf_gui import gui_refresh_welcome_message
+from securosurf_gui import gui_refresh_T2_packet_throttling
 from securosurf_gui import gui_refresh_and_get_session_configuration_names
-from securosurf_gui import gui_refresh_telemetry_frame
-from securosurf_gui import gui_refresh_update_frame
-from securosurf_gui import gui_refresh_allow_list_frame
-from securosurf_gui import gui_refresh_status_frame
-from securosurf_gui import gui_refresh_welcome_message_frame
-from securosurf_gui import gui_refresh_T2_packet_throttling_frame
-from securosurf_gui_toolkit.toolkit_tools import EventTarget
 
 ########################################################################################################################
 
@@ -74,12 +74,12 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
     def _show_help_message(_element_key: str):
         nonlocal window_showing_help
-        gui_refresh_welcome_message_frame.FUNC(widget_message, True, _help_messages.get(_element_key, ""))
+        gui_refresh_welcome_message.FUNC(widget_message, True, _help_messages.get(_element_key, ""))
         window_showing_help = True
 
     def show_welcome_message():
         nonlocal window_showing_help
-        gui_refresh_welcome_message_frame.FUNC(widget_message, False, SC.welcome_message)
+        gui_refresh_welcome_message.FUNC(widget_message, False, SC.welcome_message)
         window_showing_help = False
 
     for _element_key in _help_messages:
@@ -123,11 +123,11 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         if not window_showing_help:
             show_welcome_message()
 
-        gui_refresh_allow_list_frame          .FUNC(window, SC)
-        gui_refresh_status_frame              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
-        gui_refresh_T2_packet_throttling_frame.FUNC(window, SC)
-        gui_refresh_update_frame              .FUNC(window, SC, SC_manager.last_update_attempt)
-        gui_refresh_telemetry_frame           .FUNC(window, firewall_telemetry)
+        gui_refresh_allow_list          .FUNC(window, SC)
+        gui_refresh_status              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
+        gui_refresh_T2_packet_throttling.FUNC(window, SC)
+        gui_refresh_update              .FUNC(window, SC, SC_manager.last_update_attempt)
+        gui_refresh_telemetry           .FUNC(window, firewall_telemetry)
 
         window.refresh()
 
