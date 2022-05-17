@@ -118,7 +118,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         _new_session_configuration = session_configuration_manager.get()
         if _new_session_configuration != session_configuration:
             session_configuration_changed = True
-            session_configuration = _new_session_configuration
+        session_configuration = _new_session_configuration
 
         if not window_showing_help:
             show_welcome_message()
