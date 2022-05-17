@@ -52,8 +52,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     # ------------------------------------------------------------------------------------------------------------------
 
     def _handle_IPC():
-        nonlocal firewall_telemetry
-        nonlocal SC_changed
+        nonlocal firewall_telemetry, SC_changed
         while True:
             _messaging.send_message("get_telemetry")
             returned_message, returned_contents = _messaging.receive_message()
