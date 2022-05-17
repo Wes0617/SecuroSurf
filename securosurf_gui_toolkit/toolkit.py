@@ -30,12 +30,9 @@ def is_darkmode():
             break
     return False
 
-########################################################################################################################
-
-def FG_brightness(color):
-    return color.hex
-
 print("Is dark-mode:", is_darkmode())
+
+########################################################################################################################
 
 padding_width                       = 3
 border_width                        = 1 # combos' border is always 1, so this should be always be 1 for consistency
@@ -165,7 +162,7 @@ class Window(sg.Window):
             finalize=True,
             margins=(0, 0),
             font=window_font,
-           # alpha_channel=0.925,
+            alpha_channel=0.91,
             element_padding=padding_width,
             grab_anywhere_using_control=False,
 
@@ -236,6 +233,8 @@ class Window(sg.Window):
         state = self.TKroot.state()
 
         return WindowMetrics(screen, coords, window, state)
+
+
 
 
 _theme["BACKGROUND"] = window_BG
