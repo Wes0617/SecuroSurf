@@ -81,7 +81,7 @@ ___Crews___ are totally customizable session definitions. They are the safest mo
 can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
 requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for established
 groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
-can find an example of a crew definition [here](session.crew.Example Crew.json---), and
+can find an example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
 [here](session_configuration_json_schema.md) the full documentation.
 
 #### Local Crews
