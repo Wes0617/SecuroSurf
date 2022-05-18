@@ -9,19 +9,18 @@ import threading as t
 import multiprocessing as m
 
 from securosurf.firewall import Firewall
-from securosurf.firewall import FirewallFake
 from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf_gui_toolkit.toolkit_tools import EventTarget
 from securosurf.session_configuration_manager import SessionConfigurationSetManager
 
-from securosurf_gui import gui_make_window
+from securosurf_gui import gui_window
 from securosurf_gui import gui_refresh_update
 from securosurf_gui import gui_refresh_status
 from securosurf_gui import gui_refresh_telemetry
 from securosurf_gui import gui_refresh_allow_list
 from securosurf_gui import gui_refresh_welcome_message
-from securosurf_gui import gui_refresh_T2_packet_throttling
+from securosurf_gui import gui_refresh_T2_throttling
 from securosurf_gui import gui_refresh_and_get_session_configuration_names
 
 ########################################################################################################################
@@ -34,7 +33,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     window_refresh_rate_max_ms  = 5000
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
     _telemetry_length           = 40
-    window                      = gui_make_window.FUNC(root, _telemetry_length)
+    window                      = gui_window.FUNC(root, _telemetry_length)
     window_event_target         = EventTarget(window)
     SC_set_manager              = SessionConfigurationSetManager.CLASS(root)
     current_crew_names          = []
@@ -45,8 +44,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     _telemetry_manager          = TelemetryManager.CLASS(_telemetry_length)
     firewall_telemetry          = _telemetry_manager.get_telemetry()
     _messaging                  = ProcessMessaging.CLASS(m.Queue(), m.Queue())
-    FirewallClass               = FirewallFake if simulation else Firewall
-    firewall                    = FirewallClass.CLASS(_messaging.invert(), _telemetry_manager, SC)
+    firewall                    = Firewall.CLASS(_messaging.invert(), _telemetry_manager, SC)
     firewall.start()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -129,11 +127,11 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         if not window_showing_help:
             show_welcome_message()
 
-        gui_refresh_allow_list          .FUNC(window, SC)
-        gui_refresh_status              .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
-        gui_refresh_T2_packet_throttling.FUNC(window, SC)
-        gui_refresh_update              .FUNC(window, SC, SC_manager.last_update_attempt)
-        gui_refresh_telemetry           .FUNC(window, firewall_telemetry)
+        gui_refresh_allow_list   .FUNC(window, SC)
+        gui_refresh_status       .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
+        gui_refresh_T2_throttling.FUNC(window, SC)
+        gui_refresh_update       .FUNC(window, SC, SC_manager.last_update_attempt)
+        gui_refresh_telemetry    .FUNC(window, firewall_telemetry)
 
         window.refresh()
 

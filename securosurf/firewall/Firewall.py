@@ -80,16 +80,16 @@ class CLASS:
 
             TM.host_activity = time.time()
 
-            if SC.T2_packet_throttling is not None:
+            if SC.T2_throttling is not None:
                 now = time.time()
-                begin_of_time_frame_time = now - SC.T2_packet_throttling.per_seconds
+                begin_of_time_frame_time = now - SC.T2_throttling.per_seconds
                 while len(T2PTQ) > 0:
                     is_oldest_packet_out_of_time_frame = T2PTQ[0] < begin_of_time_frame_time
                     if is_oldest_packet_out_of_time_frame:
                         T2PTQ.popleft()
                     else:
                         break
-                queue_is_full = len(T2PTQ) >= SC.T2_packet_throttling.max_packets
+                queue_is_full = len(T2PTQ) >= SC.T2_throttling.max_packets
                 if queue_is_full:
                     TM.add(PacketInboundT2Throttled.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
                     return False

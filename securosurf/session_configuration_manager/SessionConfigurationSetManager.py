@@ -8,9 +8,9 @@ import pathlib
 import typing as t
 from securosurf.session_configuration_manager import SessionConfigurationManager
 from securosurf.session_configuration_manager import SessionConfigurationManagerLocal
+from securosurf.session_configuration_manager import SessionConfigurationManagerRemote
 
 ########################################################################################################################
-from securosurf.session_configuration_manager import SessionConfigurationManagerRemote
 
 class CLASS:
     def __init__(self, app_root: pathlib.Path):

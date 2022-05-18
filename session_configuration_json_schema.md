@@ -34,7 +34,7 @@
 				18
 			]
 		},
-		"T2_packet_throttling": {
+		"T2_throttling": {
 			"description": "Throttle the T2 packets in order to prevent full-blown gameplay connections, while still making matchmaking possible. Omit this property to disable this feature.",
 			"type": "object",
 			"properties": {

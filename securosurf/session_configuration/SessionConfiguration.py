@@ -4,8 +4,7 @@ import time
 import dataclasses as dc
 from securosurf.session_configuration import SessionConfigurationAllowList
 from securosurf.session_configuration import SessionConfigurationSessionLock
-from securosurf.session_configuration import SessionConfigurationT2PacketThrottling
-from securosurf.session_configuration import SessionConfigurationT2MandatoryPacketDetection
+from securosurf.session_configuration import SessionConfigurationT2Throttling
 
 ########################################################################################################################
 
@@ -18,9 +17,7 @@ class CLASS:
 
     T2_heartbeat_sizes: set[int] = dc.field(default_factory=set, init=True)
 
-    T2_packet_throttling: SessionConfigurationT2PacketThrottling.CLASS | None = None
-
-    T2_mandatory_packet_detection: SessionConfigurationT2MandatoryPacketDetection.CLASS | None = None
+    T2_throttling: SessionConfigurationT2Throttling.CLASS | None = None
 
     allow_list: SessionConfigurationAllowList.CLASS | None = None
 
@@ -34,8 +31,7 @@ class CLASS:
             self.welcome_message == other.welcome_message and \
             self.update_frequency == other.update_frequency and \
             self.T2_heartbeat_sizes == other.T2_heartbeat_sizes and \
-            self.T2_packet_throttling == other.T2_packet_throttling and \
-            self.T2_mandatory_packet_detection == other.T2_mandatory_packet_detection and \
+            self.T2_throttling == other.T2_throttling and \
             self.allow_list == other.allow_list and \
             self.session_lock == other.session_lock
 

@@ -20,9 +20,9 @@ def FUNC() -> tk.Container:
         [ColumnText("Last host activity:"),     tk.Text(key="traffic_host_last_activity", expand_x=True)],
     ])
 
-    f3 = tk.Frame(title="T2 Packet Throttling:", title_icon=tk.Icon.BALLOT_EMPTY, layout=[
-        [tk.Text(key="T2_packet_throttling_message", justification="center", expand_x=True)],
-    ], key="T2_packet_throttling_frame")
+    f3 = tk.Frame(title="T2 Throttling:", title_icon=tk.Icon.BALLOT_EMPTY, layout=[
+        [tk.Text(key="T2_throttling_message", justification="center", expand_x=True)],
+    ], key="T2_throttling_frame")
 
     f4 = tk.Frame(title="Configuration Update:", title_icon=tk.Icon.HEART, layout=[
         [ColumnText("Frequency:"),              tk.Text(key="update_frequency", expand_x=True)],
