@@ -22,7 +22,7 @@ especially considering how insecure this game is. ___SecuroSurf___ does not decr
 interact with the game in any way. It does not contain any reverse-engineered code, nor any code that would violate the
 game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the program. If all this
 doesn't convince you how trivial this program is, consider that the whole thing can be created by anyone with just
-[Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall) (except it would be very cumbersome to use). However,
+[Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall), except it would be very cumbersome to use. However,
 the usual warnings apply because I am not a lawyer... I just want to play in peace: use this at your own risk.
 
 ------------------------------------------------------------------------------------------------------------------------
