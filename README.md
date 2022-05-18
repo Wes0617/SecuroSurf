@@ -60,7 +60,7 @@ The ___Lan___ mode, instead, will allow only people from your own _Local Area Ne
 is useful if you want to play with just your family members, or roommates, etc. Remember that this is only effective if
 also the other players are using _SecuroSurf_ with this exact mode enabled.
 
-<p align="center"><img src="md_images/main_options.png"></p>
+<img src="md_images/main_options.png">
 
 ------------------------------------------------------------------------------------------------------------------------
 
