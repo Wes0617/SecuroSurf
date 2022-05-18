@@ -18,20 +18,20 @@
 ### 🔹 Is this a mod menu?
 
 No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, which is well within your rights,
-especially considering how insecure this game is. ___SecuroSurf___ does not decrypt the game's traffic, and it doesn't
+especially considering how insecure this game is. _SecuroSurf_ does not decrypt the game's traffic, and it doesn't
 interact with the game in any way. It does not contain any reverse-engineered code, nor any code that would violate the
 game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the program. If all this
 doesn't convince you how trivial this program is, consider that the whole thing can be created by anyone with just
 [Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall), except it would be very cumbersome to use. However,
-the usual warnings apply because I am not a lawyer... I just want to play in peace: use this at your own risk.
+the usual warning applies because I am not a lawyer... I just want to play in peace: use this at your own risk.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 Should I trust this?
 
-You should never trust random code from the internet! However, in this case the code is open source and free for anyone
-to review. Furthermore, the binaries are built by _GitHub_, whose parent company is _Microsoft_, which should give you
-the peace of mind of running safe code.
+You should never trust random code from the internet! However, in this case __the code is open source and free for
+anyone to review__. Furthermore, the binaries are built by _GitHub_, whose parent company is _Microsoft_, which should
+give you the peace of mind of running safe code.
 
 <p align="center"><img src="md_images/trust.png"></p>
 
@@ -39,10 +39,10 @@ the peace of mind of running safe code.
 
 ### 🔹 Is this effective?
 
-As of today it is, but only if used correctly! That is, __all the people you are playing with must use it__. Otherwise,
-hackers can still connect through the people that aren't running the firewall. How this works is illustrated by the
-diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to
-_Rickie_, _Lester_ and the _Assistant_ ___through___ _Rickie_:  
+As of today (v1.60) it is, but only if used correctly! That is, __all the people you are playing with must use it__.
+Otherwise, hackers can still connect through the people that aren't running the firewall. How this works is illustrated
+by the diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect
+to _Rickie_, _Lester_ and the _Assistant_ _through_ _Rickie_:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png"></p>
 
@@ -56,7 +56,7 @@ ___SecuroSurf___ is easy to use! The most important functionality is just one cl
 
 ### 🔹 Using the basic functionality of the firewall
 
-The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default.
+The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default at the startup.
 
 The ___Solo___ mode, unsurprisingly, will immediately block all the traffic and take you to a protected empty lobby.
 
@@ -82,10 +82,10 @@ app is released.**
 ### 🔹 Crew sessions (for advanced users and groups)
 
 ___Crews___ are totally customizable session definitions. They are the safest mode, given that with them, the firewall
-can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
-requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for established
-groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
-can find an example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
+can be kept active all the time, thus offering more protection than the _Dynamic_ session mode, which instead requires
+the firewall to be turned off occasionally for your friends to join. Crew sessions are meant for established groups of
+people that are looking for a more definitive, stronger solution against frequent attacks from modders. You can find an
+example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
 [here](session_configuration_json_schema.md) the full documentation.
 
 __[Local Crews]__ ___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each
@@ -120,7 +120,7 @@ replace them with the respective newer versions.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Why can't I connect sometimes (1)? 
+### 🔹 Why can't I connect sometimes? (1) 
 
 It is completely normal to get "__Unable to connect to game session__" or "__Player is no longer in session__"
 sometimes, even if everything looks fine. These errors happen when you could not complete the connection within the
@@ -131,7 +131,7 @@ this happen, don't press _Continue_; open your friends list, and try again by cl
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Why can't I connect sometimes (2)? 
+### 🔹 Why can't I connect sometimes? (2) 
 
 Instead, if you see a lot of traffic being blocked by the firewall, it means that __you tried to connect to your
 friends before the firewall could be updated on their end__ to allow you inside. Unfortunately your connection will be
