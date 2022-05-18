@@ -21,7 +21,7 @@ No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, whi
 especially considering how vulnerable and poorly maintained this (P2P!) game is. _SecuroSurf_ does not decrypt the
 game's traffic, and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor
 any code that would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to
-create the program. The firewall simply blocks traffic by IP, and simple heuristics.  
+create the program.  
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -54,8 +54,7 @@ ___SecuroSurf___ is easy to use! The most important functionality is just one cl
 
 The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default.
 
-The ___Solo___ mode, unsurprisingly, will immediately block all the active connections and take you to a protected empty
-lobby.
+The ___Solo___ mode, unsurprisingly, will immediately block all the traffic and take you to a protected empty lobby.
 
 The ___Lan___ mode, instead, will allow only people from your own _Local Area Network_ to connect to your lobbies. This
 is useful if you want to play with just your family members, or roommates, etc. Remember that this is only effective if
@@ -82,7 +81,7 @@ ___Crews___ are totally customizable session definitions. They are the safest mo
 can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
 requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for established
 groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
-can find an example of a crew definition [here](session.crew.Example Crew.json_EXAMPLE), and
+can find an example of a crew definition [here](session.crew.Example Crew.json_), and
 [here](session_configuration_json_schema.md) the full documentation.
 
 #### Local Crews
@@ -178,7 +177,8 @@ _What's cooking? Let me know._
 
 ## 🔹 Credits & Thanks
 
-This program was inspired by [_Guardian_](https://gitlab.com/digitalarc/guardian) (and [_Guardian by
+This program is inspired by [_Guardian_](https://gitlab.com/digitalarc/guardian) (and [_Guardian by
 Speyedr_](https://gitlab.com/Speyedr/guardian-fastload-fix)). Many thanks to them, as they provided the initial input
-and code I needed to start this project. _Guardian_ is still developed, and I try to contribute to it as well. Also
-thanks to my friend Robert B. for helping me out with _Python_. 
+and info necessary to start this project. _Guardian_ is still developed, and I try to contribute to it as well. Also,
+thanks to my friend Robert B. for helping me out with _Python_, and many thanks to the guinea pigs (B. and B.) that
+helped to test this application.
