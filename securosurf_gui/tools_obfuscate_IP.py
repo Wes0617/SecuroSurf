@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from firewall import is_LAN_IP
-from securosurf.firewall import is_T2_IP
+from securosurf.firewall import is_LAN_IP
 
 ########################################################################################################################
 
