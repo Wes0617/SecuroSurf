@@ -14,13 +14,11 @@ def FUNC() -> tk.Frame:
     Radio.__init__ = partialmethod(Radio.__init__, enable_events=True, pad=(tk.padding_width, 0))
     group = "session_type_change"
 
-    return tk.Frame(title="Session:", layout=[
-        [
-            Radio(labels[0], group, key=keys[0], default=True), tk.VerticalSeparator(),
-            Radio(labels[1], group, key=keys[1]), tk.VerticalSeparator(),
-            Radio(labels[2], group, key=keys[2]), tk.VerticalSeparator(),
-            Radio(labels[3], group, key=keys[3], disabled=True), tk.VerticalSeparator(),
-            Radio(labels[4], group, key=keys[4], disabled=True),
-            tk.Combo([], disabled=True, enable_events=True, readonly=True, key="crew_name", expand_x=True)
-        ]
-    ])
+    return tk.Frame(title="Session:", layout=[[
+        Radio(labels[0], group, key=keys[0], default=True), tk.VerticalSeparator(),
+        Radio(labels[1], group, key=keys[1]), tk.VerticalSeparator(),
+        Radio(labels[2], group, key=keys[2]), tk.VerticalSeparator(),
+        Radio(labels[3], group, key=keys[3], disabled=True), tk.VerticalSeparator(),
+        Radio(labels[4], group, key=keys[4], disabled=True),
+        tk.Combo([], disabled=True, enable_events=True, readonly=True, key="crew_name", expand_x=True)
+    ]])

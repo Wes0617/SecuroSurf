@@ -24,7 +24,7 @@ def FUNC(
     widget_update_last_attempted: tk.Text = window["update_last_attempted"]
     widget_update_last_attempted.tk_update(text=_text)
 
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     session_configuration_age = round(time.time() - session_configuration.fetch_time)
     update_failed = session_configuration_age > session_configuration.update_frequency
