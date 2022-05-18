@@ -74,7 +74,7 @@
 					"additionalProperties": false
 				},
 				"allow_LAN_IPs": {
-					"description": "Whether to allow direct connections with other computers in the LAN. There is probably no reason to ever disable this, except for solo sessions. This setting includes the following private network ranges: 192.168.0.0/16, 10.0.0.0/8 and 172.16.0.0/12.",
+					"description": "Whether to allow direct connections with other computers in the LAN. There is probably no reason to ever disable this, except for solo sessions. This setting includes the following range: 192.168.0.0/16.",
 					"type": "boolean",
 					"default": true
 				}
