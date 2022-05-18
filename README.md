@@ -35,7 +35,7 @@ the peace of mind of running safe code.
 
 ### 🔹 Is this effective?
 
-Only if used correctly! That is, __all the players you are playing with, must use it__. Otherwise, hackers can still
+Only if used correctly! That is, __all the people you are playing with, must use it__. Otherwise, hackers can still
 connect through the people that aren't running the firewall. How this works is illustrated by diagram below; if the
 _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to _Rickie_, _Lester_ and
 the _Assistant_ ___through___ _Rickie_:  
@@ -66,12 +66,12 @@ also the other players are using _SecuroSurf_ with this exact mode enabled.
 
 ### 🔹 Using the Dynamic session mode
 
-This mode is the best for most of the players, because it works out of the box with no configuration necessary. Simply
-create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on _Normal_
-as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the
-people currently in the session will be allowed to stay in the session. In other words, no one else can join after
-enabling the _Dynamic_ mode. **Note: this mode is currently not available, but it will be when the version 2.0 of the app is
-released.**
+This mode is the best for most of the players, because it works right out of the box with no configuration necessary.
+Simply create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on
+_Normal_ as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only
+the people currently in the session will be allowed to stay in the session. In other words, no one else can join after
+enabling the _Dynamic_ mode. **Note: this mode is currently not available, but it will be when the version 2.0 of the
+app is released.**
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -81,8 +81,8 @@ ___Crews___ are totally customizable session definitions. They are the safest mo
 can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
 requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for established
 groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
-can find an example of a crew definition [here](session.crew.Example Crew.json_), and
-[here](session_configuration_json_schema.md) the full documentation.
+can find an example of a crew definition [here](./session.crew.Example Crew.json_), and
+[here](./session_configuration_json_schema.md) the full documentation.
 
 #### Local Crews
 
@@ -96,8 +96,8 @@ file to all your crew members. The local crew file should be in the same folder 
 
 Sharing configuration files with your friends can be annoying, so it is possible to host the crew definitions on the
 web, and have ___SecuroSurf___ fetch them automatically. If your crew provided you with an URL to use with
-___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object where the key is the
-crew name, and the value the URL you've been given. For example:
+___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
+names, and the values are the respective URLs you've been given. For example:
 
 ```json
 {
