@@ -7,6 +7,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
+[**Downloads**](./) 🔹
 [User Manual](README.md#user-manual) 🔹
 [FAQs](README.md#faqs) 🔹
 [TODO](README.md#todo) 🔹
@@ -16,11 +17,13 @@
 
 ### 🔹 Is this a mod menu?
 
-No it's not! _SecuroSurf_ simply blocks traffic from IPs you don't know, which is well within your rights, especially
-considering how vulnerable and poorly maintained this (P2P!) game is. _SecuroSurf_ does not decrypt the game's traffic,
-and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor any code that
-would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was even necessary to create the
-program. The traffic is very trivially blocked by just IP and simple heuristics.
+No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, which is well within your rights,
+especially considering how vulnerable and poorly maintained this (P2P!) game is. _SecuroSurf_ does not decrypt the
+game's traffic, and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor
+any code that would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to
+create the program. The firewall simply blocks traffic by IP and simple heuristics.  
+
+------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 Should I trust this?
 
@@ -28,12 +31,14 @@ You should never trust random code from the internet! However, in this case the 
 to review. Furthermore, the binaries are built by _GitHub_, whose parent company is _Microsoft_, which should give you
 the peace of mind of running safe code.
 
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 Is this effective?
 
-Only if used correctly! That is, **all the players you are playing with must use it**. Otherwise, hackers can still
+Only if used correctly! That is, __all the players you are playing with must use it__. Otherwise, hackers can still
 connect through the people that aren't running the firewall. How this works is illustrated by diagram below; if the
 _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to _Rickie_, _Lester_ and
-the _Assistant_ _**through**_ _Rickie_:  
+the _Assistant_ ___through___ _Rickie_:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png"></p>
 
@@ -41,33 +46,55 @@ the _Assistant_ _**through**_ _Rickie_:
 
 ## User Manual
 
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 Using the basic functionality of the firewall
 
-The ___Solo___ option, as you may suspect, will immediately block all the active connections and take you to an empty
-protected lobby.
+The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default.
 
-The ___Lan___ option, instead, will allow only people from your own _Local Area Network_ to connect to your lobbies.
-This is useful when you want to play with just your family members, or dorm, etc. Remember that this is only effective
-if all the clients are using _SecuroSurf_ with this mode enabled.
+The ___Solo___ mode, unsurprisingly, will immediately block all the active connections and take you to a protected empty
+lobby.
 
-The ___Normal___ mode will allow GTAO traffic without interfering. This is the default.
+The ___Lan___ mode, instead, will allow only people from your own _Local Area Network_ to connect to your lobbies. This
+is useful if you want to play with just your family members, or roommates, etc. Remember that this is only effective if
+also the other players are using _SecuroSurf_ with this exact mode enabled.
 
-### 🔹 Using the Dynamic mode
+<p align="center"><img src="md_images/main_options.png"></p>
 
-This mode is the most useful for most players, because it works out of the box with no configuration necessary. Simply
-create a _Solo_ lobby, then switch to _Normal_, and invite your friends (while they are on _Normal_ as well). Once
-everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the people in the lobby
-will be allowed to stay in the lobby. In other words, no one else can join after enabling the _Dynamic_ mode.
+------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Custom crew definitions
+### 🔹 Using the Dynamic session mode
 
-TODO
+This mode is the best for most of the players, because it works out of the box with no configuration necessary. Simply
+create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on _Normal_
+as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the
+people currently in the session will be allowed to stay in the session. In other words, no one else can join after
+enabling the _Dynamic_ mode.
 
-### 🔹 Local crews
+------------------------------------------------------------------------------------------------------------------------
 
-TODO
+### 🔹 Crew sessions
 
-### 🔹 Remote crews
+___Crews___ are 100%-customizable session configuration definitions. They are the safest mode, given that with them, the
+firewall can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which
+instead requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for large
+crews that are looking for a more definitive, stronger solution against frequent attacks from modders. You can find an
+example of a crew definition [here](session.crew.Example Crew.json_EXAMPLE), and
+[here](session_configuration_json_schema.md) the full documentation.
+
+------------------------------------------------------------------------------------------------------------------------
+
+#### 🔹 Local Crews
+
+___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of the crew
+should have a copy of this file and use it to run the firewall. For example, you can use Google Docs to distribute the
+file to all your crew members. The local crew file should be in the same folder as `SecuroSurf.exe`, and be named
+`session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII letters, numbers, and spaces
+(e.g. `session.crew.My Amazing Crew.json`).
+
+------------------------------------------------------------------------------------------------------------------------
+
+#### 🔹 Remote Crews
 
 TODO
 
@@ -75,34 +102,42 @@ TODO
 
 ## FAQs
 
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 How to update?
 
-This project follows _SemVer_ versioning. Meaning that, **for example, if you own the firewall version 2.x you can
-use your configuration files on any other 2.x, but not 3.x.**. However, you should try to keep your configuration files
+This project follows _SemVer_ versioning. Meaning that, __for example, if you own the firewall version 2.x you can
+use your configuration files on any other 2.x, but not 3.x.__. However, you should try to keep your configuration files
 updated, rather than blindly copying them from one directory to another. Important to know also, is that the presets
 that ship with the firewall (_Normal, Solo, Lan, Dynamic_) are not meant to be user-configurable, so you should always
 replace them with the respective newer versions.
 
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 Why can't I connect sometimes (1)? 
 
-It is completely normal to get "**Unable to connect to game session**" or "**Player is no longer in session**"
+It is completely normal to get "__Unable to connect to game session__" or "__Player is no longer in session__"
 sometimes, even if everything looks fine. These errors happen when you could not complete the connection within the
-allowed traffic limits, probably because other people or strangers were trying to connect at the same time. **Should
-this happen, don't press _Continue_; open your friends list, and try again by clicking _Join Game_**:
+allowed traffic limits, probably because other people or strangers were trying to connect at the same time. __Should
+this happen, don't press _Continue_; open your friends list, and try again by clicking _Join Game___:
 
 <p align="center"><img src="md_images/player_no_longer_in_session_fix.gif"></p>
 
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 Why can't I connect sometimes (2)? 
 
-Instead, if you see a lot of traffic being blocked by the firewall, it means that **you tried to connect to your
-friends before the firewall could be updated on their end** to allow you inside. Unfortunately your connection will be
-permanently glitched when this happens, and the only way to fix it is to **switch to single player** before trying
+Instead, if you see a lot of traffic being blocked by the firewall, it means that __you tried to connect to your
+friends before the firewall could be updated on their end__ to allow you inside. Unfortunately your connection will be
+permanently glitched when this happens, and the only way to fix it is to __switch to single player__ before trying
 again. This problem will be solved in a future version, where the app will tell you explicitly when it's ok to join your
 friends.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ## TODO
+
+------------------------------------------------------------------------------------------------------------------------
 
 ## 🔹 SecuroSurf 2.0
 
@@ -111,6 +146,8 @@ friends.
 - Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
 - Implement session lock and Dynamic mode.
 - Complete README.
+
+------------------------------------------------------------------------------------------------------------------------
 
 ## 🔹 SecuroSurf 2.+
 
@@ -123,6 +160,8 @@ friends.
 - Determine whether it is necessary to implement the "mandatory packet detection" heuristics.
 - Consider whether to introduce the "Firewall Cooldown" option.
 - Implement manual kick of non-firewalled users. 
+
+------------------------------------------------------------------------------------------------------------------------
 
 ## 🔹 SecuroSurf >2
 
