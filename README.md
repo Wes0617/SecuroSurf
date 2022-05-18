@@ -40,9 +40,9 @@ the peace of mind of running safe code.
 ### 🔹 Is this effective?
 
 As of today it is, but only if used correctly! That is, __all the people you are playing with must use it__. Otherwise,
-hackers can still connect through the people that aren't running the firewall. How this works is illustrated by diagram
-below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to _Rickie_,
-_Lester_ and the _Assistant_ ___through___ _Rickie_:  
+hackers can still connect through the people that aren't running the firewall. How this works is illustrated by the
+diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to
+_Rickie_, _Lester_ and the _Assistant_ ___through___ _Rickie_:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png"></p>
 
