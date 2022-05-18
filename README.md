@@ -18,10 +18,10 @@
 ### 🔹 Is this a mod menu?
 
 No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, which is well within your rights,
-especially considering how vulnerable and poorly maintained this game is. _SecuroSurf_ does not decrypt the game's
+especially considering how vulnerable every aspect of this game is. ___SecuroSurf___ does not decrypt the game's
 traffic, and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor any code
 that would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the
-program.  
+program.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -96,13 +96,19 @@ file to all your crew members. The local crew file should be in the same folder 
 
 Sharing configuration files with your friends can be annoying, so it is possible to host the crew definitions on the
 web, and have ___SecuroSurf___ fetch them automatically. If your crew provided you with an URL to use with
-___SecuroSurf___, you must create a `session.crews-remote.json` file containing a list of 
+___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object where the key is the
+crew name, and the value the URL you've been given. For example:
 
-The format used is the same as the local crews, except the
-data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to implement this, or
-ask for help in the [issues](./issues) section.
+```json
+{
+    "GTA Amazing Crew": "https://amazing-gta-crew.example.org/session-configuration.json.php",
+    "My Friends":       "https://my-private-site.example.org/get-gta-firewall-config.json.php"
+}
+```
 
-Instead, if you've been given a 
+The format used for the remote configurations is the same as the local crews, except the data is obfuscated. If you are
+the leader of a crew, have a look at the source code to learn how to implement this, or ask for help in the
+[issues](./issues) section. 
 
 ------------------------------------------------------------------------------------------------------------------------
 
