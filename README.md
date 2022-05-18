@@ -21,7 +21,7 @@ No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, whi
 especially considering how vulnerable and poorly maintained this (P2P!) game is. _SecuroSurf_ does not decrypt the
 game's traffic, and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor
 any code that would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to
-create the program. The firewall simply blocks traffic by IP and simple heuristics.  
+create the program. The firewall simply blocks traffic by IP, and simple heuristics.  
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ the peace of mind of running safe code.
 
 ### 🔹 Is this effective?
 
-Only if used correctly! That is, __all the players you are playing with must use it__. Otherwise, hackers can still
+Only if used correctly! That is, __all the players you are playing with, must use it__. Otherwise, hackers can still
 connect through the people that aren't running the firewall. How this works is illustrated by diagram below; if the
 _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect to _Rickie_, _Lester_ and
 the _Assistant_ ___through___ _Rickie_:  
@@ -46,9 +46,11 @@ the _Assistant_ ___through___ _Rickie_:
 
 ## User Manual
 
+___SecuroSurf___ is easy to use! The most important functionality is just one click away.
+
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Using the basic functionality of the firewall
+### 🔹 Using the basic functionality
 
 The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default.
 
@@ -69,38 +71,40 @@ This mode is the best for most of the players, because it works out of the box w
 create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on _Normal_
 as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the
 people currently in the session will be allowed to stay in the session. In other words, no one else can join after
-enabling the _Dynamic_ mode.
+enabling the _Dynamic_ mode. **Note: this mode is currently not available, but it will be when the version 2.0 of the app is
+released.**
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 Crew sessions
 
-___Crews___ are 100%-customizable session configuration definitions. They are the safest mode, given that with them, the
-firewall can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which
-instead requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for large
-crews that are looking for a more definitive, stronger solution against frequent attacks from modders. You can find an
-example of a crew definition [here](session.crew.Example Crew.json_EXAMPLE), and
+___Crews___ are totally customizable session definitions. They are the safest mode, given that with them, the firewall
+can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
+requires the firewall to be turned off occasionally for your friends to join. ___Crews___ are meant for established
+groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
+can find an example of a crew definition [here](session.crew.Example Crew.json_EXAMPLE), and
 [here](session_configuration_json_schema.md) the full documentation.
 
-------------------------------------------------------------------------------------------------------------------------
-
-#### 🔹 Local Crews
+#### Local Crews
 
 ___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of the crew
-should have a copy of this file and use it to run the firewall. For example, you can use Google Docs to distribute the
+should have a copy of this file and use it to run the firewall. For example, you can use _Google Docs_ to distribute the
 file to all your crew members. The local crew file should be in the same folder as `SecuroSurf.exe`, and be named
 `session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII letters, numbers, and spaces
 (e.g. `session.crew.My Amazing Crew.json`).
 
-------------------------------------------------------------------------------------------------------------------------
+#### Remote Crews
 
-#### 🔹 Remote Crews
-
-TODO
+Sharing configuration files with your friends can be annoying, so it is possible to host the crew definitions on the
+web, and have ___SecuroSurf___ fetch them automatically. The format used is the same as the local crews, except the
+data is obfuscated. Have a look at the source code to learn how to implement this, or ask for help in the
+[issues](./issues) section.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ## FAQs
+
+Frequently Asked Questions.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -137,6 +141,8 @@ friends.
 
 ## TODO
 
+_What's cooking? Let me know._
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ## 🔹 SecuroSurf 2.0
@@ -170,7 +176,7 @@ friends.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## Credits & Thanks
+## 🔹 Credits & Thanks
 
 This program was inspired by [_Guardian_](https://gitlab.com/digitalarc/guardian) (and [_Guardian by
 Speyedr_](https://gitlab.com/Speyedr/guardian-fastload-fix)). Many thanks to them, as they provided the initial input
