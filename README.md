@@ -50,7 +50,7 @@ ___SecuroSurf___ is easy to use! The most important functionality is just one cl
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Using the basic functionality
+### 🔹 Using the basic functionality of the firewall
 
 The ___Normal___ mode will allow GTA Online traffic without interfering. This is the default.
 
@@ -64,18 +64,18 @@ also the other players are using _SecuroSurf_ with this exact mode enabled.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Using the Dynamic session mode
+### 🔹 Using Dynamic sessions (best for most users)
 
-This mode is the best for most of the players, because it works right out of the box with no configuration necessary.
-Simply create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on
-_Normal_ as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only
-the people currently in the session will be allowed to stay in the session. In other words, no one else can join after
+This mode is the best for most players, because it works right out of the box with no configuration necessary. Simply
+create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on _Normal_
+as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the
+people currently in the session will be allowed to stay in the session. In other words, no one else can join after
 enabling the _Dynamic_ mode. **Note: this mode is currently not available, but it will be when the version 2.0 of the
 app is released.**
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Crew sessions
+### 🔹 Crew sessions (for advanced users and groups)
 
 ___Crews___ are totally customizable session definitions. They are the safest mode, given that with them, the firewall
 can be kept active all the time, thus offering more protection than the ___Dynamic___ session mode, which instead
@@ -84,31 +84,19 @@ groups of people that are looking for a more definitive, stronger solution again
 can find an example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
 [here](session_configuration_json_schema.md) the full documentation.
 
-#### Local Crews
+__[Local Crews]__ ___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each
+member of the crew should have an identical copy of this file and use it to run the firewall. For example, you can use
+_Google Drive_ to distribute the file to all your crew members. The local crew file should be in the same folder as
+`SecuroSurf.exe`, and be named `session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII
+letters, numbers, and spaces (e.g. `session.crew.My Amazing Crew.json`).
 
-___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of the crew
-should have a copy of this file and use it to run the firewall. For example, you can use _Google Docs_ to distribute the
-file to all your crew members. The local crew file should be in the same folder as `SecuroSurf.exe`, and be named
-`session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII letters, numbers, and spaces
-(e.g. `session.crew.My Amazing Crew.json`).
-
-#### Remote Crews
-
-Sharing configuration files with your friends can be annoying, so it is possible to host the crew definitions on the
-web, and have ___SecuroSurf___ fetch them automatically. If your crew provided you with an URL to use with
-___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
-names, and the values are the respective URLs you've been given. For example:
-
-```json
-{
-    "GTA Amazing Crew": "https://amazing-gta-crew.example.org/session-configuration.json.php",
-    "My Friends":       "https://my-private-site.example.org/get-gta-firewall-config.json.php"
-}
-```
-
-The format used for the remote configurations is the same as the local crews, except the data is obfuscated. If you are
-the leader of a crew, have a look at the source code to learn how to implement this, or ask for help in the
-[issues](./issues) section. 
+__[Remote Crews]__ Sharing configuration files with your friends can be annoying, so it is possible to host the crew
+definitions on the web, and have ___SecuroSurf___ fetch them automatically. If your crew provided you with an URL to use
+with ___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the
+crew names, and the values are the respective URLs you've been given. See an example [here](
+session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local crews, except
+the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to implement this,
+or ask for help in the [issues](./issues) section. 
 
 ------------------------------------------------------------------------------------------------------------------------
 
