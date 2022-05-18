@@ -67,12 +67,12 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     def _fetch_configuration_thread():
         nonlocal SC_manager, SC, SC_changed
         while True:
-            time.sleep(SC.update_frequency)
             SC_manager = SC_set_manager.get_by_name(SC_name)
             _new_session_configuration = SC_manager.get()
             if _new_session_configuration != SC:
                 SC_changed = True
             SC = _new_session_configuration
+            time.sleep(SC.update_frequency)
     t.Thread(target=_fetch_configuration_thread, args=(), daemon=True).start()
 
     # ------------------------------------------------------------------------------------------------------------------
