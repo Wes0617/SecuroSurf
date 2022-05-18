@@ -6,7 +6,7 @@ from securosurf.firewall import is_T2_IP
 ########################################################################################################################
 
 def FUNC(IP: str) -> str:
-    if is_T2_IP.FUNC(IP) or is_LAN_IP.FUNC(IP):
+    if is_LAN_IP.FUNC(IP):
         return IP
 
     # Obfuscate the IP in a predictable manner,
