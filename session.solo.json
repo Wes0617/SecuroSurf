@@ -4,7 +4,7 @@
 	"update_frequency": 5,
 
 	"T2_throttling": {
-		"max_packets": 20,
+		"max_packets": 30,
 		"per_seconds": 60
 	},
 
