@@ -149,11 +149,9 @@ _What's cooking? Let me know._
 
 ### 🔹 SecuroSurf 2.0
 
-- Set up GitHub actions to build releases automatically.
 - The remote crews should stop updating themselves if the game is turned off.
 - Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
 - Implement session lock and Dynamic mode.
-- Complete README.
 
 ------------------------------------------------------------------------------------------------------------------------
 
