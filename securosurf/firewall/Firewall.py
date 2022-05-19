@@ -75,7 +75,7 @@ class CLASS:
 
         if length in SC.T2_heartbeat_sizes:
             self.__matchmaking_servers.add(rm_ip)
-            TM.add(PacketInboundT2Heartbeat.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+            TM.add(PacketInboundT2Heartbeat.CLASS(my_ip, rm_ip, length)) if ET else None
             return True
 
         if rm_ip in self.__matchmaking_servers:
@@ -92,25 +92,25 @@ class CLASS:
                         break
                 queue_is_full = len(T2PTQ) >= SC.T2_throttling.max_packets
                 if queue_is_full:
-                    TM.add(PacketInboundT2Throttled.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+                    TM.add(PacketInboundT2Throttled.CLASS(my_ip, rm_ip, length)) if ET else None
                     return False
                 T2PTQ.append(now)
 
-            TM.add(PacketInboundT2.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+            TM.add(PacketInboundT2.CLASS(my_ip, rm_ip, length)) if ET else None
             return True
 
         if SC.allow_list is None:
-            TM.add(PacketInboundAllowedStranger.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+            TM.add(PacketInboundAllowedStranger.CLASS(my_ip, rm_ip, length)) if ET else None
             return True
         else:
             if SC.allow_list.allow_LAN_IPs is True and is_LAN_IP.FUNC(rm_ip):
-                TM.add(PacketInboundAllowListLAN.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+                TM.add(PacketInboundAllowListLAN.CLASS(my_ip, rm_ip, length)) if ET else None
                 return True
 
             allow_list_message = SC.allow_list.IPs.get(rm_ip, None)
             if allow_list_message is not None:
-                TM.add(PacketInboundAllowList.CLASS(my_ip, rm_ip, len(packet.payload), allow_list_message)) if ET else None
+                TM.add(PacketInboundAllowList.CLASS(my_ip, rm_ip, length, allow_list_message)) if ET else None
                 return True
 
-            TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+            TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, length)) if ET else None
             return False
