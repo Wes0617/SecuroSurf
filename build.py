@@ -39,3 +39,6 @@ for _config in _configs:
     _source = cwd / _config
     _destination = build_path / _config
     shutil.copyfile(_source, _destination)
+
+zip_path = cwd / "build" / "zipped_build"
+shutil.make_archive(str(zip_path), 'zip', build_path)

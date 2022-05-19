@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - v**
+
+jobs:
+  build-windows:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.10'
+          architecture: 'x64'
+
+      - name: Requirements
+        run: |
+          pip install -r requirements.txt
+
+      - name: Build
+        run: |
+          python build.py build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifact-name
+          path: build/zipped_build.zip
+
+      - name: Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: true
+
+      - name: Upload
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{steps.create_release.outputs.upload_url}}
+          asset_path: build/zipped_build.zip
+          asset_name: SecuroSurf.${{ github.ref_name }}.zip
+          asset_content_type: application/zip
