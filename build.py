@@ -26,6 +26,8 @@ setup(
 
 shutil.copytree(cwd / "images", build_path / "images")
 
+(build_path / "errors").mkdir()
+
 shutil.copytree(cwd / "errors", build_path / "errors")
 
 _configs = [
