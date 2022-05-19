@@ -7,7 +7,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[**Downloads**](./releases) 🔹
+[**Downloads**](https://github.com/Wes0617/SecuroSurf/releases) 🔹
 [User Manual](#user-manual) 🔹
 [FAQs](#faqs) 🔹
 [TODO](#todo) 🔹
