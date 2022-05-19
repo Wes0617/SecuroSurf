@@ -7,7 +7,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[**Downloads**](./) 🔹
+[**Downloads**](./releases) 🔹
 [User Manual](#user-manual) 🔹
 [FAQs](#faqs) 🔹
 [TODO](#todo) 🔹
@@ -45,6 +45,9 @@ by the diagram below; if the _Assistant_ and _Lester_ are running the firewall, 
 to _Rickie_, _Lester_ and the _Assistant_ _through_ _Rickie_:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png"></p>
+
+Will the firewall continue to work in future? It probably will, because changing the game's network architecture now, at
+the end of its life, would be a big waste of money. GTA Online will continue to be a P2P game, unfortunately.
 
 ------------------------------------------------------------------------------------------------------------------------
 
