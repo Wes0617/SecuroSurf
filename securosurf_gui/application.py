@@ -27,8 +27,6 @@ from securosurf_gui import gui_refresh_and_determine_selection
 
 def FUNC(root: p.Path, simulation: bool = False) -> None:
 
-    active_max_age_minutes      = 1
-    host_max_age_minutes        = 2
     window_refresh_rate_user_ms = 100
     window_refresh_rate_max_ms  = 5000
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
@@ -129,7 +127,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
             show_welcome_message()
 
         gui_refresh_allow_list   .FUNC(window, SC)
-        gui_refresh_status       .FUNC(window, firewall_telemetry, active_max_age_minutes, host_max_age_minutes)
+        gui_refresh_status       .FUNC(window, firewall_telemetry)
         gui_refresh_T2_throttling.FUNC(window, SC)
         gui_refresh_update       .FUNC(window, SC, SC_manager.last_update_attempt)
         gui_refresh_telemetry    .FUNC(window, firewall_telemetry)
