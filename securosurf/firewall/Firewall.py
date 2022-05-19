@@ -35,6 +35,7 @@ class CLASS:
         self.__telemetry_manager = telemetry_manager
         self.__process: m.Process = m.Process(target=self._run, daemon=True)
         self.__session_configuration = initial_session_configuration
+        self.__matchmaking_servers = set()
 
     def start(self):
         pydivert.WinDivert.register()
@@ -70,14 +71,14 @@ class CLASS:
         T2PTQ = self.T2_packet_throttling_deque
         my_ip = packet.dst_addr if packet.is_inbound else packet.src_addr
         rm_ip = packet.dst_addr if packet.is_outbound else packet.src_addr
+        length = len(packet.payload)
 
-        if is_T2_IP.FUNC(rm_ip):
-            length = len(packet.payload)
+        if length in SC.T2_heartbeat_sizes:
+            self.__matchmaking_servers.add(rm_ip)
+            TM.add(PacketInboundT2Heartbeat.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
+            return True
 
-            if length in SC.T2_heartbeat_sizes:
-                TM.add(PacketInboundT2Heartbeat.CLASS(my_ip, rm_ip, len(packet.payload))) if ET else None
-                return True
-
+        if rm_ip in self.__matchmaking_servers:
             TM.host_activity = time.time()
 
             if SC.T2_throttling is not None:
