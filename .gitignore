@@ -1,6 +1,7 @@
 .idea
 __pycache__
 ignore
+errors
 build
 venv
 session.crews-remote.json
