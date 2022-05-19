@@ -105,6 +105,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
+        # Tkinter changes the mouse pointer to load and leaves it like that forever. This seems to fix it.
         window.TKroot.config(cursor='')
 
         # --------------------------------------------------------------------------------------------------------------
