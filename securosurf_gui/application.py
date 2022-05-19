@@ -21,7 +21,7 @@ from securosurf_gui import gui_refresh_telemetry
 from securosurf_gui import gui_refresh_allow_list
 from securosurf_gui import gui_refresh_welcome_message
 from securosurf_gui import gui_refresh_T2_throttling
-from securosurf_gui import gui_refresh_and_get_session_configuration_names
+from securosurf_gui import gui_refresh_and_determine_selection
 
 ########################################################################################################################
 
@@ -36,7 +36,6 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
     window                      = gui_window.FUNC(root, _telemetry_length)
     window_event_target         = EventTarget(window)
     SC_set_manager              = SessionConfigurationSetManager.CLASS(root)
-    current_crew_names          = []
     SC_name                     = "Normal"
     SC_manager                  = SC_set_manager.get_by_name(SC_name)
     SC                          = SC_manager.get()
@@ -120,9 +119,10 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
-        current_crew_names, SC_name = gui_refresh_and_get_session_configuration_names.FUNC(
-            window, SC_set_manager, current_crew_names, event_name == "crew_name"
-        )
+        _new_crew_names = SC_set_manager.get_crew_names()
+        _current_crew_names = locals().get("_current_crew_names", [])
+        SC_name = gui_refresh_and_determine_selection.FUNC(window, _new_crew_names, _current_crew_names, event_name == "crew_name")
+        _current_crew_names = _new_crew_names
 
         if not window_showing_help:
             show_welcome_message()

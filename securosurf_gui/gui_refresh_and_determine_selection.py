@@ -6,15 +6,14 @@ import securosurf_gui_toolkit.toolkit as tk
 
 ########################################################################################################################
 
-NewCrewNames = list[str]
 CurrentSessionConfigurationName = str
 
 def FUNC(
     window: tk.Window,
-    session_configuration_manager,
+    new_crew_names: list[str],
     current_crew_names: list[str],
     triggered_by_crew_name_change: bool
-) -> tuple[NewCrewNames, CurrentSessionConfigurationName]:
+) -> CurrentSessionConfigurationName:
 
     widget_to_normal: sg.Radio = window["to_normal"]
     widget_to_solo: sg.Radio = window["to_solo"]
@@ -24,13 +23,8 @@ def FUNC(
     widget_crew_name: sg.Combo = window["crew_name"]
     widget_crew_name.Widget.selection_range(0, 0)
 
-    new_crew_names = gui_refresh_crew_names.FUNC(
-        session_configuration_manager,
-        current_crew_names,
-        widget_crew_name,
-        widget_to_crew,
-        widget_to_solo
-    )
+    if new_crew_names != current_crew_names:
+        gui_refresh_crew_names.FUNC( new_crew_names, widget_crew_name, widget_to_crew, widget_to_solo)
 
     if triggered_by_crew_name_change:
         widget_to_crew.update(value=True)
@@ -48,4 +42,4 @@ def FUNC(
     else:
         raise Exception()
 
-    return new_crew_names, session_configuration_name
+    return session_configuration_name
