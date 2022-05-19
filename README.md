@@ -23,14 +23,14 @@ interact with the game in any way. It does not contain any reverse-engineered co
 game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the program. If all this
 doesn't convince you how trivial this program is, consider that the whole thing can be created by anyone with just
 [Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall), except it would be very cumbersome to use. However,
-the usual warning applies because I am not a lawyer... I just want to play in peace: use this at your own risk.
+the usual warning applies because I am not a lawyer… I just want to play in peace: use this at your own risk.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 Should I trust this?
 
 You should never trust random code from the internet! However, in this case __the code is open source and free for
-anyone to review__. Furthermore, the binaries are built by _GitHub_, whose parent company is _Microsoft_, which should
+anyone to review__. Furthermore, the binaries are built via _GitHub_, whose parent company is _Microsoft_, which should
 give you the peace of mind of running safe code.
 
 <p align="center"><img src="md_images/trust.png"></p>
@@ -40,14 +40,14 @@ give you the peace of mind of running safe code.
 ### 🔹 Is this effective?
 
 As of today (v1.60) it is, but only if used correctly! That is, __all the people you are playing with must use it__.
-Otherwise, hackers can still connect through the people that aren't running the firewall. How this works is illustrated
-by the diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_ is not, hackers can connect
-to _Rickie_, _Lester_ and the _Assistant_ _through_ _Rickie_:  
+Otherwise, hackers can still connect through the people that aren't protected by the firewall. How this works
+(tunneling) is illustrated by the diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_
+is not, hackers can connect to _Rickie_, _Lester_ and the _Assistant_ _through_ _Rickie_:  
 
 <p align="center"><img src="md_images/tunneling_diagram.png"></p>
 
-Will the firewall continue to work in future? It probably will, because changing the game's network architecture now, at
-the end of its life, would be a big waste of money. GTA Online will continue to be a P2P game, unfortunately.
+Will the firewall continue to work in future? It most probably will, because changing the game's network architecture
+now, at the end of its life, would be a huge waste of money. GTA Online will continue to be a P2P game, unfortunately.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -91,16 +91,16 @@ people that are looking for a more definitive, stronger solution against frequen
 example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
 [here](session_configuration_json_schema.md) the full documentation.
 
-__[Local Crews]__ ___Crews___ can be saved in simple _JSON_ files to keep alongside the program's executable. Each
-member of the crew should have an identical copy of this file and use it to run the firewall. For example, you can use
-_Google Drive_ to distribute the file to all your crew members. The local crew file should be in the same folder as
+__[Local Crews]__ _Crews_ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of
+the crew should have an identical copy of this file and use it to run the firewall. For example, you can use _Google
+Drive_ to distribute the file to all your crew members. The local crew file should be in the same folder as
 `SecuroSurf.exe`, and be named `session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII
 letters, numbers, and spaces (e.g. `session.crew.My Amazing Crew.json`).
 
 __[Remote Crews]__ Sharing configuration files with your friends can be annoying, so it is possible to host the crew
-definitions on the web, and have ___SecuroSurf___ fetch them automatically. If your crew provided you with an URL to use
-with ___SecuroSurf___, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the
-crew names, and the values are the respective URLs you've been given. See an example [here](
+definitions on the web, and have _SecuroSurf_ fetch them automatically. If your crew provided you with an URL to use 
+with _SecuroSurf_, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
+names, and the values are the respective URLs you've been given. See an example [here](
 session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local crews, except
 the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to implement this,
 or ask for help in the [issues](./issues) section. 
