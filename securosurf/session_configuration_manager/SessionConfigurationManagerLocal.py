@@ -19,4 +19,4 @@ class CLASS(SessionConfigurationManager.CLASS):
             with open(self.__path, "r") as JSON_file_pointer:
                 return JSON_file_pointer.read(), None
         except FileNotFoundError as exception:
-            return None, str(__class__) + " " + str(exception)
+            return None, str(exception)
