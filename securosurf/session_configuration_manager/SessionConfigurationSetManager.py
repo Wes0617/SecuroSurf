@@ -67,7 +67,10 @@ class CLASS:
                     for crew_name_no_prefix in JSON_object:
                         crew_name = "[R] " + crew_name_no_prefix
                         URL = JSON_object[crew_name_no_prefix]
-                        new_crews[crew_name] = SessionConfigurationManagerRemote.CLASS(self.__app_root, crew_name, URL)
+                        if crew_name in self.__crews:
+                            new_crews[crew_name] = self.__crews[crew_name]
+                        else:
+                            new_crews[crew_name] = SessionConfigurationManagerRemote.CLASS(self.__app_root, crew_name, URL)
             except Exception as exception:
                 print(exception)
 
