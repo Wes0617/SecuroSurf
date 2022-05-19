@@ -11,7 +11,6 @@ CurrentSessionConfigurationName = str
 def FUNC(
     window: tk.Window,
     new_crew_names: list[str],
-    current_crew_names: list[str],
     triggered_by_crew_name_change: bool
 ) -> CurrentSessionConfigurationName:
 
@@ -23,8 +22,7 @@ def FUNC(
     widget_crew_name: sg.Combo = window["crew_name"]
     widget_crew_name.Widget.selection_range(0, 0)
 
-    if new_crew_names != current_crew_names:
-        gui_refresh_crew_names.FUNC( new_crew_names, widget_crew_name, widget_to_crew, widget_to_solo)
+    gui_refresh_crew_names.FUNC(new_crew_names, widget_crew_name, widget_to_crew, widget_to_solo)
 
     if triggered_by_crew_name_change:
         widget_to_crew.update(value=True)

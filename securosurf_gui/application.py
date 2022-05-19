@@ -119,9 +119,7 @@ def FUNC(root: p.Path, simulation: bool = False) -> None:
         # --------------------------------------------------------------------------------------------------------------
 
         _new_crew_names = SC_set_manager.get_crew_names()
-        _current_crew_names = locals().get("_current_crew_names", [])
-        SC_name = gui_refresh_and_determine_selection.FUNC(window, _new_crew_names, _current_crew_names, event_name == "crew_name")
-        _current_crew_names = _new_crew_names
+        SC_name = gui_refresh_and_determine_selection.FUNC(window, _new_crew_names, event_name == "crew_name")
 
         if not window_showing_help:
             show_welcome_message()
