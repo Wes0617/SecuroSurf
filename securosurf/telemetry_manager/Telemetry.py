@@ -7,9 +7,9 @@ from securosurf.telemetry_manager import LiveTraffic
 
 ########################################################################################################################
 
-_active_max_age_minutes = 1
+_active_max_age_minutes = 2
 
-_host_max_age_minutes = 2
+_host_max_age_minutes = 3
 
 @dc.dataclass(frozen=True)
 class CLASS:
