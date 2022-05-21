@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import time
 import collections as c
 from securosurf.telemetry import Packet
 from securosurf.telemetry import PacketInboundT2
