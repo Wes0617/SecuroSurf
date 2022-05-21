@@ -18,8 +18,10 @@ def FUNC(IP: str) -> str:
     p3 = int(pieces[2]) * 3
     p4 = int(pieces[3]) * 4
     total = p1 + p2 + p3 + p4
-    show_piece = total % 4
+    show_piece_1 = total % 4
+    show_piece_2 = (total + 1) % 4
 
-    obfuscated_pieces[show_piece] = pieces[show_piece]
+    obfuscated_pieces[show_piece_1] = pieces[show_piece_1]
+    obfuscated_pieces[show_piece_2] = pieces[show_piece_2]
 
     return ".".join(obfuscated_pieces)
