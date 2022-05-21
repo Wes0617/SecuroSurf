@@ -1,16 +1,18 @@
 import os
 import sys
 import shutil
-import pathlib
+import pathlib as p
 from cx_Freeze import setup, Executable
 from securosurf import information
 
 ########################################################################################################################
 
-cwd = pathlib.Path(__file__).parent
+information.VAR = information.CLASS(p.Path(__file__).parent)
+
+# ----------------------------------------------------------------------------------------------------------------------
 
 _build_directory_filename = f"exe.win-amd64-{sys.version_info.major}.{sys.version_info.minor}"
-build_path = cwd / "build" / _build_directory_filename
+build_path = information.VAR.path / "build" / _build_directory_filename
 if os.path.exists(build_path):
     shutil.rmtree(build_path)
 
@@ -29,10 +31,10 @@ setup(
 
 for _asset_directory_filename in information.VAR.asset_directories_filenames:
     _asset_directory_path = build_path / _asset_directory_filename
-    _asset_directory_path.mkdir()
-    shutil.copytree(cwd / _asset_directory_filename, build_path / _asset_directory_filename)
+    shutil.copytree(information.VAR.path / _asset_directory_filename, _asset_directory_path)
+    _asset_directory_path.mkdir(exist_ok=True)
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-zip_path = cwd / "build" / "zipped_build"
+zip_path = information.VAR.path / "build" / "zipped_build"
 shutil.make_archive(str(zip_path), 'zip', build_path)

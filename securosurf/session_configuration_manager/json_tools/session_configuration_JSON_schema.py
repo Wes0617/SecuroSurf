@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import json
-from securosurf import information
-
 ########################################################################################################################
 
 VAR = {
@@ -111,12 +108,3 @@ VAR = {
         }
     },
 }
-
-########################################################################################################################
-
-__destination = information.VAR.configs_path / "session_configuration_json_schema.md"
-with open(__destination, "w+") as __file_pointer:
-    __file_pointer.write("# Session Configuration JSON Schema\n\n")
-    __file_pointer.write("```json\n")
-    json.dump(VAR, fp=__file_pointer, indent="\t", separators=(",", ": "))
-    __file_pointer.write("\n```\n")

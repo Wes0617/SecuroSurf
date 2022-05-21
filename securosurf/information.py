@@ -4,19 +4,22 @@ import pathlib as p
 
 ########################################################################################################################
 
-_root = p.Path(__file__).parent.parent
-
 class CLASS:
-    application_name: str = "SecuroSurf"
-    application_version: str = "2.0.0"
-    application_full_name: str = "SecuroSurf 2.0.0"
-    application_mime: str = "application/securosurf-2"
-    errors_path = _root / "errors"
-    configs_path = _root / "configs"
-    remote_crews_path = _root / "configs" / "session.crews-remote.json"
-    icon_path = _root / "images" / "icon.ico"
-    asset_directories_filenames = ["errors", "configs", "images"]
+    def __init__(self, root: p.Path):
+        self.application_name: str = "SecuroSurf"
+        self.application_version: str = "2.0.0"
+        self.application_full_name: str = "SecuroSurf 2.0.0"
+
+        self.application_mime: str = "application/securosurf-2"
+
+        self.path: p.Path = root
+        self.errors_path: p.Path = root / "errors"
+        self.configs_path: p.Path = root / "configs"
+        self.remote_crews_path: p.Path = root / "configs" / "session.crews-remote.json"
+        self.icon_path: p.Path = root / "images" / "icon.ico"
+
+        self.asset_directories_filenames: list[str] = ["configs", "errors", "images"]
 
 ########################################################################################################################
 
-VAR = CLASS()
+VAR: CLASS | None = None
