@@ -169,7 +169,8 @@ _What's cooking? Let me know._
 - Add "please wait N seconds before joining the crew" message.
 - Determine whether it is necessary to implement the "mandatory packet detection" heuristics.
 - Consider whether to introduce the "Firewall Cooldown" option.
-- Implement manual kick of non-firewalled users. 
+- Implement manual kick of non-firewalled users.
+- Allow users to customize the T2 servers.
 
 ------------------------------------------------------------------------------------------------------------------------
 
