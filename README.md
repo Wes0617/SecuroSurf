@@ -88,22 +88,22 @@ ___Crews___ are totally customizable session configurations. They are the safest
 firewall can be kept active all the time, thus offering more protection than the _Dynamic_ session mode, which instead
 requires the firewall to be turned off occasionally for your friends to join. Crew sessions are meant for established
 groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
-can find an example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
+can find an example of a crew definition [here](configs/session.crew.Example%20Crew.json_EXAMPLE), and
 [here](configs/session_configuration_json_schema.md) the full documentation.
 
-__[Local Crews]__ _Crews_ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of
-the crew should have an identical copy of this file and use it to run the firewall. For example, you can use _Google
-Drive_ to distribute the file to all your crew members. The local crew file should be in the same folder as
-`SecuroSurf.exe`, and be named `session.crew.name.json`, where "name" can be replaced with any name consisting in ASCII
-letters, numbers, and spaces (e.g. `session.crew.My Amazing Crew.json`).
+__[Local Crews]__ A _crew_ can be defined with a simple _JSON_ file. Then, each member of the crew should have an
+identical copy of this file and use it to run the firewall. For example, you can use _Google Drive_ to distribute the
+file to all your crew members. The file should be placed in the "configs" folder, and be named `session.crew.name.json`,
+where "name" can be replaced with any name consisting in ASCII letters, numbers, and spaces (e.g.
+`session.crew.My Amazing Crew.json`).
 
 __[Remote Crews]__ Sharing configuration files with your friends can be annoying, so it is possible to host the crew
 definitions on the web, and have _SecuroSurf_ fetch them automatically. If your crew provided you with an URL to use 
 with _SecuroSurf_, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
 names, and the values are the respective URLs you've been given. See an example [here](
-configs/session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local crews, except
-the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to implement this,
-or ask for help in the [issues](./issues) section. 
+configs/session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local
+crews, except the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to
+implement this, or ask for help in the [issues](./issues) section. 
 
 ------------------------------------------------------------------------------------------------------------------------
 
