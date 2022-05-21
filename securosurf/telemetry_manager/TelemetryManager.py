@@ -26,8 +26,7 @@ class CLASS:
             self.__slots.clear()
             self.__log.append(LiveTraffic.CLASS(packet))
         elif isinstance(packet, PacketInboundT2Throttled.CLASS):
-            self.__slots.clear()
-            self.__log.append(LiveTraffic.CLASS(packet))
+            self.__add_slotted(f"T2 Throttled", packet)
         elif isinstance(packet, PacketInboundT2.CLASS):
             self.__add_slotted(f"T2", packet)
 
