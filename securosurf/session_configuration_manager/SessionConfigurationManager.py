@@ -31,9 +31,10 @@ class CLASS(abc.ABC):
         elapsed = time.time() - self.__last_update_attempt
         if elapsed < self.__session_configuration.update_frequency:
             return self.__session_configuration
-        self.__last_update_attempt = time.time()
 
         JSON, error = self._get_JSON()
+
+        self.__last_update_attempt = time.time()
 
         if JSON is not None:
             new_session_configuration, error = session_configuration_from_JSON.FUNC(JSON)
