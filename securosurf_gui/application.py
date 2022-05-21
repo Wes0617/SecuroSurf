@@ -25,15 +25,15 @@ from securosurf_gui import gui_refresh_and_determine_selection
 
 ########################################################################################################################
 
-def FUNC(root: p.Path, simulation: bool = False) -> None:
+def FUNC(simulation: bool = False) -> None:
 
     window_refresh_rate_user_ms = 100
     window_refresh_rate_max_ms  = 5000
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
     _telemetry_length           = 40
-    window                      = gui_window.FUNC(root, _telemetry_length)
+    window                      = gui_window.FUNC(_telemetry_length)
     window_event_target         = EventTarget(window)
-    SC_set_manager              = SessionConfigurationSetManager.CLASS(root)
+    SC_set_manager              = SessionConfigurationSetManager.CLASS()
     SC_name                     = "Normal"
     SC_manager                  = SC_set_manager.get_by_name(SC_name)
     SC                          = SC_manager.get()

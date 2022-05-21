@@ -8,10 +8,8 @@ from securosurf_gui_toolkit.toolkit import TextAppearance
 
 ########################################################################################################################
 
-def FUNC(root: p.Path) -> None:
+def FUNC() -> None:
     message = f"Unable to start! Please use \"Run as Administrator\" to launch {information.VAR.application_name}!"
-
-    icon_path = root / "images" / "icon.ico"
 
     layout = [
         [tk.EmptyRectangle(background_color=tk.accent_BG_lighter, area=(3, 3), expand_x=True)],
@@ -37,7 +35,7 @@ def FUNC(root: p.Path) -> None:
         )]], expand_x=True)],
     ]
 
-    window = tk.Window(title=information.VAR.application_name, layout=layout, icon=icon_path)
+    window = tk.Window(title=information.VAR.application_name, layout=layout, icon=information.VAR.icon_path)
 
     while True:
         event, values = window.read()

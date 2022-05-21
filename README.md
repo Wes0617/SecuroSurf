@@ -101,7 +101,7 @@ __[Remote Crews]__ Sharing configuration files with your friends can be annoying
 definitions on the web, and have _SecuroSurf_ fetch them automatically. If your crew provided you with an URL to use 
 with _SecuroSurf_, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
 names, and the values are the respective URLs you've been given. See an example [here](
-session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local crews, except
+configs/session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local crews, except
 the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to implement this,
 or ask for help in the [issues](./issues) section. 
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-import pathlib
+from securosurf import information
 
 ########################################################################################################################
 
@@ -114,7 +114,7 @@ VAR = {
 
 ########################################################################################################################
 
-__destination = pathlib.Path(__file__).parent.parent.parent.parent / "session_configuration_json_schema.md"
+__destination = information.VAR.configs_path / "session_configuration_json_schema.md"
 with open(__destination, "w+") as __file_pointer:
     __file_pointer.write("# Session Configuration JSON Schema\n\n")
     __file_pointer.write("```json\n")

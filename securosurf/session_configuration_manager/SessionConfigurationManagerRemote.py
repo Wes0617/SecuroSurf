@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import requests
-import pathlib as p
 from base64 import b64decode
 from Crypto.Cipher import AES
 from securosurf import information
@@ -14,8 +13,8 @@ JSONString = str
 ErrorString = str
 
 class CLASS(SessionConfigurationManager.CLASS):
-    def __init__(self, app_root: p.Path, session_configuration_name: str, URL: str):
-        super().__init__(app_root, session_configuration_name, 30)
+    def __init__(self, session_configuration_name: str, URL: str):
+        super().__init__(session_configuration_name, 30)
         self.__URL: str = URL
 
     def _get_JSON(self) -> tuple[JSONString | None, ErrorString | None]:

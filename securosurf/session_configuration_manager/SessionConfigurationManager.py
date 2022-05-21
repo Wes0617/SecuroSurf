@@ -5,6 +5,7 @@ import time
 import pathlib as p
 from securosurf.session_configuration import SessionConfiguration
 from securosurf.session_configuration_manager.json_tools import session_configuration_from_JSON
+from securosurf import  information
 
 ########################################################################################################################
 
@@ -13,9 +14,8 @@ ErrorString = str
 
 class CLASS(abc.ABC):
 
-    def __init__(self, app_root: p.Path, crew_name: str, retry_frequency_if_fail: int):
-        error_path = app_root / "errors" / (crew_name + ".txt")
-        self.__error_path: p.Path = error_path
+    def __init__(self, crew_name: str, retry_frequency_if_fail: int):
+        self.__error_path: p.Path = information.VAR.errors_path / (crew_name + ".txt")
         self.__last_update_attempt: float = 0
         self.__session_configuration: SessionConfiguration.CLASS = SessionConfiguration.CLASS(
             welcome_message=f"Error! Check the \"errors\" folder for more info!",
