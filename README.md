@@ -150,24 +150,26 @@ _What's cooking? Let me know._
 
 ------------------------------------------------------------------------------------------------------------------------
 
+### 🔹 Minor improvements
+
+- User setting for custom refresh rate (to apply when maximized).
+- Save settings to local files automatically, such as refresh rate, or window position.
+- Notifications, e.g. play bell sound when people join or leave.
+- Add transfer rate in the telemetry window.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ### 🔹 SecuroSurf 2.0
 
-- Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
 - Implement session lock and Dynamic mode.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 SecuroSurf 2.+
 
-- User setting for custom refresh rate (to apply when maximized -- minimized should reduce refresh rate already).
 - Custom enable-telemetry setting (always enabled, disabled if minimized, always disabled).
-- Notifications, e.g. play bell sound when people join or leave.
-- Save settings to local files automatically, such as refresh rate, or window position.
-- Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
 - Add "please wait N seconds before joining the crew" message.
-- Determine whether it is necessary to implement the "mandatory packet detection" heuristics.
-- Consider whether to introduce the "Firewall Cooldown" option.
-- Implement manual kick of non-firewalled users.
+- Implement manual disconnect of non-firewalled users.
 - Allow users to customize the T2 servers.
 
 ------------------------------------------------------------------------------------------------------------------------
