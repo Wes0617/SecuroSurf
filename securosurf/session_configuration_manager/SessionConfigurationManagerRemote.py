@@ -20,6 +20,7 @@ class CLASS(SessionConfigurationManager.CLASS):
 
     def _get_JSON(self) -> tuple[JSONString | None, ErrorString | None]:
         try:
+            print("Requesting session configuration from remote")
             headers = {"Accept": information.VAR.application_mime}
             result = requests.get(url=self.__URL, headers=headers)
             if result.status_code != 200:
