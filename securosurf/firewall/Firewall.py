@@ -7,7 +7,6 @@ import collections as c
 import multiprocessing as m
 from pydivert.packet import Packet
 
-from securosurf.firewall import is_T2_IP
 from securosurf.firewall import is_LAN_IP
 from securosurf.telemetry import PacketInboundT2Throttled
 
