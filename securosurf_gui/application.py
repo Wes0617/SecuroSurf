@@ -64,16 +64,16 @@ def FUNC(simulation: bool = False) -> None:
     def _fetch_configuration_thread():
         nonlocal SC_manager, SC, SC_changed
         while True:
-            fetched_SC_name = SC_name
-            SC_manager = SC_set_manager.get_by_name(fetched_SC_name)
-            _new_session_configuration = SC_manager.get()
-            if _new_session_configuration != SC:
+            last_fetched_SC_name = SC_name
+            SC_manager = SC_set_manager.get_by_name(last_fetched_SC_name)
+            _new_SC = SC_manager.get()
+            if _new_SC != SC:
                 SC_changed = True
-            SC = _new_session_configuration
+            SC = _new_SC
             refresh_time = time.time() + SC.update_frequency
             while True:
                 time.sleep(1)
-                if time.time() >= refresh_time or SC_name != fetched_SC_name:
+                if time.time() >= refresh_time or SC_name != last_fetched_SC_name:
                     break
     t.Thread(target=_fetch_configuration_thread, args=(), daemon=True).start()
 
