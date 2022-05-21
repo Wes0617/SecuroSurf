@@ -84,12 +84,12 @@ app is released.**
 
 ### 🔹 Crew sessions (for advanced users and groups)
 
-___Crews___ are totally customizable session definitions. They are the safest mode, given that with them, the firewall
-can be kept active all the time, thus offering more protection than the _Dynamic_ session mode, which instead requires
-the firewall to be turned off occasionally for your friends to join. Crew sessions are meant for established groups of
-people that are looking for a more definitive, stronger solution against frequent attacks from modders. You can find an
-example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
-[here](session_configuration_json_schema.md) the full documentation.
+___Crews___ are totally customizable session configurations. They are the safest mode, given that with them, the
+firewall can be kept active all the time, thus offering more protection than the _Dynamic_ session mode, which instead
+requires the firewall to be turned off occasionally for your friends to join. Crew sessions are meant for established
+groups of people that are looking for a more definitive, stronger solution against frequent attacks from modders. You
+can find an example of a crew definition [here](session.crew.Example%20Crew.json_EXAMPLE), and
+[here](configs/session_configuration_json_schema.md) the full documentation.
 
 __[Local Crews]__ _Crews_ can be saved in simple _JSON_ files to keep alongside the program's executable. Each member of
 the crew should have an identical copy of this file and use it to run the firewall. For example, you can use _Google
@@ -152,7 +152,6 @@ _What's cooking? Let me know._
 
 ### 🔹 SecuroSurf 2.0
 
-- Move configuration files in "configs" directory.
 - The remote crews should stop updating themselves if the game is turned off.
 - Add timestamps in the telemetry window. And maybe also the transfer rate, etc.
 - Implement session lock and Dynamic mode.
@@ -183,8 +182,8 @@ _What's cooking? Let me know._
 
 ## Credits & Thanks
 
-This program is inspired by [_Guardian_](https://gitlab.com/digitalarc/guardian) (and [_Guardian by
-Speyedr_](https://gitlab.com/Speyedr/guardian-fastload-fix)). Many thanks to them, as they provided the initial input
-and info necessary to start this project. _Guardian_ is still developed, and I try to contribute to it as well. Also,
-thanks to my friend Robert B. for helping me out with _Python_, and many thanks to the guinea pigs (B. and B.) that
-helped to test this application.
+This program is inspired by [_Guardian_](https://gitlab.com/digitalarc/guardian), and [_Guardian by Speyedr_](
+https://gitlab.com/Speyedr/guardian-fastload-fix). Many thanks to them, as they provided the initial input and info
+necessary to start this project. In particular to [_Speyedr_](https://github.com/Speyedr), which figured out the first
+proof of concept. Also, thanks to my friend Robert B. for helping me out with _Python_, and many thanks to the guinea
+pigs (B. and B.) that helped to test this application.
