@@ -30,9 +30,11 @@ setup(
 # ----------------------------------------------------------------------------------------------------------------------
 
 for _asset_directory_filename in information.VAR.asset_directories_filenames:
-    _asset_directory_path = build_path / _asset_directory_filename
-    shutil.copytree(information.VAR.path / _asset_directory_filename, _asset_directory_path)
-    _asset_directory_path.mkdir(exist_ok=True)
+    _source = information.VAR.path / _asset_directory_filename
+    _dest = build_path / _asset_directory_filename
+    if _source.is_dir():
+        shutil.copytree(_source, _dest)
+    _dest.mkdir(exist_ok=True)
 
 # ----------------------------------------------------------------------------------------------------------------------
 
