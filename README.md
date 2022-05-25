@@ -7,7 +7,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
-[**Downloads**](https://github.com/Wes0617/SecuroSurf/releases) 🔹
+**Jump to:** 🔹 [**Downloads**](https://github.com/Wes0617/SecuroSurf/releases) 🔹
 [User Manual](#user-manual) 🔹
 [FAQs](#faqs) 🔹
 [TODO](#todo) 🔹
@@ -51,9 +51,18 @@ now, at the end of its life, would be a huge waste of money. GTA Online will con
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## User Manual
+## Quick Guide
 
 ___SecuroSurf___ is easy to use! The most important functionality is just one click away.
+
+------------------------------------------------------------------------------------------------------------------------
+
+### 🔹 Download and run the app
+
+___SecuroSurf___ is a portable application that requires zero configuration for most users. All you need to do is to
+download the [latest release](https://github.com/Wes0617/SecuroSurf/releases) (only win10/x64 is currently
+supported), unzip it somewhere, and then run `SecuroSurf.exe` as _Administrator_ (Right-click on the executable and
+press _Run as administrator_). 
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -141,43 +150,6 @@ friends before the firewall could be updated on their end__ to allow you inside.
 permanently glitched when this happens, and the only way to fix it is to __switch to single player__ before trying
 again. This problem will be solved in a future version, where the app will tell you explicitly when it's ok to join your
 friends.
-
-------------------------------------------------------------------------------------------------------------------------
-
-## TODO
-
-_What's cooking? Let me know._
-
-------------------------------------------------------------------------------------------------------------------------
-
-### 🔹 Minor improvements
-
-- User setting for custom refresh rate (to apply when maximized).
-- Save settings to local files automatically, such as refresh rate, or window position.
-- Notifications, e.g. play bell sound when people join or leave.
-- Add transfer rate in the telemetry window.
-
-------------------------------------------------------------------------------------------------------------------------
-
-### 🔹 SecuroSurf 2.0
-
-- Implement session lock and Dynamic mode.
-
-------------------------------------------------------------------------------------------------------------------------
-
-### 🔹 SecuroSurf 2.+
-
-- Custom enable-telemetry setting (always enabled, disabled if minimized, always disabled).
-- Add "please wait N seconds before joining the crew" message.
-- Implement manual disconnect of non-firewalled users.
-- Allow users to customize the T2 servers.
-
-------------------------------------------------------------------------------------------------------------------------
-
-### 🔹 SecuroSurf >2
-
-- Switch to a better GUI toolkit. Possibly [libui](https://github.com/libui-ng/libui-ng). Any suggestions?
-- Maybe port the project to Rust, for performance and for the updated WinDivert bindings.
 
 ------------------------------------------------------------------------------------------------------------------------
 
