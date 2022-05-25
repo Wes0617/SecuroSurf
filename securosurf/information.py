@@ -9,6 +9,7 @@ class CLASS:
         self.application_name: str = "SecuroSurf"
         self.application_version: str = "2.0.0"
         self.application_full_name: str = "SecuroSurf 2.0.0"
+        self.application_ID: str = "SecuroSurf"
 
         self.application_mime: str = "application/securosurf-2"
 
