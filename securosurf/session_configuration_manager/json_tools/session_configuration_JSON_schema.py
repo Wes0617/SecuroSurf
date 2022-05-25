@@ -68,8 +68,9 @@ VAR = {
             "type": "object",
             "properties": {
                 "IPs": {
-                    "description": "Use IPv4 as key, and name of the player as value. If this object is empty, no one "
-                                   "will be allowed in the session.",
+                    "description": "Use IPv4 as key, and the in-game name of the player as value. If this object is "
+                                   "empty, no one will be allowed in the session (unless they are allowed by the other "
+                                   "options, such as \"allow_LAN_IPs\").",
                     "type": "object",
                     "patternProperties": {
                         r"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$": {
