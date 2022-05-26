@@ -10,20 +10,21 @@
 **Jump to:** 🔹 [**Downloads**](https://github.com/Wes0617/SecuroSurf/releases) 🔹
 [User Manual](#user-manual) 🔹
 [FAQs](#faqs) 🔹
-[TODO](#todo) 🔹
-[Credits & Thanks](#credits--thanks)
+[Credits & Thanks](#credits--thanks) 🔹
+[Wiki](https://github.com/Wes0617/SecuroSurf/wiki)
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ### 🔹 Is this a mod menu?
 
-No it's not! ___SecuroSurf___ simply blocks traffic from IPs you don't know, which is well within your rights,
-especially considering how insecure this game is. _SecuroSurf_ does not decrypt the game's traffic, and it doesn't
-interact with the game in any way. It does not contain any reverse-engineered code, nor any code that would violate the
-game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the program. If all this
-doesn't convince you how trivial this program is, consider that the whole thing can be created by anyone with just
-[Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall), except it would be very cumbersome to use. However,
-the usual warning applies because I am not a lawyer… I just want to play in peace: use this at your own risk.
+No it's not! ___SecuroSurf___ is a firewall software whose only duty is blocking traffic from IPs you don't know, which
+is well within your rights, especially considering how insecure this game is. _SecuroSurf_ does not decrypt the game's
+traffic, and it doesn't interact with the game in any way. It does not contain any reverse-engineered code, nor any code
+that would violate the game developer's _EULA_. Furthermore, no decompilation or decryption was necessary to create the
+program. If all this doesn't convince you how trivial this program is, consider that the whole thing can be created by
+anyone with just [Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall) (except it would be very cumbersome
+to use). However, the usual warning applies because I am not a lawyer… I just want to play in peace: use this at your
+own risk.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -107,12 +108,12 @@ where "name" can be replaced with any name consisting in ASCII letters, numbers,
 `session.crew.My Amazing Crew.json`).
 
 __[Remote Crews]__ Sharing configuration files with your friends can be annoying, so it is possible to host the crew
-definitions on the web, and have _SecuroSurf_ fetch them automatically. If your crew provided you with an URL to use 
+definitions on the web, and have _SecuroSurf_ fetch them automatically. If your crew provided you with an URL to use
 with _SecuroSurf_, you must create a `session.crews-remote.json` file containing a _JSON_ object whose keys are the crew
 names, and the values are the respective URLs you've been given. See an example [here](
 configs/session.crews-remote.json_EXAMPLE). The format used for the remote configurations is the same as the local
 crews, except the data is obfuscated. If you are the leader of a crew, have a look at the source code to learn how to
-implement this, or ask for help in the [issues](./issues) section. 
+implement this, or ask for help in the [discussions](https://github.com/Wes0617/SecuroSurf/discussions) section. 
 
 ------------------------------------------------------------------------------------------------------------------------
 
