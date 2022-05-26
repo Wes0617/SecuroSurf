@@ -86,7 +86,13 @@ VAR = {
                                    "includes the following range: 192.168.0.0/16.",
                     "type": "boolean",
                     "default": True,
-                }
+                },
+                "IP_changed": {
+                    "description": "This entry is meant for remote crews only, and it is used to signal that the IP of "
+                                   "the crew member performing the request has changed.",
+                    "type": "boolean",
+                    "default": False,
+                },
             },
             "required": ["IPs"],
         },

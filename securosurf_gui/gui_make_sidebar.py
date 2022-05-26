@@ -11,8 +11,8 @@ def FUNC() -> tk.Container:
     ColumnText.__init__ = partialmethod(ColumnText.__init__, size=16)
     column_width = 371
 
-    f1 = tk.Frame("", layout=[
-        [sg.Text(key="allow_list_info", expand_x=True, justification="center", font=("Segoe UI", 8, "bold"))]
+    f1 = tk.Frame("Allow-list:", layout=[
+        [tk.Text(key="allow_list_info", expand_x=True, justification="center")],
     ])
 
     f2 = tk.Frame(title="Traffic Status:", title_icon=tk.Icon.STATUS, layout=[

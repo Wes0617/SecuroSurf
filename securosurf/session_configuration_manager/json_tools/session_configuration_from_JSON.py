@@ -25,7 +25,7 @@ def FUNC(JSON: str) -> tuple[SessionConfiguration.CLASS | None, ErrorString | No
     T2T = None if v is None else SessionConfigurationT2Throttling.CLASS(v["max_packets"], v["per_seconds"])
 
     v = JSON_object.get("allow_list", None)
-    AL = None if v is None else SessionConfigurationAllowList.CLASS(v["IPs"], v["allow_LAN_IPs"])
+    AL = None if v is None else SessionConfigurationAllowList.CLASS(v["IPs"], v["allow_LAN_IPs"], v["IP_changed"])
 
     v = JSON_object.get("session_lock", None)
     SL = None if v is None else SessionConfigurationSessionLock.CLASS(v["default_enabled"])

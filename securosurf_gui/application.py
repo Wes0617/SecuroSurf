@@ -4,7 +4,6 @@ import PySimpleGUI as sg
 
 import sys
 import time
-import pathlib as p
 import threading as t
 import multiprocessing as m
 
@@ -13,6 +12,7 @@ from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf_gui_toolkit.toolkit_tools import EventTarget
 from securosurf.session_configuration_manager import SessionConfigurationSetManager
+from securosurf import information
 
 from securosurf_gui import gui_window
 from securosurf_gui import gui_refresh_update
@@ -30,6 +30,7 @@ def FUNC(simulation: bool = False) -> None:
     window_refresh_rate_user_ms = 100
     window_refresh_rate_max_ms  = 5000
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
+    window_play_bell            = False
     _telemetry_length           = 40
     window                      = gui_window.FUNC(_telemetry_length)
     window_event_target         = EventTarget(window)
@@ -62,7 +63,7 @@ def FUNC(simulation: bool = False) -> None:
     # ------------------------------------------------------------------------------------------------------------------
 
     def _fetch_configuration_thread():
-        nonlocal SC_manager, SC, SC_changed
+        nonlocal SC_manager, SC, SC_changed, window_play_bell
         while True:
             last_fetched_SC_name = SC_name
             SC_manager = SC_set_manager.get_by_name(last_fetched_SC_name)
@@ -70,7 +71,8 @@ def FUNC(simulation: bool = False) -> None:
             _new_SC = SC_manager.get()
             if _new_SC != SC:
                 SC_changed = True
-
+                if _new_SC.allow_list is not None and _new_SC.allow_list.IP_changed:
+                    window_play_bell = True
             SC = _new_SC
 
             refresh_time = time.time() + SC.update_frequency
@@ -115,6 +117,14 @@ def FUNC(simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
+        _window_blink_last = locals().get("_window_blink_last", time.time())
+        window_blink = locals().get("window_blink", True)
+        if time.time() > _window_blink_last + 0.5:
+            window_blink = not window_blink
+            _window_blink_last = time.time()
+
+        # --------------------------------------------------------------------------------------------------------------
+
         # Tkinter changes the mouse pointer to load and leaves it like that forever. This seems to fix it.
         window.TKroot.config(cursor='')
 
@@ -134,10 +144,20 @@ def FUNC(simulation: bool = False) -> None:
         _user_selected_a_crew_in_combo_box = event_name == "crew_name"
         SC_name = gui_refresh_and_determine_selection.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box)
 
+        # --------------------------------------------------------------------------------------------------------------
+
         if not window_showing_help:
             show_welcome_message()
 
-        gui_refresh_allow_list   .FUNC(window, SC)
+        # --------------------------------------------------------------------------------------------------------------
+
+        if window_play_bell:
+            window.ding()
+            window_play_bell = False
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        gui_refresh_allow_list   .FUNC(window, SC, window_blink)
         gui_refresh_status       .FUNC(window, firewall_telemetry)
         gui_refresh_T2_throttling.FUNC(window, SC)
         gui_refresh_update       .FUNC(window, SC, SC_manager.last_update_attempt)

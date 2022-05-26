@@ -8,3 +8,4 @@ import dataclasses as dc
 class CLASS(object):
     IPs: dict[str, str]
     allow_LAN_IPs: bool
+    IP_changed: bool

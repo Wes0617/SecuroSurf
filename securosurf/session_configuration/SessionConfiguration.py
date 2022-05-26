@@ -25,6 +25,19 @@ class CLASS:
 
     fetch_time: float = dc.field(default_factory=time.time, init=False)
 
+    @property
+    def IP_changed_sync_countdown(self) -> float | None:
+        if self.allow_list is None:
+            return None
+
+        if self.allow_list.IP_changed is False:
+            return None
+
+        sync_time = self.fetch_time + self.update_frequency
+        period_to_sync_time = sync_time - time.time()
+
+        return period_to_sync_time if period_to_sync_time >= 0 else None
+
     def __eq__(self, other) -> bool:
         return \
             isinstance(other, CLASS) and \
