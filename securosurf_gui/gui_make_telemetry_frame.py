@@ -80,7 +80,7 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
 
     traffic_table.pop()
 
-    return tk.Frame(layout=[[
+    return tk.Frame("Telemetry:", layout=[[
         sg.Col(traffic_table, expand_x=True, pad=tk.padding_width),
     ]])
 

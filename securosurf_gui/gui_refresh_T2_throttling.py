@@ -9,13 +9,9 @@ def FUNC(
     window: tk.Window,
     session_configuration: SessionConfiguration.CLASS,
 ):
-    widget_T2_packet_throttling_frame: tk.Frame = window["T2_throttling_frame"]
     widget_T2_packet_throttling_message: tk.Text = window["T2_throttling_message"]
 
     enabled = session_configuration.T2_throttling is not None
-
-    title_icon = tk.Icon.BALLOT_CHECK if enabled else tk.Icon.BALLOT_EMPTY
-    widget_T2_packet_throttling_frame.tk_update(title_icon=title_icon)
 
     if enabled:
         max_packets = session_configuration.T2_throttling.max_packets

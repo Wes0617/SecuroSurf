@@ -15,16 +15,16 @@ def FUNC() -> tk.Container:
         [tk.Text(key="allow_list_info", expand_x=True, justification="center")],
     ])
 
-    f2 = tk.Frame(title="Traffic Status:", title_icon=tk.Icon.STATUS, layout=[
+    f2 = tk.Frame(title="T2 Throttling:", layout=[
+        [tk.Text(key="T2_throttling_message", justification="center", expand_x=True)],
+    ])
+
+    f3 = tk.Frame(title="Traffic Status:", layout=[
         [ColumnText("Last activity:"),          tk.Text(key="traffic_last_activity", expand_x=True)],
         [ColumnText("Last host activity:"),     tk.Text(key="traffic_host_last_activity", expand_x=True)],
     ])
 
-    f3 = tk.Frame(title="T2 Throttling:", title_icon=tk.Icon.BALLOT_EMPTY, layout=[
-        [tk.Text(key="T2_throttling_message", justification="center", expand_x=True)],
-    ], key="T2_throttling_frame")
-
-    f4 = tk.Frame(title="Configuration Update:", title_icon=tk.Icon.HEART, layout=[
+    f4 = tk.Frame(title="Configuration Update:", layout=[
         [ColumnText("Frequency:"),              tk.Text(key="update_frequency", expand_x=True)],
         [ColumnText("Last attempted:"),         tk.Text(key="update_last_attempted", expand_x=True)],
         [ColumnText("Last successful:"),        tk.Text(key="update_last_successful", expand_x=True)],
@@ -33,14 +33,14 @@ def FUNC() -> tk.Container:
     refresh_rate_slider = tk.Slider(key="refresh_rate", range=(100, 5000), value=100, step=100, expand_x=True, disabled=True)
     refresh_rate_apply = tk.Button(key="set_refresh_rate", text="Apply", appearance=tk.ButtonAppearance.DISABLED)
     telemetry_options = ["Always enabled", "Disabled if minimized", "Always disabled"]
-    f5 = tk.Frame("Performance:", title_icon=tk.Icon.EYE, layout=[
+    f5 = tk.Frame("Performance:", layout=[
         [tk.Text("These options are currently not implemented.", justification="center", expand_x=True)],
         [ColumnText("Refresh rate (ms):"),      refresh_rate_slider, refresh_rate_apply],
         [ColumnText("Telemetry:"),              tk.Combo(telemetry_options, telemetry_options[0], expand_x=True, disabled=True, readonly=True, key="telemetry_type")],
     ])
 
     notifications_options = ["Disable", "Enable"]
-    f6 = tk.Frame(title="Notifications:", title_icon=tk.Icon.BELL, layout=[
+    f6 = tk.Frame(title="Notifications:", layout=[
         [tk.Text("These options are currently not implemented.", justification="center", expand_x=True)],
         [ColumnText("On join:"),                tk.Combo(notifications_options, notifications_options[0], expand_x=True, disabled=True, readonly=True, key="enable_join_notifications")],
         [ColumnText("On leave:"),               tk.Combo(notifications_options, notifications_options[0], expand_x=True, disabled=True, readonly=True, key="enable_leave_notifications")],
