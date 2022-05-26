@@ -42,16 +42,15 @@
 					"description": "The maximum amount of T2 packets allowed in the specified period of time. If set to 0, all packets will be blocked.",
 					"type": "integer",
 					"minimum": 0,
-					"maximum": 1000000
+					"maximum": 1200
 				},
 				"per_seconds": {
 					"description": "The period of time in which the specified amount of packets will be allowed.",
 					"type": "integer",
 					"minimum": 1,
-					"maximum": 1000000
+					"maximum": 600
 				}
 			},
-			"additionalProperties": false,
 			"required": [
 				"max_packets",
 				"per_seconds"
@@ -62,7 +61,7 @@
 			"type": "object",
 			"properties": {
 				"IPs": {
-					"description": "Use IPv4 as key, and name of the player as value. If this object is empty, no one will be allowed in the session.",
+					"description": "Use IPv4 as key, and the in-game name of the player as value. If this object is empty, no one will be allowed in the session (unless they are allowed by the other options, such as \"allow_LAN_IPs\").",
 					"type": "object",
 					"patternProperties": {
 						"^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$": {
@@ -79,7 +78,6 @@
 					"default": true
 				}
 			},
-			"additionalProperties": false,
 			"required": [
 				"IPs"
 			]
@@ -93,8 +91,7 @@
 					"type": "boolean",
 					"default": false
 				}
-			},
-			"additionalProperties": false
+			}
 		}
 	}
 }
