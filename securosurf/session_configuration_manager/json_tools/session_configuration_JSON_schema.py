@@ -13,7 +13,7 @@ VAR = {
             "type": "string",
             "minLength": 3,
             "maxLength": 280,
-            "default": "Welcome to SecuroSurf! I'll take care of the cheaters, you take care of the company."
+            "default": "Welcome to SecuroSurf! I'll take care of the cheaters, you take care of the company.",
         },
 
         "update_frequency": {
@@ -37,7 +37,7 @@ VAR = {
                 "maximum": 2000,
                 "maxLength": 20,
             },
-            "default": [12, 18]
+            "default": [12, 18],
         },
 
         "T2_throttling": {
@@ -50,16 +50,15 @@ VAR = {
                                    "If set to 0, all packets will be blocked.",
                     "type": "integer",
                     "minimum": 0,
-                    "maximum": 1_000_000
+                    "maximum": 60 * 10 * 2,
                 },
                 "per_seconds": {
                     "description": "The period of time in which the specified amount of packets will be allowed.",
                     "type": "integer",
                     "minimum": 1,
-                    "maximum": 1_000_000
+                    "maximum": 60 * 10,
                 },
             },
-            "additionalProperties": False,
             "required": ["max_packets", "per_seconds"],
         },
 
@@ -77,7 +76,7 @@ VAR = {
                             "type": "string",
                             "minLength": 3,
                             "maxLength": 50,
-                        }
+                        },
                     },
                     "additionalProperties": False,
                 },
@@ -89,7 +88,6 @@ VAR = {
                     "default": True,
                 }
             },
-            "additionalProperties": False,
             "required": ["IPs"],
         },
 
@@ -105,7 +103,6 @@ VAR = {
                     "default": False,
                 }
             },
-            "additionalProperties": False,
-        }
+        },
     },
 }
