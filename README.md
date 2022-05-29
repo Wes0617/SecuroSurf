@@ -3,12 +3,12 @@
     SecuroSurf
 </h1>
 
-<p><b>A GTA Online PC Firewall</b></p>
+<p><b>A _GTA Online_ PC Firewall</b></p>
 
 ------------------------------------------------------------------------------------------------------------------------
 
 **Jump to:** 🔹 [**Downloads**](https://github.com/Wes0617/SecuroSurf/releases) 🔹
-[User Manual](#user-manual) 🔹
+[Quick Guide](#quick-guide) 🔹
 [FAQs](#faqs) 🔹
 [Credits & Thanks](#credits--thanks) 🔹
 [Wiki](https://github.com/Wes0617/SecuroSurf/wiki)
@@ -63,7 +63,7 @@ ___SecuroSurf___ is easy to use! The most important functionality is just one cl
 ___SecuroSurf___ is a portable application that requires zero configuration for most users. All you need to do is to
 download the [latest release](https://github.com/Wes0617/SecuroSurf/releases) (only win10/x64 is currently
 supported), unzip it somewhere, and then run `SecuroSurf.exe` as _Administrator_ (Right-click on the executable and
-press _Run as administrator_). 
+press _Run as administrator_). If you use a _VPN_ for _GTA_, make sure _SecuroSurf_ connects through it as well.
 
 ------------------------------------------------------------------------------------------------------------------------
 
