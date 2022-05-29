@@ -11,12 +11,12 @@ def FUNC() -> tk.Container:
     ColumnText.__init__ = partialmethod(ColumnText.__init__, size=16)
     column_width = 371
 
-    f1 = tk.Frame("Allow-list:", layout=[
-        [tk.Text(key="allow_list_info", expand_x=True, justification="center")],
+    f1 = tk.Frame(title="T2 Throttling:", layout=[
+        [tk.Text(key="T2_throttling_message", justification="center", expand_x=True)],
     ])
 
-    f2 = tk.Frame(title="T2 Throttling:", layout=[
-        [tk.Text(key="T2_throttling_message", justification="center", expand_x=True)],
+    f2 = tk.Frame("Allow-list:", layout=[
+        [tk.Text(key="allow_list_info", expand_x=True, justification="center")],
     ])
 
     f3 = tk.Frame(title="Traffic Status:", layout=[
@@ -44,6 +44,7 @@ def FUNC() -> tk.Container:
         [tk.Text("These options are currently not implemented.", justification="center", expand_x=True)],
         [ColumnText("On join:"),                tk.Combo(notifications_options, notifications_options[0], expand_x=True, disabled=True, readonly=True, key="enable_join_notifications")],
         [ColumnText("On leave:"),               tk.Combo(notifications_options, notifications_options[0], expand_x=True, disabled=True, readonly=True, key="enable_leave_notifications")],
+        [ColumnText("On IP Change:"),           tk.Combo(notifications_options, notifications_options[1], expand_x=True, disabled=True, readonly=True, key="enable_IP_change_notifications")],
     ])
 
     return tk.Container([
