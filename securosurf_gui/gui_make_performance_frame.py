@@ -10,7 +10,6 @@ def FUNC(ColumnTextClass: Type[tk.Text]) -> tk.Frame:
     refresh_rate_apply = tk.Button(key="set_refresh_rate", text="Apply", appearance=tk.ButtonAppearance.DISABLED)
     telemetry_options = ["Always enabled", "Disabled if minimized", "Always disabled"]
     return tk.Frame("Performance:", layout=[
-        [tk.Text("These options are currently not implemented.", justification="center", expand_x=True)],
         [ColumnTextClass("Refresh rate (ms):"), refresh_rate_slider, refresh_rate_apply],
         [ColumnTextClass("Telemetry:"),         tk.Combo(telemetry_options, telemetry_options[0], expand_x=True, disabled=True, readonly=True, key="telemetry_type")],
     ])
