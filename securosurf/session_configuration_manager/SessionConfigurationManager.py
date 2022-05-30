@@ -18,6 +18,7 @@ class CLASS(abc.ABC):
         self.__error_path: p.Path = information.VAR.errors_path / (crew_name + ".txt")
         self.__last_update_attempt: float = 0
         self.__session_configuration: SessionConfiguration.CLASS = SessionConfiguration.CLASS(
+            fetch_time=0,
             welcome_message=f"Error! Check the \"errors\" folder for more info!",
             update_frequency=retry_frequency_if_fail,
         )
@@ -37,7 +38,7 @@ class CLASS(abc.ABC):
         self.__last_update_attempt = time.time()
 
         if JSON is not None:
-            new_session_configuration, error = session_configuration_from_JSON.FUNC(JSON)
+            new_session_configuration, error = session_configuration_from_JSON.FUNC(JSON, self.__last_update_attempt)
             if new_session_configuration is not None:
                 self.__session_configuration = new_session_configuration
                 return new_session_configuration

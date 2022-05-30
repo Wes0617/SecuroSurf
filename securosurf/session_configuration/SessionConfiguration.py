@@ -10,6 +10,7 @@ from securosurf.session_configuration import SessionConfigurationT2Throttling
 
 @dc.dataclass(frozen=True)
 class CLASS:
+    fetch_time: float
 
     welcome_message: str
 
@@ -22,8 +23,6 @@ class CLASS:
     allow_list: SessionConfigurationAllowList.CLASS | None = None
 
     session_lock: SessionConfigurationSessionLock.CLASS | None = None
-
-    fetch_time: float = dc.field(default_factory=time.time, init=False)
 
     @property
     def IP_changed_sync_countdown(self) -> float | None:

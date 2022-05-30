@@ -12,7 +12,7 @@ from securosurf.session_configuration_manager.json_tools import session_configur
 
 ErrorString = str
 
-def FUNC(JSON: str) -> tuple[SessionConfiguration.CLASS | None, ErrorString | None]:
+def FUNC(JSON: str, fetch_time_if_success: float) -> tuple[SessionConfiguration.CLASS | None, ErrorString | None]:
     try:
         JSON_object = json.loads(JSON)
         session_configuration_validate_normalize_JSON.FUNC(JSON_object)
@@ -31,6 +31,7 @@ def FUNC(JSON: str) -> tuple[SessionConfiguration.CLASS | None, ErrorString | No
     SL = None if v is None else SessionConfigurationSessionLock.CLASS(v["default_enabled"])
 
     return SessionConfiguration.CLASS(
+        fetch_time=fetch_time_if_success,
         welcome_message=JSON_object["welcome_message"],
         update_frequency=JSON_object["update_frequency"],
         T2_heartbeat_sizes=T2H,
