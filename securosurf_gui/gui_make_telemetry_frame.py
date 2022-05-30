@@ -42,8 +42,8 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
     sizes.append(5 + 2)
     sizes.append(25)
 
-    fonts = [("Segoe UI", 8, "normal")] * 9
-    fonts[1] = fonts[7] = fonts[8] = ("Segoe UI", 8, "bold")
+    fonts = [("Segoe UI", 7, "normal")] * 9
+    fonts[1] = fonts[7] = fonts[8] = ("Segoe UI", 7, "bold")
 
     traffic_table.append([
         _TitleCell(labels[0], size=sizes[0], font=fonts[0]), _Separator(True),
@@ -88,7 +88,7 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
 
 class _Cell(sg.Text): pass
 _Cell.__init__ = partialmethod(
-    _Cell.__init__, font=("Segoe UI", 8, "normal"),
+    _Cell.__init__, font=("Segoe UI", 7, "normal"),
     justification="center", pad=(tk.padding_width * 2, 0), border_width=0,
 )
 

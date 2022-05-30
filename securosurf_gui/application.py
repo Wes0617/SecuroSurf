@@ -12,15 +12,14 @@ from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf_gui_toolkit.toolkit_tools import EventTarget
 from securosurf.session_configuration_manager import SessionConfigurationSetManager
-from securosurf import information
 
-from securosurf_gui import gui_window
-from securosurf_gui import gui_refresh_update
-from securosurf_gui import gui_refresh_status
+from securosurf_gui import gui_make
 from securosurf_gui import gui_refresh_telemetry
 from securosurf_gui import gui_refresh_allow_list
-from securosurf_gui import gui_refresh_welcome_message
+from securosurf_gui import gui_refresh_game_status
 from securosurf_gui import gui_refresh_T2_throttling
+from securosurf_gui import gui_refresh_welcome_message
+from securosurf_gui import gui_refresh_configuration_update
 from securosurf_gui import gui_refresh_and_determine_selection
 
 ########################################################################################################################
@@ -32,7 +31,7 @@ def FUNC(simulation: bool = False) -> None:
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
     window_play_bell            = False
     _telemetry_length           = 40
-    window                      = gui_window.FUNC(_telemetry_length)
+    window                      = gui_make.FUNC(_telemetry_length)
     window_event_target         = EventTarget(window)
     SC_set_manager              = SessionConfigurationSetManager.CLASS()
     SC_name                     = "Normal"
@@ -157,11 +156,11 @@ def FUNC(simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
-        gui_refresh_allow_list   .FUNC(window, SC, window_blink)
-        gui_refresh_status       .FUNC(window, firewall_telemetry)
-        gui_refresh_T2_throttling.FUNC(window, SC)
-        gui_refresh_update       .FUNC(window, SC, SC_manager.last_update_attempt)
-        gui_refresh_telemetry    .FUNC(window, firewall_telemetry)
+        gui_refresh_allow_list          .FUNC(window, SC, window_blink)
+        gui_refresh_game_status         .FUNC(window, firewall_telemetry)
+        gui_refresh_T2_throttling       .FUNC(window, SC)
+        gui_refresh_configuration_update.FUNC(window, SC, SC_manager.last_update_attempt)
+        gui_refresh_telemetry           .FUNC(window, firewall_telemetry)
 
         window.refresh()
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 from securosurf import information
 from securosurf_gui import gui_make_sidebar
 import securosurf_gui_toolkit.toolkit as tk
-from securosurf_gui import gui_make_main_toolbar
 from securosurf_gui import gui_make_telemetry_frame
 from securosurf_gui import gui_make_welcome_message_frame
 from securosurf_gui_toolkit.toolkit import TextAppearance
@@ -17,11 +16,13 @@ def FUNC(telemetry_length: int) -> tk.Window:
         [tk.EmptyRectangle(background_color=tk.accent_BG, area=(8, 8), expand_x=True)],
 
         [tk.FrameContainer([
-            [gui_make_main_toolbar.FUNC()],
             [gui_make_welcome_message_frame.FUNC()],
             [
                 gui_make_sidebar.FUNC(),
-                gui_make_telemetry_frame.FUNC(telemetry_length)
+                tk.Container([
+                    [gui_make_telemetry_frame.FUNC(telemetry_length)],
+                    [tk.EmptyRectangle()]
+                ]),
             ],
         ], expand_x=True, expand_y=True)],
 
