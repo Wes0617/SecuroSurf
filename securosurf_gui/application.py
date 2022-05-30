@@ -74,14 +74,14 @@ def FUNC(simulation: bool = False) -> None:
                     window_play_bell = True
             SC = _new_SC
 
-            refresh_time = time.time() + SC.update_frequency
+            fetch_SC_again_time = time.time() + SC.update_frequency
             while True:
                 time.sleep(1)
                 if SC_name != last_fetched_SC_name:
                     break
                 if firewall_telemetry.is_active is False:
                     continue
-                if time.time() >= refresh_time:
+                if time.time() >= fetch_SC_again_time:
                     break
     t.Thread(target=_fetch_configuration_thread, args=(), daemon=True).start()
 
