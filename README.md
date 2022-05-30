@@ -133,7 +133,7 @@ replace them with the respective newer versions.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 🔹 Why can't I connect sometimes? (1) 
+### 🔹 Why can't I connect sometimes? 
 
 It is completely normal to get "__Unable to connect to game session__" or "__Player is no longer in session__"
 sometimes, even if everything looks fine. These errors happen when you could not complete the connection within the
@@ -141,16 +141,6 @@ allowed traffic limits, probably because other people or strangers were trying t
 this happen, don't press _Continue_; open your friends list, and try again by clicking _Join Game___:
 
 <p align="center"><img src="md_images/player_no_longer_in_session_fix.gif"></p>
-
-------------------------------------------------------------------------------------------------------------------------
-
-### 🔹 Why can't I connect sometimes? (2) 
-
-Instead, if you see a lot of traffic being blocked by the firewall, it means that __you tried to connect to your
-friends before the firewall could be updated on their end__ to allow you inside. Unfortunately your connection will be
-permanently glitched when this happens, and the only way to fix it is to __switch to single player__ before trying
-again. This problem will be solved in a future version, where the app will tell you explicitly when it's ok to join your
-friends.
 
 ------------------------------------------------------------------------------------------------------------------------
 
