@@ -12,10 +12,7 @@ VAR["to_crew"]                    = "Only allow the people from the selected cre
 
 VAR["crew_name"]                  = "Only allow the people from the selected crew in this session."
 
-VAR["allow_list_info"]            = "Overview of the people that the current settings allow in your sessions."
-
-VAR["T2_throttling_message"]      = "This functionality prevents strangers to connect to the session through T2 " \
-                                    "gaming servers."
+VAR["filter_info"]                = "Overview of the filtering rules of the firewall."
 
 VAR["traffic_last_activity"]      = "This is used to determine whether the firewall should be kept active and " \
                                     "updated. If you close the game, the firewall will become idle as a result."

@@ -17,10 +17,9 @@ from securosurf_gui import gui_make
 from securosurf_gui import gui_refresh_telemetry
 from securosurf_gui import gui_refresh_allow_list
 from securosurf_gui import gui_refresh_game_status
-from securosurf_gui import gui_refresh_T2_throttling
 from securosurf_gui import gui_refresh_welcome_message
 from securosurf_gui import gui_refresh_configuration_update
-from securosurf_gui import gui_refresh_and_determine_selection
+from securosurf_gui import gui_refresh_configuration_selector
 
 ########################################################################################################################
 
@@ -30,7 +29,7 @@ def FUNC(simulation: bool = False) -> None:
     window_refresh_rate_max_ms  = 5000
     window_refresh_rate_used_ms = window_refresh_rate_user_ms
     window_play_bell            = False
-    _telemetry_length           = 40
+    _telemetry_length           = 32
     window                      = gui_make.FUNC(_telemetry_length)
     window_event_target         = EventTarget(window)
     SC_set_manager              = SessionConfigurationSetManager.CLASS()
@@ -141,7 +140,7 @@ def FUNC(simulation: bool = False) -> None:
 
         _new_crew_names = SC_set_manager.get_crew_names()
         _user_selected_a_crew_in_combo_box = event_name == "crew_name"
-        SC_name = gui_refresh_and_determine_selection.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box)
+        SC_name = gui_refresh_configuration_selector.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box)
 
         # --------------------------------------------------------------------------------------------------------------
 
@@ -158,7 +157,6 @@ def FUNC(simulation: bool = False) -> None:
 
         gui_refresh_allow_list          .FUNC(window, SC, window_blink)
         gui_refresh_game_status         .FUNC(window, firewall_telemetry)
-        gui_refresh_T2_throttling       .FUNC(window, SC)
         gui_refresh_configuration_update.FUNC(window, SC, SC_manager.last_update_attempt)
         gui_refresh_telemetry           .FUNC(window, firewall_telemetry)
 
