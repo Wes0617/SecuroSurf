@@ -15,6 +15,7 @@ from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry import PacketInboundT2Heartbeat
 from securosurf.telemetry import PacketInboundAllowListLAN
 from securosurf.telemetry import PacketInboundAllowedStranger
+from securosurf.telemetry import PacketInboundStrangersPhoneInvites
 
 ########################################################################################################################
 
@@ -116,6 +117,8 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
         elif isinstance(end_packet, PacketInboundStranger.CLASS):
             widget_message.update("Stranger", text_color=FG_error)
             block()
-
+        elif isinstance(end_packet, PacketInboundStrangersPhoneInvites.CLASS):
+            widget_message.update("Strangers' Phone Invites?", text_color=FG_disabled)
+            allow()
         else:
             raise "unknown type"
