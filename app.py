@@ -19,7 +19,6 @@ if __name__ == '__main__':
 
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(information.VAR.application_ID)
 
-
     session_configuration_JSON_schema_generate_md.FUNC()
 
     if ctypes.windll.shell32.IsUserAnAdmin() or simulation:
