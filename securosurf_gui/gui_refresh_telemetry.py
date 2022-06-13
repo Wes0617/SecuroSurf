@@ -35,12 +35,13 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
         i += 1
 
         widget_st: sg.Text = window[f"telemetry_st_{i}"]
-        widget_count: sg.Text = window[f"telemetry_count_{i}"]
         widget_et: sg.Text = window[f"telemetry_et_{i}"]
         widget_local_IP: sg.Text = window[f"telemetry_local_IP_{i}"]
         widget_traffic_indicator: sg.Text = window[f"telemetry_traffic_indicator_{i}"]
         widget_remote_IP: sg.Text = window[f"telemetry_remote_IP_{i}"]
         widget_size: sg.Text = window[f"telemetry_size_{i}"]
+        widget_count: sg.Text = window[f"telemetry_count_{i}"]
+        widget_packets_per_s: sg.Text = window[f"telemetry_packets_per_s_{i}"]
         widget_action: sg.Text = window[f"telemetry_action_{i}"]
         widget_message: sg.Input = window[f"telemetry_message_{i}"]
 
@@ -79,8 +80,6 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
 
         widget_st.update(_time(start_packet.time), text_color=FG)
 
-        widget_count.update(str(live_traffic.count), text_color=FG)
-
         widget_et.update(_time(end_packet.time), text_color=FG)
 
         widget_local_IP.update(end_packet.local_IP, text_color=FG)
@@ -90,6 +89,17 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
         widget_remote_IP.update(tools_obfuscate_IP.FUNC(end_packet.remote_IP), text_color=FG)
 
         widget_size.update(f"{end_packet.size}", text_color=FG)
+
+        widget_count.update(str(live_traffic.count), text_color=FG)
+
+        elapsed_time = end_packet.time - start_packet.time
+        if elapsed_time == 0:
+            packets_per_s = "-"
+        else:
+            packets_per_s = round(live_traffic.count / elapsed_time, 2)
+            packets_per_s = str(packets_per_s)
+
+        widget_packets_per_s.update(packets_per_s, text_color=FG)
 
         allow = lambda: widget_action.update("ALLOW", text_color=FG_success)
         block = lambda: widget_action.update("BLOCK", text_color=FG_error)

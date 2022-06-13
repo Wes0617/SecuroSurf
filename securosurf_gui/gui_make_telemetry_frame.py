@@ -11,39 +11,41 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
 
     labels = []
     labels.append("STime:")
-    labels.append("Count:")
     labels.append("ETime:")
     labels.append("Local IP:")
     labels.append("\N{white left-pointing triangle}\N{white right-pointing triangle}")
     labels.append("Remote IP:")
     labels.append("Bytes:")
+    labels.append("Count:")
+    labels.append("Packets/s:")
     labels.append("Action:")
     labels.append("Message:")
 
     keys = []
     keys.append("telemetry_st_")
-    keys.append("telemetry_count_")
     keys.append("telemetry_et_")
     keys.append("telemetry_local_IP_")
     keys.append("telemetry_traffic_indicator_")
     keys.append("telemetry_remote_IP_")
     keys.append("telemetry_size_")
+    keys.append("telemetry_count_")
+    keys.append("telemetry_packets_per_s_")
     keys.append("telemetry_action_")
     keys.append("telemetry_message_")
 
     sizes = []
     sizes.append(5 + 2)
     sizes.append(3 + 2)
-    sizes.append(5 + 2)
     sizes.append(15 + 2)
     sizes.append(3 + 4)
     sizes.append(15 + 2)
     sizes.append(3 + 2)
     sizes.append(5 + 2)
+    sizes.append(5 + 2)
+    sizes.append(5 + 2)
     sizes.append(25)
 
-    fonts = [("Segoe UI", 7, "normal")] * 9
-    fonts[1] = fonts[7] = fonts[8] = ("Segoe UI", 7, "bold")
+    fonts = [("Segoe UI", 7, "normal")] * 10
 
     traffic_table.append([
         _TitleCell(labels[0], size=sizes[0], font=fonts[0]), _Separator(True),
@@ -54,7 +56,8 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
         _TitleCell(labels[5], size=sizes[5], font=fonts[5]), _Separator(True),
         _TitleCell(labels[6], size=sizes[6], font=fonts[6]), _Separator(True),
         _TitleCell(labels[7], size=sizes[7], font=fonts[7]), _Separator(True),
-        _TitleCell(labels[8], size=sizes[8], font=fonts[8]),
+        _TitleCell(labels[8], size=sizes[8], font=fonts[8]), _Separator(True),
+        _TitleCell(labels[9], size=sizes[9], font=fonts[9]),
     ])
 
     traffic_table.append([_HeadingSeparator()])
@@ -66,11 +69,12 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
             _Cell(key=f"{keys[2]}{i}", size=sizes[2], font=fonts[2]), _Separator(True),
             _Cell(key=f"{keys[3]}{i}", size=sizes[3], font=fonts[3]), _Separator(True),
             _Cell(key=f"{keys[4]}{i}", size=sizes[4], font=fonts[4]), _Separator(True),
-            _Cell(key=f"{keys[5]}{i}", size=sizes[5], font=fonts[5],), _Separator(True),
-            _Cell(key=f"{keys[6]}{i}", size=sizes[6], font=fonts[6],), _Separator(True),
-            _Cell(key=f"{keys[7]}{i}", size=sizes[7], font=fonts[7],), _Separator(True),
+            _Cell(key=f"{keys[5]}{i}", size=sizes[5], font=fonts[5]), _Separator(True),
+            _Cell(key=f"{keys[6]}{i}", size=sizes[6], font=fonts[6]), _Separator(True),
+            _Cell(key=f"{keys[7]}{i}", size=sizes[7], font=fonts[7]), _Separator(True),
+            _Cell(key=f"{keys[8]}{i}", size=sizes[8], font=fonts[8]), _Separator(True),
             sg.Input(
-                key=f"{keys[8]}{i}", size=sizes[8], font=fonts[8],
+                key=f"{keys[9]}{i}", size=sizes[9], font=fonts[9],
                 pad=(tk.padding_width * 2, 0), border_width=0,
                 disabled_readonly_background_color=tk.window_BG,
                 readonly=False, disabled=True,
