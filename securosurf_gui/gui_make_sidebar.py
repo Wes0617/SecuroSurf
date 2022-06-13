@@ -19,7 +19,7 @@ def FUNC() -> tk.Container:
         [gui_make_configuration_selector_frame.FUNC()],
         [gui_make_game_status_frame.FUNC(ColumnText)],
         [gui_make_configuration_update_frame.FUNC(ColumnText)],
-        [gui_make_performance_frame.FUNC(ColumnText)],
-        [gui_make_notifications_frame.FUNC(ColumnText)],
+        # [gui_make_performance_frame.FUNC(ColumnText)],
+        # [gui_make_notifications_frame.FUNC(ColumnText)],
         [tk.EmptyRectangle(area=(380, 0))]
     ])

@@ -17,7 +17,7 @@ def FUNC(
     widget_to_normal: sg.Radio = window["to_normal"]
     widget_to_solo: sg.Radio = window["to_solo"]
     widget_to_LAN: sg.Radio = window["to_LAN"]
-    widget_to_dyn: sg.Radio = window["to_dynamic"]
+    # widget_to_dyn: sg.Radio = window["to_dynamic"]
     widget_to_crew: sg.Radio = window["to_crew"]
     widget_crew_name: sg.Combo = window["crew_name"]
     widget_crew_name.Widget.selection_range(0, 0)
@@ -33,8 +33,8 @@ def FUNC(
         session_configuration_name = "Solo"
     elif widget_to_LAN.get():
         session_configuration_name = "LAN"
-    elif widget_to_dyn.get():
-        session_configuration_name = "Dynamic"
+    # elif widget_to_dyn.get():
+    #    session_configuration_name = "Dynamic"
     elif widget_to_crew.get():
         session_configuration_name = widget_crew_name.get()
     else:
