@@ -63,10 +63,10 @@ class CLASS:
         packet_filter = "inbound and udp.DstPort == 6672 and udp.PayloadLength > 0 and ip"
         with pydivert.WinDivert(packet_filter) as win_divert:
             for packet in win_divert:
-                if self.__do_allow(packet):
+                if self.__do_allow(packet, time.time()):
                     win_divert.send(packet)
 
-    def __do_allow(self, packet: Packet):
+    def __do_allow(self, packet: Packet, now: float):
         ET = True # enable telemetry
 
         SC = self.__session_configuration
@@ -76,7 +76,7 @@ class CLASS:
         SB_max_packets = 60
 
         TM = self.__telemetry_manager
-        TM.activity = time.time()
+        TM.activity = now
 
         my_ip = packet.dst_addr if packet.is_inbound else packet.src_addr
         rm_ip = packet.dst_addr if packet.is_outbound else packet.src_addr
@@ -88,7 +88,7 @@ class CLASS:
             return True
 
         if rm_ip in self.__matchmaking_servers:
-            TM.host_activity = time.time()
+            TM.host_activity = now
 
             if SC.T2_throttling is not None:
                 if self.T2_throttling.do_throttle(SC.T2_throttling.per_seconds, SC.T2_throttling.max_packets):
