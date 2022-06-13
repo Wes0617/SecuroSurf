@@ -15,7 +15,7 @@ from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf.session_configuration import SessionConfiguration
 
-from securosurf.telemetry import PacketInboundStrangersPhoneInvites
+from securosurf.telemetry import PacketInboundStrangersVoidConnections
 from securosurf.telemetry import PacketInboundAllowedStranger
 from securosurf.telemetry import PacketInboundStranger
 from securosurf.telemetry import PacketInboundAllowList
@@ -116,7 +116,7 @@ class CLASS:
                 TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, length)) if ET else None
                 return False
 
-            TM.add(PacketInboundStrangersPhoneInvites.CLASS(my_ip, rm_ip, length)) if ET else None
+            TM.add(PacketInboundStrangersVoidConnections.CLASS(my_ip, rm_ip, length)) if ET else None
             return True
 
         TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, length)) if ET else None

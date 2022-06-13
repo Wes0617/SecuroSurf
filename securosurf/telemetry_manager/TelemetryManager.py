@@ -9,7 +9,7 @@ from securosurf.telemetry import PacketInboundT2Heartbeat
 from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry import PacketInboundAllowListLAN
 from securosurf.telemetry import PacketInboundAllowedStranger
-from securosurf.telemetry import PacketInboundStrangersPhoneInvites
+from securosurf.telemetry import PacketInboundStrangersVoidConnections
 from securosurf.telemetry_manager import LiveTraffic
 from securosurf.telemetry_manager import Telemetry
 
@@ -40,7 +40,7 @@ class CLASS:
             self.__add_slotted(f"Stranger {packet.remote_IP}", packet)
         elif isinstance(packet, PacketInboundAllowedStranger.CLASS):
             self.__add_slotted(f"AllowedStranger {packet.remote_IP}", packet)
-        elif isinstance(packet, PacketInboundStrangersPhoneInvites.CLASS):
+        elif isinstance(packet, PacketInboundStrangersVoidConnections.CLASS):
             self.__add_slotted(f"TempAllowedStranger {packet.remote_IP}", packet)
         else:
             raise Exception()
