@@ -73,7 +73,7 @@ class CLASS:
 
         SB = True # soft block
         SB_per_seconds = 60
-        SB_max_packets = 30
+        SB_max_packets = 15
 
         TM = self.__telemetry_manager
         TM.activity = now
