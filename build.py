@@ -18,11 +18,16 @@ if os.path.exists(build_path):
 
 # ----------------------------------------------------------------------------------------------------------------------
 
+build_exe_options = {
+    "optimize": 2,
+    'build_exe': build_path
+}
+
 _executable_name = information.VAR.application_name + ".exe"
 setup(
     name=information.VAR.application_name,
     version=information.VAR.application_version,
-    options=dict(build_exe=dict(optimize=2)),
+    options=dict(build_exe=build_exe_options),
     executables=[Executable("app.py", targetName=_executable_name, icon=information.VAR.icon_path, base="Win32GUI")],
     packages=["securosurf", "securosurf_gui", "securosurf_gui_toolkit"],
 )
