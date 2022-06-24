@@ -7,8 +7,8 @@ import pathlib as p
 class CLASS:
     def __init__(self, root: p.Path):
         self.application_name: str = "SecuroSurf"
-        self.application_version: str = "2.0.3"
-        self.application_full_name: str = "SecuroSurf 2.0.3 Newport Edition"
+        self.application_version: str = "2.0.4"
+        self.application_full_name: str = "SecuroSurf 2.0.4 Alien Egg Edition"
         self.application_ID: str = "SecuroSurf"
 
         self.application_mime: str = "application/securosurf-2"
