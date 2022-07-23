@@ -3,7 +3,6 @@ from __future__ import annotations
 import time
 import pydivert
 import threading as t
-import collections as c
 import multiprocessing as m
 from pydivert.packet import Packet
 
@@ -14,8 +13,8 @@ from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf.session_configuration import SessionConfiguration
+from securosurf.runtime_configuration import RuntimeConfiguration
 
-from securosurf.telemetry import PacketInboundStrangersVoidConnections
 from securosurf.telemetry import PacketInboundAllowedStranger
 from securosurf.telemetry import PacketInboundStranger
 from securosurf.telemetry import PacketInboundAllowList
@@ -31,12 +30,14 @@ class CLASS:
         messaging: ProcessMessaging.CLASS,
         telemetry_manager: TelemetryManager.CLASS,
         initial_session_configuration: SessionConfiguration.CLASS,
+        initial_runtime_configuration: RuntimeConfiguration.CLASS
     ):
         self.__messaging: ProcessMessaging.CLASS                 = messaging
         self.__telemetry_manager: TelemetryManager.CLASS         = telemetry_manager
         self.__process: m.Process                                = m.Process(target=self._run, daemon=True)
         self.__session_configuration: SessionConfiguration.CLASS = initial_session_configuration
-        self.__matchmaking_servers: set[str]                     = set()
+        self.__runtime_configuration: RuntimeConfiguration.CLASS = initial_runtime_configuration
+        self._T2_servers: set[str]                               = set()
 
     def start(self):
         pydivert.WinDivert.register()
@@ -55,12 +56,16 @@ class CLASS:
                 elif returned_message == "set_session_configuration":
                     self.__session_configuration = returned_contents
                     print("Received session configuration from parent process.")
+                elif returned_message == "set_runtime_configuration":
+                    self.__runtime_configuration = returned_contents
+                    print("Received runtime configuration from parent process.")
         t.Thread(target=_handle_IPC, args=(), daemon=True).start()
 
         self.T2_throttling = PacketThrottler.CLASS()
+
         self.SG_throttling = PacketThrottler.CLASS()
 
-        packet_filter = "inbound and udp.DstPort == 6672 and udp.PayloadLength > 0 and ip"
+        packet_filter = f"inbound and ip and udp.DstPort == 6672 and udp.PayloadLength > 0"
         with pydivert.WinDivert(packet_filter) as win_divert:
             for packet in win_divert:
                 if self.__do_allow(packet, time.time()):
@@ -68,56 +73,64 @@ class CLASS:
 
     def __do_allow(self, packet: Packet, now: float):
         ET = True # enable telemetry
-
         SC = self.__session_configuration
-
-        SB = True # soft block
-        SB_per_seconds = 60
-        SB_max_packets = 30
-
+        RC = self.__runtime_configuration
         TM = self.__telemetry_manager
         TM.activity = now
 
-        my_ip = packet.dst_addr if packet.is_inbound else packet.src_addr
-        rm_ip = packet.dst_addr if packet.is_outbound else packet.src_addr
+        if packet.is_inbound:
+            my_IP = packet.dst_addr
+            my_port = packet.dst_port
+            rm_IP = packet.src_addr
+            rm_port = packet.src_port
+        else:
+            my_IP = packet.src_addr
+            my_port = packet.src_port
+            rm_IP = packet.dst_addr
+            rm_port = packet.dst_port
+
         length = len(packet.payload)
 
+
         if length in SC.T2_heartbeat_sizes:
-            self.__matchmaking_servers.add(rm_ip)
-            TM.add(PacketInboundT2Heartbeat.CLASS(my_ip, rm_ip, length)) if ET else None
-            return True
+            print(f"Found T2 server {rm_IP}")
+            self._T2_servers.add(rm_IP)
 
-        if rm_ip in self.__matchmaking_servers:
-            TM.host_activity = now
+        if SC.allow_list is not None:
+            allow_list_identity = SC.allow_list.IPs.get(rm_IP, None)
 
-            if SC.T2_throttling is not None:
-                if self.T2_throttling.do_throttle(SC.T2_throttling.per_seconds, SC.T2_throttling.max_packets):
-                    TM.add(PacketInboundT2Throttled.CLASS(my_ip, rm_ip, length)) if ET else None
+            if allow_list_identity is not None:
+                TM.add(PacketInboundAllowList.CLASS(my_IP, my_port, rm_IP, rm_port, length, allow_list_identity)) if ET else None
+                return True
+
+            elif SC.allow_list.allow_LAN_IPs is True and is_LAN_IP.FUNC(rm_IP):
+                TM.add(PacketInboundAllowListLAN.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                return True
+
+            elif rm_IP in self._T2_servers:
+                if \
+                    self.T2_throttling is not None and \
+                    self.T2_throttling.do_throttle(SC.T2_throttling.per_seconds, SC.T2_throttling.max_packets):
+                    TM.add(PacketInboundT2Throttled.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
                     return False
 
-            TM.add(PacketInboundT2.CLASS(my_ip, rm_ip, length)) if ET else None
-            return True
+            else:
+                if RC.job_mode is True or (
+                    SC.strangers_throttling is not None and
+                    self.SG_throttling.do_throttle(SC.strangers_throttling.per_seconds, SC.strangers_throttling.max_packets)
+                ):
+                    TM.add(PacketInboundStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                    return False
 
-        if SC.allow_list is None:
-            TM.add(PacketInboundAllowedStranger.CLASS(my_ip, rm_ip, length)) if ET else None
-            return True
+        if rm_IP in self._T2_servers:
+            if length in SC.T2_heartbeat_sizes:
+                TM.add(PacketInboundT2Heartbeat.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                return True
 
-        if SC.allow_list.allow_LAN_IPs is True and is_LAN_IP.FUNC(rm_ip):
-            TM.add(PacketInboundAllowListLAN.CLASS(my_ip, rm_ip, length)) if ET else None
-            return True
+            else:
+                TM.host_activity = now
+                TM.add(PacketInboundT2.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                return True
 
-        allow_list_message = SC.allow_list.IPs.get(rm_ip, None)
-        if allow_list_message is not None:
-            TM.add(PacketInboundAllowList.CLASS(my_ip, rm_ip, length, allow_list_message)) if ET else None
-            return True
-
-        if SB:
-            if self.SG_throttling.do_throttle(SB_per_seconds, SB_max_packets):
-                TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, length)) if ET else None
-                return False
-
-            TM.add(PacketInboundStrangersVoidConnections.CLASS(my_ip, rm_ip, length)) if ET else None
-            return True
-
-        TM.add(PacketInboundStranger.CLASS(my_ip, rm_ip, length)) if ET else None
-        return False
+        TM.add(PacketInboundAllowedStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+        return True

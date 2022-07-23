@@ -12,6 +12,7 @@ from securosurf.telemetry_manager import TelemetryManager
 from securosurf.process_messaging import ProcessMessaging
 from securosurf_gui_toolkit.toolkit_tools import EventTarget
 from securosurf.session_configuration_manager import SessionConfigurationSetManager
+from securosurf.runtime_configuration import RuntimeConfiguration
 
 from securosurf_gui import gui_make
 from securosurf_gui import gui_refresh_telemetry
@@ -37,24 +38,33 @@ def FUNC(simulation: bool = False) -> None:
     SC_manager                  = SC_set_manager.get_by_name(SC_name)
     SC                          = SC_manager.get()
     SC_changed                  = False
+    RC                          = RuntimeConfiguration.CLASS()
+    RC_changed                  = False
     _telemetry_manager          = TelemetryManager.CLASS(_telemetry_length)
     firewall_telemetry          = _telemetry_manager.get_telemetry()
     _messaging                  = ProcessMessaging.CLASS(m.Queue(), m.Queue())
-    firewall                    = Firewall.CLASS(_messaging.invert(), _telemetry_manager, SC)
+    firewall                    = Firewall.CLASS(_messaging.invert(), _telemetry_manager, SC, RC)
     firewall.start()
 
     # ------------------------------------------------------------------------------------------------------------------
 
     def _handle_IPC_thread():
-        nonlocal firewall_telemetry, SC_changed
+        nonlocal firewall_telemetry, SC_changed, RC_changed
         while True:
             _messaging.send_message("get_telemetry")
             returned_message, returned_contents = _messaging.receive_message()
+
             if returned_message == "return_telemetry":
                 firewall_telemetry = returned_contents
+
             if SC_changed:
                 SC_changed = False
                 _messaging.send_message("set_session_configuration", SC)
+
+            if RC_changed:
+                RC_changed = False
+                _messaging.send_message("set_runtime_configuration", RC)
+
             time.sleep(window_refresh_rate_used_ms / 1000)
     t.Thread(target=_handle_IPC_thread, args=(), daemon=True).start()
 
@@ -141,6 +151,13 @@ def FUNC(simulation: bool = False) -> None:
         _new_crew_names = SC_set_manager.get_crew_names()
         _user_selected_a_crew_in_combo_box = event_name == "crew_name"
         SC_name = gui_refresh_configuration_selector.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box)
+
+        # --------------------------------------------------------------------------------------------------------------
+
+        _new_RC = RuntimeConfiguration.CLASS(window["job_mode"].get())
+        if _new_RC != RC:
+            RC = _new_RC
+            RC_changed = True
 
         # --------------------------------------------------------------------------------------------------------------
 

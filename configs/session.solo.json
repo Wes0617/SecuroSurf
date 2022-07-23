@@ -1,15 +1,20 @@
 {
 	"welcome_message": "I don't got time for pleasantries. Just get the job done. I've gotta go, someone's coming.",
 
-	"update_frequency": 5,
+	"update_frequency": 30,
+
+	"allow_list": {
+		"IPs": {},
+		"allow_LAN_IPs": false
+	},
 
 	"T2_throttling": {
 		"max_packets": 30,
 		"per_seconds": 60
 	},
 
-	"allow_list": {
-		"IPs": {},
-		"allow_LAN_IPs": false
+	"strangers_throttling": {
+		"max_packets": 30,
+		"per_seconds": 60
 	}
 }

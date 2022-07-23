@@ -1,12 +1,7 @@
 {
 	"welcome_message": "This is an example crew definition. Try to define your own!",
 
-	"update_frequency": 5,
-
-	"T2_throttling": {
-		"max_packets": 30,
-		"per_seconds": 60
-	},
+	"update_frequency": 30,
 
 	"allow_list": {
 		"IPs": {
@@ -15,5 +10,15 @@
 		    "127.0.0.4": "Rickie Lukens",
 		    "127.0.0.5": "Avi Schwartzman"
 		}
+	},
+
+	"T2_throttling": {
+		"max_packets": 30,
+		"per_seconds": 60
+	},
+
+	"strangers_throttling": {
+		"max_packets": 30,
+		"per_seconds": 60
 	}
 }

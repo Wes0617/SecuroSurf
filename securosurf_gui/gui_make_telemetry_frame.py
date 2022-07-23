@@ -36,9 +36,9 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
     sizes = []
     sizes.append(5 + 2)
     sizes.append(3 + 2)
-    sizes.append(15 + 2)
+    sizes.append(15 + 5 + 2)
     sizes.append(3 + 4)
-    sizes.append(15 + 2)
+    sizes.append(15 + 5 + 2)
     sizes.append(3 + 2)
     sizes.append(5 + 2)
     sizes.append(5 + 2)

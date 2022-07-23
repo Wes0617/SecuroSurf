@@ -3,12 +3,17 @@
 
 	"update_frequency": 5,
 
+	"allow_list": {
+		"IPs": {}
+	},
+
 	"T2_throttling": {
 		"max_packets": 30,
 		"per_seconds": 60
 	},
 
-	"allow_list": {
-		"IPs": {}
+	"strangers_throttling": {
+		"max_packets": 30,
+		"per_seconds": 60
 	}
 }

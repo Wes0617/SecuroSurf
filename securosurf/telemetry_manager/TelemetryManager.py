@@ -9,7 +9,6 @@ from securosurf.telemetry import PacketInboundT2Heartbeat
 from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry import PacketInboundAllowListLAN
 from securosurf.telemetry import PacketInboundAllowedStranger
-from securosurf.telemetry import PacketInboundStrangersVoidConnections
 from securosurf.telemetry_manager import LiveTraffic
 from securosurf.telemetry_manager import Telemetry
 
@@ -26,22 +25,26 @@ class CLASS:
         if isinstance(packet, PacketInboundT2Heartbeat.CLASS):
             self.__slots.clear()
             self.__log.append(LiveTraffic.CLASS(packet))
+
         elif isinstance(packet, PacketInboundT2Throttled.CLASS):
             self.__add_slotted(f"T2 Throttled", packet)
+
         elif isinstance(packet, PacketInboundT2.CLASS):
             self.__add_slotted(f"T2", packet)
 
         elif isinstance(packet, PacketInboundAllowList.CLASS):
             packet: PacketInboundAllowList.CLASS # only necessary for autocompletion
             self.__add_slotted(f"AllowList " + packet.identity, packet)
+
         elif isinstance(packet, PacketInboundAllowListLAN.CLASS):
             self.__add_slotted(f"AllowListLAN", packet)
+
         elif isinstance(packet, PacketInboundStranger.CLASS):
             self.__add_slotted(f"Stranger {packet.remote_IP}", packet)
+
         elif isinstance(packet, PacketInboundAllowedStranger.CLASS):
             self.__add_slotted(f"AllowedStranger {packet.remote_IP}", packet)
-        elif isinstance(packet, PacketInboundStrangersVoidConnections.CLASS):
-            self.__add_slotted(f"TempAllowedStranger {packet.remote_IP}", packet)
+
         else:
             raise Exception()
 

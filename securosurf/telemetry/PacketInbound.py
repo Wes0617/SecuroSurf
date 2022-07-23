@@ -8,7 +8,9 @@ class CLASS(Packet.CLASS):
     def __init__(
         self,
         local_IP: str,
+        local_port: int,
         remote_IP: str,
+        remote_port: int,
         size: int,
     ):
-        super().__init__(local_IP, remote_IP, True, size)
+        super().__init__(local_IP, local_port, remote_IP, remote_port, True, size)

@@ -40,28 +40,6 @@ VAR = {
             "default": [12, 18],
         },
 
-        "T2_throttling": {
-            "description": "Throttle the T2 packets in order to prevent full-blown gameplay connections, while still "
-                           "making matchmaking possible. Omit this property to disable this feature.",
-            "type": "object",
-            "properties": {
-                "max_packets": {
-                    "description": "The maximum amount of T2 packets allowed in the specified period of time. "
-                                   "If set to 0, all packets will be blocked.",
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 60 * 10 * 2,
-                },
-                "per_seconds": {
-                    "description": "The period of time in which the specified amount of packets will be allowed.",
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 60 * 10,
-                },
-            },
-            "required": ["max_packets", "per_seconds"],
-        },
-
         "allow_list": {
             "description": "The list of allowed IPs. Omit this property to disable the feature and allow everyone.",
             "type": "object",
@@ -80,6 +58,7 @@ VAR = {
                     },
                     "additionalProperties": False,
                 },
+
                 "allow_LAN_IPs": {
                     "description": "Whether to allow direct connections with other computers in the LAN. There is "
                                    "probably no reason to ever disable this, except for solo sessions. This setting "
@@ -87,6 +66,15 @@ VAR = {
                     "type": "boolean",
                     "default": True,
                 },
+
+                "force_allow_T2_IPs": {
+                    "description": "Whether to allow all traffic from T2 IPs. This is not normally something you would "
+                                   "do, because it makes tunneling possible, but it is necessary for some special "
+                                   "modes of the firewall.",
+                    "type": "boolean",
+                    "default": False,
+                },
+
                 "IP_changed": {
                     "description": "This entry is meant for remote crews only, and it is used to signal that the IP of "
                                    "the crew member performing the request has changed.",
@@ -94,7 +82,55 @@ VAR = {
                     "default": False,
                 },
             },
+
             "required": ["IPs"],
+        },
+
+        "T2_throttling": {
+            "description": "Throttle the T2 packets in order to prevent full-blown gameplay connections, while still "
+                           "making matchmaking possible. If omitted, all traffic from T2 IPs will be allowed. "
+                           "This option has only effect if the \"allow_list\" is enabled.",
+            "type": "object",
+            "properties": {
+                "max_packets": {
+                    "description": "The maximum amount of T2 packets allowed in the specified time. "
+                                   "If set to 0, all packets will be blocked.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 60 * 10 * 2,
+                },
+                "per_seconds": {
+                    "description": "The period of time in which the specified amount of packets will be allowed.",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60 * 10,
+                },
+            },
+            "required": ["max_packets", "per_seconds"],
+        },
+
+        "strangers_throttling": {
+            "description": "Data is regularly exchanged with strangers, even if they are not actually trying to join "
+                           "the lobby. This is probably used to test latency, or something like that. Use this option "
+                           "to allow this type of minimal packet exchange with strangers, or omit it to block "
+                           "everything. This option has effect only if the \"allow_list\" is enabled.",
+            "type": "object",
+            "properties": {
+                "max_packets": {
+                    "description": "The maximum amount of packets from strangers allowed in the specified time. "
+                                   "If set to 0, all packets will be blocked.",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 60 * 10 * 2,
+                },
+                "per_seconds": {
+                    "description": "The period of time in which the specified amount of packets will be allowed.",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60 * 10,
+                },
+            },
+            "required": ["max_packets", "per_seconds"],
         },
 
         "session_lock": {

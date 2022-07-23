@@ -15,7 +15,6 @@ from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry import PacketInboundT2Heartbeat
 from securosurf.telemetry import PacketInboundAllowListLAN
 from securosurf.telemetry import PacketInboundAllowedStranger
-from securosurf.telemetry import PacketInboundStrangersVoidConnections
 
 ########################################################################################################################
 
@@ -82,11 +81,12 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
 
         widget_et.update(_time(end_packet.time), text_color=FG)
 
-        widget_local_IP.update(end_packet.local_IP, text_color=FG)
+        widget_local_IP.update(end_packet.local_IP + f":{end_packet.local_port}", text_color=FG)
 
         widget_traffic_indicator.update("".join(traffic_indicator_text), text_color=traffic_indicator_color)
 
-        widget_remote_IP.update(tools_obfuscate_IP.FUNC(end_packet.remote_IP), text_color=FG)
+        formatted_remote_IP = tools_obfuscate_IP.FUNC(end_packet.remote_IP) + f":{end_packet.remote_port}"
+        widget_remote_IP.update(formatted_remote_IP, text_color=FG)
 
         widget_size.update(f"{end_packet.size}", text_color=FG)
 
@@ -127,8 +127,5 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
         elif isinstance(end_packet, PacketInboundStranger.CLASS):
             widget_message.update("Stranger", text_color=FG_error)
             block()
-        elif isinstance(end_packet, PacketInboundStrangersVoidConnections.CLASS):
-            widget_message.update("Stranger's void connection", text_color=FG_disabled)
-            allow()
         else:
             raise "unknown type"

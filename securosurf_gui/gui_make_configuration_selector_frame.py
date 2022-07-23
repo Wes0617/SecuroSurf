@@ -14,12 +14,15 @@ def FUNC() -> tk.Frame:
     Radio.__init__ = partialmethod(Radio.__init__, enable_events=True, pad=(tk.padding_width, 0))
     group = "session_type_change"
 
+    job_mode = sg.Checkbox("Job Mode", False, key="job_mode", enable_events=True)
+
     return tk.Frame(layout=[
         [
             Radio(labels[0], group, key=keys[0], default=True), tk.VerticalSeparator(),
             Radio(labels[1], group, key=keys[1]), tk.VerticalSeparator(),
             Radio(labels[2], group, key=keys[2]), tk.VerticalSeparator(),
-            Radio(labels[3], group, key=keys[3], disabled=True),
+            Radio(labels[3], group, key=keys[3], disabled=True), tk.VerticalSeparator(),
+            job_mode,
         ],
         [tk.Combo([], disabled=True, enable_events=True, readonly=True, key="crew_name", expand_x=True)],
         [sg.Input(key="filter_info", expand_x=True, justification="center")],

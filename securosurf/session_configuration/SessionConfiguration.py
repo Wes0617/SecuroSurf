@@ -5,6 +5,7 @@ import dataclasses as dc
 from securosurf.session_configuration import SessionConfigurationAllowList
 from securosurf.session_configuration import SessionConfigurationSessionLock
 from securosurf.session_configuration import SessionConfigurationT2Throttling
+from securosurf.session_configuration import SessionConfigurationStrangersThrottling
 
 ########################################################################################################################
 
@@ -19,6 +20,8 @@ class CLASS:
     T2_heartbeat_sizes: set[int] = dc.field(default_factory=set, init=True)
 
     T2_throttling: SessionConfigurationT2Throttling.CLASS | None = None
+
+    strangers_throttling: SessionConfigurationStrangersThrottling.CLASS | None = None
 
     allow_list: SessionConfigurationAllowList.CLASS | None = None
 
@@ -44,6 +47,7 @@ class CLASS:
             self.update_frequency == other.update_frequency and \
             self.T2_heartbeat_sizes == other.T2_heartbeat_sizes and \
             self.T2_throttling == other.T2_throttling and \
+            self.strangers_throttling == other.strangers_throttling and \
             self.allow_list == other.allow_list and \
             self.session_lock == other.session_lock
 

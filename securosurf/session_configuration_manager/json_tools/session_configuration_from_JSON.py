@@ -6,6 +6,7 @@ from securosurf.session_configuration import SessionConfiguration
 from securosurf.session_configuration import SessionConfigurationAllowList
 from securosurf.session_configuration import SessionConfigurationSessionLock
 from securosurf.session_configuration import SessionConfigurationT2Throttling
+from securosurf.session_configuration import SessionConfigurationStrangersThrottling
 from securosurf.session_configuration_manager.json_tools import session_configuration_validate_normalize_JSON
 
 ########################################################################################################################
@@ -24,6 +25,9 @@ def FUNC(JSON: str, fetch_time_if_success: float) -> tuple[SessionConfiguration.
     v = JSON_object.get("T2_throttling", None)
     T2T = None if v is None else SessionConfigurationT2Throttling.CLASS(v["max_packets"], v["per_seconds"])
 
+    v = JSON_object.get("strangers_throttling", None)
+    SGT = None if v is None else SessionConfigurationStrangersThrottling.CLASS(v["max_packets"], v["per_seconds"])
+
     v = JSON_object.get("allow_list", None)
     AL = None if v is None else SessionConfigurationAllowList.CLASS(v["IPs"], v["allow_LAN_IPs"], v["IP_changed"])
 
@@ -36,6 +40,7 @@ def FUNC(JSON: str, fetch_time_if_success: float) -> tuple[SessionConfiguration.
         update_frequency=JSON_object["update_frequency"],
         T2_heartbeat_sizes=T2H,
         T2_throttling=T2T,
+        strangers_throttling=SGT,
         allow_list=AL,
         session_lock=SL
     ), None

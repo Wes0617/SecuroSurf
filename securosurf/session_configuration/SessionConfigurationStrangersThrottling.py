@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from securosurf.telemetry import PacketInbound
+import dataclasses as dc
 
 ########################################################################################################################
 
-class CLASS(PacketInbound.CLASS):
-    pass
+@dc.dataclass(frozen=True)
+class CLASS(object):
+    max_packets: int
+    per_seconds: int

@@ -25,19 +25,26 @@ def FUNC(
 
     filter_spec = []
 
-    if SC.T2_throttling is not None:
-        max_packets = SC.T2_throttling.max_packets
-        per_seconds = SC.T2_throttling.per_seconds
-        filter_spec.append(f"{max_packets} T2 packets every {per_seconds}s")
-
-    if SC.allow_list is not None:
+    if SC.allow_list is None:
+        filter_spec.append("Anyone")
+    else:
         filter_spec.append("Self")
+
         if SC.allow_list.allow_LAN_IPs:
             filter_spec.append("Lan")
+
         if len(SC.allow_list.IPs) > 0:
             filter_spec.append(f"{len(SC.allow_list.IPs)} IPs")
-    else:
-        filter_spec.append("Anyone")
+
+        if SC.T2_throttling is not None:
+            max_packets = SC.T2_throttling.max_packets
+            per_seconds = SC.T2_throttling.per_seconds
+            filter_spec.append(f"{max_packets}T2s/{per_seconds}s")
+
+        if SC.strangers_throttling is not None:
+            max_packets = SC.strangers_throttling.max_packets
+            per_seconds = SC.strangers_throttling.per_seconds
+            filter_spec.append(f"{max_packets}SGs/{per_seconds}s")
 
     _text = "Allows: " + (" + ".join(filter_spec))
     widget_filter_info.update(_text)
