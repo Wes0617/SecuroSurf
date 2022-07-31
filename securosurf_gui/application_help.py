@@ -20,7 +20,10 @@ VAR["traffic_last_activity"]      = "This is used to determine whether the firew
 VAR["traffic_host_last_activity"] = "Large T2 packets are usually received only by the host of the session."
 
 VAR["job_mode"]                   = "Improves connectivity during jobs (e.g. heists) by blocking all traffic from " \
-                                    "strangers. Enable RIGHT AFTER starting the job."
+                                    "strangers. Enable before starting the job, and disable after completing it."
+
+VAR["kill_process"]               = "A modder is trying to get you banned with money drops? Click this to terminate " \
+                                    "the GTA5.exe process immediately."
 
 # VAR["refresh_rate"]               = "Sets the frequency with which the telemetry is displayed. This option doesn't " \
 #                                     "affect the firewall's performance much, but it can help reduce the CPU usage."

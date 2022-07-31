@@ -11,7 +11,8 @@ CurrentSessionConfigurationName = str
 def FUNC(
     window: tk.Window,
     new_crew_names: list[str],
-    triggered_by_crew_name_change: bool
+    triggered_by_crew_name_change: bool,
+    SC_has_allow_list: bool
 ) -> CurrentSessionConfigurationName:
 
     widget_to_normal: sg.Radio = window["to_normal"]
@@ -21,8 +22,14 @@ def FUNC(
     widget_to_crew: sg.Radio = window["to_crew"]
     widget_crew_name: sg.Combo = window["crew_name"]
     widget_crew_name.Widget.selection_range(0, 0)
+    widget_job_mode: sg.Checkbox = window["job_mode"]
 
     gui_refresh_crew_names.FUNC(new_crew_names, widget_crew_name, widget_to_crew, widget_to_solo)
+
+    if SC_has_allow_list:
+        widget_job_mode.update(disabled=False)
+    else:
+        widget_job_mode.update(value=False, disabled=True)
 
     if triggered_by_crew_name_change:
         widget_to_crew.update(value=True)

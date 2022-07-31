@@ -14,7 +14,7 @@ def FUNC() -> tk.Frame:
     Radio.__init__ = partialmethod(Radio.__init__, enable_events=True, pad=(tk.padding_width, 0))
     group = "session_type_change"
 
-    job_mode = sg.Checkbox("Job Mode", False, key="job_mode", enable_events=True)
+    job_mode = sg.Checkbox("Job Mode", False, key="job_mode", enable_events=True, disabled=True)
 
     return tk.Frame(layout=[
         [
