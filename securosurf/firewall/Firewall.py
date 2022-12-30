@@ -21,6 +21,8 @@ from securosurf.telemetry import PacketInboundAllowList
 from securosurf.telemetry import PacketInboundT2
 from securosurf.telemetry import PacketInboundT2Heartbeat
 from securosurf.telemetry import PacketInboundAllowListLAN
+from securosurf.telemetry import PacketOutbound
+from securosurf.telemetry import PacketOutboundT2
 
 ########################################################################################################################
 
@@ -65,7 +67,30 @@ class CLASS:
 
         self.SG_throttling = PacketThrottler.CLASS()
 
-        packet_filter = f"inbound and ip and udp.DstPort == 6672 and udp.PayloadLength > 0"
+        inbound_packet_filter = "(inbound and (" \
+                                "    udp.DstPort == 6672" \
+                                "    or udp.SrcPort == 6672" \
+                                "    or udp.SrcPort == 61455" \
+                                "    or udp.SrcPort == 61456" \
+                                "    or udp.SrcPort == 61457" \
+                                "    or udp.SrcPort == 61458" \
+                                "))"
+
+        outbound_packet_filter = "(outbound and (" \
+                                "    udp.DstPort == 6672" \
+                                "    or udp.SrcPort == 6672" \
+                                "    or udp.SrcPort == 61455" \
+                                "    or udp.SrcPort == 61456" \
+                                "    or udp.SrcPort == 61457" \
+                                "    or udp.SrcPort == 61458" \
+                                "    or udp.DstPort == 61455" \
+                                "    or udp.DstPort == 61456" \
+                                "    or udp.DstPort == 61457" \
+                                "    or udp.DstPort == 61458" \
+                                "))"
+
+        packet_filter = f"udp.PayloadLength > 0 and ip and ({inbound_packet_filter} or {outbound_packet_filter})"
+
         with pydivert.WinDivert(packet_filter) as win_divert:
             for packet in win_divert:
                 if self.__do_allow(packet, time.time()):
@@ -91,46 +116,55 @@ class CLASS:
 
         length = len(packet.payload)
 
-
         if length in SC.T2_heartbeat_sizes:
             print(f"Found T2 server {rm_IP}")
             self._T2_servers.add(rm_IP)
 
-        if SC.allow_list is not None:
-            allow_list_identity = SC.allow_list.IPs.get(rm_IP, None)
+        if packet.is_inbound:
+            if SC.allow_list is not None:
+                allow_list_identity = SC.allow_list.IPs.get(rm_IP, None)
 
-            if allow_list_identity is not None:
-                TM.add(PacketInboundAllowList.CLASS(my_IP, my_port, rm_IP, rm_port, length, allow_list_identity)) if ET else None
+                if allow_list_identity is not None:
+                    TM.add(PacketInboundAllowList.CLASS(my_IP, my_port, rm_IP, rm_port, length, allow_list_identity)) if ET else None
+                    return True
+
+                elif SC.allow_list.allow_LAN_IPs is True and is_LAN_IP.FUNC(rm_IP):
+                    TM.add(PacketInboundAllowListLAN.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                    return True
+
+                elif rm_IP in self._T2_servers:
+                    if RC.tinfoil_hat_mode is True or (
+                        self.T2_throttling is not None and
+                        self.T2_throttling.do_throttle(SC.T2_throttling.per_seconds, SC.T2_throttling.max_packets)
+                    ):
+                        TM.add(PacketInboundT2Throttled.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                        return False
+
+                else:
+                    if RC.tinfoil_hat_mode is True or (
+                        SC.strangers_throttling is not None and
+                        self.SG_throttling.do_throttle(SC.strangers_throttling.per_seconds, SC.strangers_throttling.max_packets)
+                    ):
+                        TM.add(PacketInboundStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                        return False
+
+            if rm_IP in self._T2_servers:
+                if length in SC.T2_heartbeat_sizes:
+                    TM.add(PacketInboundT2Heartbeat.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                    return True
+
+                else:
+                    TM.host_activity = now
+                    TM.add(PacketInboundT2.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                    return True
+
+            TM.add(PacketInboundAllowedStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+            return True
+        else:
+            if rm_IP in self._T2_servers:
+                TM.add(PacketOutboundT2.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
                 return True
-
-            elif SC.allow_list.allow_LAN_IPs is True and is_LAN_IP.FUNC(rm_IP):
-                TM.add(PacketInboundAllowListLAN.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
-                return True
-
-            elif rm_IP in self._T2_servers:
-                if \
-                    self.T2_throttling is not None and \
-                    self.T2_throttling.do_throttle(SC.T2_throttling.per_seconds, SC.T2_throttling.max_packets):
-                    TM.add(PacketInboundT2Throttled.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
-                    return False
-
             else:
-                if RC.job_mode is True or (
-                    SC.strangers_throttling is not None and
-                    self.SG_throttling.do_throttle(SC.strangers_throttling.per_seconds, SC.strangers_throttling.max_packets)
-                ):
-                    TM.add(PacketInboundStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
-                    return False
-
-        if rm_IP in self._T2_servers:
-            if length in SC.T2_heartbeat_sizes:
-                TM.add(PacketInboundT2Heartbeat.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
+                TM.add(PacketOutbound.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
                 return True
 
-            else:
-                TM.host_activity = now
-                TM.add(PacketInboundT2.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
-                return True
-
-        TM.add(PacketInboundAllowedStranger.CLASS(my_IP, my_port, rm_IP, rm_port, length)) if ET else None
-        return True

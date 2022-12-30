@@ -43,7 +43,7 @@ def FUNC(window_telemetry_length: int) -> tk.Frame:
     sizes.append(5 + 2)
     sizes.append(5 + 2)
     sizes.append(5 + 2)
-    sizes.append(25)
+    sizes.append(22)
 
     fonts = [("Segoe UI", 7, "normal")] * 10
 

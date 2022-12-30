@@ -163,7 +163,7 @@ def FUNC(simulation: bool = False) -> None:
 
         # --------------------------------------------------------------------------------------------------------------
 
-        _new_RC = RuntimeConfiguration.CLASS(window["job_mode"].get())
+        _new_RC = RuntimeConfiguration.CLASS(window["tinfoil_hat_mode"].get())
         if _new_RC != RC:
             RC = _new_RC
             RC_changed = True
