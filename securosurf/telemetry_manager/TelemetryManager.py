@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import collections as c
-from securosurf.telemetry import PacketOutbound
-from securosurf.telemetry import PacketOutboundT2
 from securosurf.telemetry import Packet
 from securosurf.telemetry import PacketInboundT2
 from securosurf.telemetry import PacketInboundStranger
@@ -46,14 +44,6 @@ class CLASS:
 
         elif isinstance(packet, PacketInboundAllowedStranger.CLASS):
             self.__add_slotted(f"AllowedStranger {packet.remote_IP}", packet)
-
-        elif isinstance(packet, PacketOutboundT2.CLASS):
-            print("found1")
-            self.__add_slotted(f"T2 Outbound {packet.remote_IP}", packet)
-
-        elif isinstance(packet, PacketOutbound.CLASS):
-            print("found")
-            self.__add_slotted(f"Outbound {packet.remote_IP}", packet)
 
         else:
             raise Exception()

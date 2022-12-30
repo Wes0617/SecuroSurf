@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from securosurf.telemetry import PacketOutbound
+from securosurf.telemetry import PacketInboundStranger
 
 ########################################################################################################################
 
-class CLASS(PacketOutbound.CLASS):
+class CLASS(PacketInboundStranger.CLASS):
     pass

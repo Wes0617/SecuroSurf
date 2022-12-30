@@ -8,10 +8,9 @@ import securosurf_gui_toolkit.toolkit as tk
 from securosurf_gui import tools_obfuscate_IP
 from securosurf.telemetry_manager import Telemetry
 from securosurf.telemetry_manager import LiveTraffic
-from securosurf.telemetry import PacketOutbound
-from securosurf.telemetry import PacketOutboundT2
 from securosurf.telemetry import PacketInboundT2
 from securosurf.telemetry import PacketInboundStranger
+from securosurf.telemetry import PacketInboundLockedStranger
 from securosurf.telemetry import PacketInboundAllowList
 from securosurf.telemetry import PacketInboundT2Throttled
 from securosurf.telemetry import PacketInboundT2Heartbeat
@@ -129,11 +128,8 @@ def FUNC(window: tk.Window, firewall_telemetry: Telemetry.CLASS):
         elif isinstance(end_packet, PacketInboundStranger.CLASS):
             widget_message.update("Stranger", text_color=FG_error)
             block()
-        elif isinstance(end_packet, PacketOutboundT2.CLASS):
-            widget_message.update("Outbound T2", text_color=FG_warning)
-            allow()
-        elif isinstance(end_packet, PacketOutbound.CLASS):
-            widget_message.update("Outbound", text_color=FG_disabled)
-            allow()
+        elif isinstance(end_packet, PacketInboundLockedStranger.CLASS):
+            widget_message.update("Locked Stranger", text_color=FG_error)
+            block()
         else:
             raise "unknown type"

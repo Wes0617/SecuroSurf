@@ -19,14 +19,8 @@ VAR["traffic_last_activity"]      = "This is used to determine whether the firew
 
 VAR["traffic_host_last_activity"] = "Large T2 packets are usually received only by the host of the session."
 
-VAR["tinfoil_hat_mode"]           = "Blocks all the connections in the strictest way possible. Also useful to improve " \
-                                    "connectivity during heists, e.g. mantrap bug. Enable it *after* starting the job."
+VAR["locked_mode"]                = "Release the lock to allow your friends in the session. Lock is only necessary " \
+                                    "for the \"Dynamic\" mode. In the other modes, it only makes the firewall stricter."
 
 VAR["kill_process"]               = "A modder is trying to get you banned with money drops? Click this to terminate " \
                                     "the GTA5.exe process immediately."
-
-# VAR["refresh_rate"]               = "Sets the frequency with which the telemetry is displayed. This option doesn't " \
-#                                     "affect the firewall's performance much, but it can help reduce the CPU usage."
-
-# VAR["telemetry_type"]             = "Disabling the telemetry will improve the performance of the firewall. This can " \
-#                                     "be useful to improve connectivity when playing heists with multiple people."

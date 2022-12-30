@@ -39,7 +39,7 @@ def FUNC(simulation: bool = False) -> None:
     SC_manager                  = SC_set_manager.get_by_name(SC_name)
     SC                          = SC_manager.get()
     SC_changed                  = False
-    SC_has_allow_list           = False
+    SC_can_lock                 = False
     RC                          = RuntimeConfiguration.CLASS()
     RC_changed                  = False
     _telemetry_manager          = TelemetryManager.CLASS(_telemetry_length)
@@ -73,7 +73,7 @@ def FUNC(simulation: bool = False) -> None:
     # ------------------------------------------------------------------------------------------------------------------
 
     def _fetch_configuration_thread():
-        nonlocal SC_manager, SC, SC_changed, SC_has_allow_list, window_play_bell
+        nonlocal SC_manager, SC, SC_changed, SC_can_lock, window_play_bell
         while True:
             last_fetched_SC_name = SC_name
             SC_manager = SC_set_manager.get_by_name(last_fetched_SC_name)
@@ -84,8 +84,8 @@ def FUNC(simulation: bool = False) -> None:
                 if _new_SC.allow_list is not None and _new_SC.allow_list.IP_changed:
                     window_play_bell = True
             SC = _new_SC
-            SC_has_allow_list = SC.allow_list is not None
-            print("has allow list: " + str(SC_has_allow_list))
+            SC_can_lock = SC.session_lock is not None
+            print("can lock: " + str(SC_can_lock))
 
             fetch_SC_again_time = time.time() + SC.update_frequency
             while True:
@@ -159,11 +159,11 @@ def FUNC(simulation: bool = False) -> None:
 
         _new_crew_names = SC_set_manager.get_crew_names()
         _user_selected_a_crew_in_combo_box = event_name == "crew_name"
-        SC_name = gui_refresh_configuration_selector.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box, SC_has_allow_list)
+        SC_name = gui_refresh_configuration_selector.FUNC(window, _new_crew_names, _user_selected_a_crew_in_combo_box, SC_can_lock)
 
         # --------------------------------------------------------------------------------------------------------------
 
-        _new_RC = RuntimeConfiguration.CLASS(window["tinfoil_hat_mode"].get())
+        _new_RC = RuntimeConfiguration.CLASS(window["locked_mode"].get())
         if _new_RC != RC:
             RC = _new_RC
             RC_changed = True
