@@ -15,6 +15,13 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
+### 🔹 Buy me a Martini
+There are a bunch of things I can still add to this project (check wiki), but at the moment I have no urgency to do it
+because I play in _invite only_ sessions like most players now. However, this app could still be useful for streamers
+and crews. Sending me a tip might convince me to go ahead and make more improvements. 
+
+Paypal: [https://ko-fi.com/wes0617](https://ko-fi.com/wes0617)
+
 ### 🔹 Is this a mod menu?
 
 No it's not! ___SecuroSurf___ is a firewall software whose only duty is blocking traffic from IPs you don't know, which
@@ -40,7 +47,7 @@ give you the peace of mind of running safe code.
 
 ### 🔹 Is this effective?
 
-As of today (v1.60) it is, but only if used correctly! That is, __all the people you are playing with must use it__.
+As of today (v1.64) it is, but only if used correctly! That is, __all the people you are playing with must use it__.
 Otherwise, hackers can still connect through the people that aren't protected by the firewall. How this works
 (tunneling) is illustrated by the diagram below; if the _Assistant_ and _Lester_ are running the firewall, but _Rickie_
 is not, hackers can connect to _Rickie_, _Lester_ and the _Assistant_ _through_ _Rickie_:  
@@ -83,12 +90,14 @@ also the other players are using _SecuroSurf_ with this exact mode enabled.
 
 ### 🔹 Using Dynamic sessions (best for most users)
 
-This mode is the best for most players, because it works right out of the box with no configuration necessary. Simply
-create a _Solo_ lobby, then switch to _Normal_. Wait a few seconds, and invite your friends (while they are on _Normal_
-as well). Once everybody has joined, everybody should enable the ___Dynamic___ mode. This will ensure that only the
-people currently in the session will be allowed to stay in the session. In other words, no one else can join after
-enabling the _Dynamic_ mode. **Note: this mode is currently not available, but it will be when the version 2.0 of the
-app is released.**
+This mode is the best for most players, because it works right out of the box with no configuration necessary. Create a
+_friends only_ or _invite only_ session, then invite your friends in. Once everybody has joined, everybody must enable
+the ___Dynamic___ mode and "lock" it. This will ensure that only the people currently in the session will be allowed to
+stay in the session. In other words, no one else can join the session _after_ enabling the _Dynamic_ mode.
+
+Remember that if you want to allow more friends in the session, _everybody_ must release the lock. When the locks are
+disabled everybody can join the session, so only release the locks briefly, and off-screen if you are streaming.
+The _Dynamic_ mode doesn't do anything on its own: the locks must be enabled for it to be effective.
 
 ------------------------------------------------------------------------------------------------------------------------
 
