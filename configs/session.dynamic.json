@@ -4,12 +4,12 @@
 	"update_frequency": 30,
 
 	"T2_throttling": {
-		"max_packets": 30,
-		"per_seconds": 60
+		"max_packets": 120,
+		"per_seconds": 240
 	},
 
 	"strangers_throttling": {
-		"max_packets": 30,
+		"max_packets": 3,
 		"per_seconds": 60
 	},
 
